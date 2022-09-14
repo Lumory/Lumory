@@ -1,5 +1,3 @@
-# Gitlab User Story Example
-
 > **As a** baker \
 > **I want to** have an apple tree \
 > **So that I** can make apple pies without having to purchase apples
