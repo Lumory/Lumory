@@ -1,0 +1,45 @@
+version: '3.3'
+services:
+  db:
+    image: mariadb
+    restart: always
+    container_name: lumory-mariadb
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - "lumory-db:/var/lib/mysql"
+    
+  backend: # Backend C# Service
+    build: ./Lumory
+    container_name: lumory-backend
+    ports:
+      - 3001:3001
+    restart: always
+    depends_on:
+      - db
+    links: 
+      - db
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - 3002:80
+    links:
+      - db
+
+  frontend:
+    build: ./frontend
+    container_name: lumory-frontend
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+    restart: always
+
+volumes:
+  lumory-db:
