@@ -1,6 +1,18 @@
+using Lumory.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+var serverVersion = new MySqlServerVersion(new Version(10, 9, 3));
+
+builder.Services.AddDbContextPool<ApplicationDbContext>(dbContextOptions => dbContextOptions
+    .UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), serverVersion)
+    // The following three options help with debugging, but should
+    // be changed or removed for production.
+    .LogTo(Console.WriteLine, LogLevel.Information)
+    .EnableSensitiveDataLogging());
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
