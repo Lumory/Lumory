@@ -1,4 +1,5 @@
 ﻿using Lumory.Data;
+using Lumory.Services.Companies;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lumory.Controllers.Companies;
@@ -7,16 +8,16 @@ namespace Lumory.Controllers.Companies;
 [Route("[controller]")]
 public class CompanyController : ControllerBase
 {
-    private ApplicationDbContext _db;
+    private CompanyService _service;
 
-    public CompanyController(ApplicationDbContext db)
+    public CompanyController(CompanyService service)
     {
-        _db = db;
+        _service = service;
     }
     
     [HttpGet(Name = "All")]
     public IActionResult Get()
     {
-        return Ok(_db.Companies.ToList());
+        return Ok(_service.ListCompanies());
     }
 }

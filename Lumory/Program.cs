@@ -1,4 +1,6 @@
 using Lumory.Data;
+using Lumory.Repositories.Companies;
+using Lumory.Services.Companies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +20,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<CompanyRepository>();
+builder.Services.AddScoped<CompanyService>();
 
 var app = builder.Build();
 
