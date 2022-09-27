@@ -16,4 +16,14 @@ public class CompanyService
     {
         return _repository.GetCompanies();
     }
+
+    public Company? FindCompany(int id)
+    {
+        return _repository.FindCompanyById(id);
+    }
+
+    public void DeleteCompany(Company company)
+    {
+        _repository.DeleteCompany(company);
+    }
 }

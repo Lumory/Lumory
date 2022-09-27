@@ -16,4 +16,16 @@ public class CompanyRepository
     {
         return _ctx.Companies.ToList();
     }
+
+    public Company? FindCompanyById(int id)
+    {
+        return _ctx.Companies.Where((Company c) => c.Id == id).SingleOrDefault();
+    }
+
+    public void DeleteCompany(Company company)
+    {
+        _ctx.Companies.Remove(company);
+
+        _ctx.SaveChanges();
+    }
 }
