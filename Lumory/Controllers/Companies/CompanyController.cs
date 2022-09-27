@@ -50,6 +50,6 @@ public class CompanyController : ControllerBase
 
         _service.DeleteCompany(company);
 
-        return Ok(company);
+        return NoContent();
     }
 }
