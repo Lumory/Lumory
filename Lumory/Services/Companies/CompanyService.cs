@@ -26,4 +26,20 @@ public class CompanyService
     {
         _repository.DeleteCompany(company);
     }
+
+    public Company CreateCompany(Company company)
+    {
+        return _repository.CreateCompany(company);
+    }
+
+    public Company UpdateCompany(Company oldCompany, Company newCompany)
+    {
+        oldCompany.City = newCompany.City;
+        oldCompany.Email = newCompany.Email;
+        oldCompany.Name = newCompany.Name;
+        oldCompany.Website = newCompany.Website;
+        oldCompany.StreetAddress = newCompany.StreetAddress;
+
+        return _repository.UpdateCompany(oldCompany);
+    }
 }

@@ -52,4 +52,28 @@ public class CompanyController : ControllerBase
 
         return NoContent();
     }
+    
+    [HttpPost]
+    public IActionResult Create([FromBody] Company company)
+    {
+        company = _service.CreateCompany(company);        
+        
+        return Ok(company);
+    }
+    
+    [HttpPut]
+    [Route("{id}")]
+    public IActionResult Update(int id, [FromBody] Company newCompany)
+    {
+        var oldCompany = _service.FindCompany(id);
+
+        if (oldCompany == null)
+        {
+            return NotFound();
+        }
+
+        newCompany = _service.UpdateCompany(oldCompany, newCompany);
+        
+        return Ok(newCompany);
+    }
 }

@@ -28,4 +28,22 @@ public class CompanyRepository
 
         _ctx.SaveChanges();
     }
+
+    public Company CreateCompany(Company company)
+    {
+        _ctx.Companies.Add(company);
+
+        _ctx.SaveChanges();
+
+        return company;
+    }
+    
+    public Company UpdateCompany(Company company)
+    {
+        _ctx.Companies.Update(company);
+
+        _ctx.SaveChanges();
+
+        return FindCompanyById(company.Id);
+    }
 }
