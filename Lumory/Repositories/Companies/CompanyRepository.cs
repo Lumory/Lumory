@@ -12,7 +12,7 @@ public class CompanyRepository
         _ctx = ctx;
     }
 
-    public IEnumerable<Company> GetCompanies()
+    public List<Company> GetCompanies()
     {
         return _ctx.Companies.ToList();
     }

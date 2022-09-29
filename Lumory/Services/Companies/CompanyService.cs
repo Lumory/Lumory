@@ -12,7 +12,7 @@ public class CompanyService
         _repository = repository;
     }
 
-    public IEnumerable<Company> ListCompanies()
+    public List<Company> ListCompanies()
     {
         return _repository.GetCompanies();
     }
