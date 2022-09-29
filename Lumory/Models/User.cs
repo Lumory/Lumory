@@ -16,7 +16,6 @@ public class User
     [StringLength(128)]
     public string Email { get; set; }
     
-    [IgnoreDataMember]
     public string Password { get; set; }
     
     [Timestamp]
