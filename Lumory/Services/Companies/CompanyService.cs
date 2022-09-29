@@ -24,7 +24,7 @@ public class CompanyService
 
     public void DeleteCompany(Company company)
     {
-        _repository.DeleteCompany(company);
+        _repository.RemoveCompany(company);
     }
 
     public Company CreateCompany(Company company)
