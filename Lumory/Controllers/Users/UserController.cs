@@ -24,4 +24,59 @@ public class UserController : ControllerBase
         
         return Ok(new UserDto(user));
     }
+    
+    [HttpGet]
+    public IActionResult Get()
+    {
+        return Ok(
+            _service.ListUsers()
+                .Select(c => new UserDto(c))
+        );
+    }
+
+    [HttpGet]
+    [Route("{id}")]
+    public IActionResult Find(int id)
+    {
+        var user = _service.FindUser(id);
+
+        if (user == null)
+        {
+            return NotFound();
+        }
+        
+        return Ok(new UserDto(user));
+    }
+
+    [HttpDelete]
+    [Route("{id}")]
+    public IActionResult Delete(int id)
+    {
+        var user = _service.FindUser(id);
+
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        _service.DeleteUser(user);
+
+        return NoContent();
+    }
+
+    [HttpPut]
+    [Route("{id}")]
+    public IActionResult Update(int id, [FromBody] User newUser)
+    {
+        var oldUser = _service.FindUser(id);
+
+        if (oldUser == null)
+        {
+            return NotFound();
+        }
+
+        newUser = _service.UpdateUser(oldUser, newUser);
+        
+        return Ok(new UserDto(newUser));
+    }
 }
