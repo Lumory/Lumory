@@ -6,7 +6,13 @@
 
 <style>
 .container {
-  width: 1200px;
-  margin: 0 auto;
+  width: calc(100% - 20px);
+  padding: 10px;
+}
+@media (min-width: 640px) {
+  .container {
+    width: 1200px;
+    margin: 0 auto;
+  }
 }
 </style>
