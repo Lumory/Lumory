@@ -50,5 +50,17 @@ table {
 /* LUMORY STYLING BEGINS*/
 
 * {
-    font-family: Roboto;
+    font-family: Arial;
+    color: #333333;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+}
+h1 {
+    font-size: 3rem;
+    padding: 1em;
+}
+h3 {
+    font-size: 1.5rem;
+    padding: 0.5em;
 }

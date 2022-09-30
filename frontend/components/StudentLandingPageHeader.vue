@@ -1,33 +1,29 @@
 <template>
-  <container>
-    <n-grid cols="1 s:2" x-gap="25px" responsive="screen">
-      <n-grid-item class="n-grid-item">
-        <n-layout>
-          <n-layout-content class="CTA">
-            <p class="intro-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus velit eros, facilisis suscipit risus sed, venenatis rutrum lectus.</p>
-            <n-button round color="#FEBF00">Registreer nu!</n-button>
-          </n-layout-content>
-        </n-layout>
-      </n-grid-item>
-      <n-grid-item>
-          <n-image
-              src="/assets/img/new2.png"
-              class="header-image"
-              width="100%"
-              preview-disabled
-          />
-      </n-grid-item>
-    </n-grid>
-  </container>
+  <n-grid class="student-hero-section" cols="1 s:2" x-gap="25px" responsive="screen">
+    <n-grid-item class="n-grid-item">
+      <n-layout>
+        <n-layout-content class="CTA">
+          <p class="intro-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus velit eros, facilisis suscipit risus sed, venenatis rutrum lectus.</p>
+          <n-button round color="#FEBF00">Registreer nu!</n-button>
+        </n-layout-content>
+      </n-layout>
+    </n-grid-item>
+    <n-grid-item>
+        <n-image
+            src="/assets/img/new2.png"
+            class="header-image"
+            width="100%"
+            preview-disabled
+        />
+    </n-grid-item>
+  </n-grid>
 </template>
 
 <script>
 import {NGrid, NGridItem, NLayout, NLayoutContent, NButton, NImage} from "naive-ui";
-import VCard from "./VCard";
 
 export default {
   components: {
-    VCard,
     NGrid,
     NGridItem,
     NLayout,
@@ -39,14 +35,14 @@ export default {
 </script>
 
 <style>
-.n-grid-item {
+.student-hero-section .n-grid-item {
   display: flex;
   align-items: center;
 }
-.n-layout-content {
+.student-hero-section .n-layout-content {
   align-items: center;
 }
-.n-grid {
+.student-hero-section {
   margin-top: 150px;
 }
 .CTA {
