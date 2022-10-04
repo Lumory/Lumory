@@ -1,5 +1,6 @@
 ﻿using Lumory.Models;
 using Lumory.Repositories.Companies;
+using BCrypt.Net;
 
 namespace Lumory.Services.Companies;
 
@@ -29,6 +30,8 @@ public class CompanyService
 
     public Company CreateCompany(Company company)
     {
+        company.Password = BCrypt.Net.BCrypt.HashPassword(company.Password);
+        
         return _repository.CreateCompany(company);
     }
 

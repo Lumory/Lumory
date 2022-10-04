@@ -14,6 +14,8 @@ public class UserService
 
     public User CreateUser(User user)
     {
+        user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+        
         return _repository.CreateUser(user);
     }
     
@@ -37,7 +39,6 @@ public class UserService
         oldUser.FirstName = newUser.FirstName;
         oldUser.LastName = newUser.LastName;
         oldUser.Email = newUser.Email;
-        oldUser.Password = newUser.Password;
         oldUser.Password = newUser.Password;
         
         return _repository.UpdateUser(oldUser);
