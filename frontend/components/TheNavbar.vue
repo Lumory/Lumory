@@ -8,7 +8,11 @@
 					alt="Logo Lumory"
 				/>
 			</div>
-			<div class="navbar__links navbar__item">
+			<div class="links navbar__item">
+        <div class="links__item --white">studenten</div>
+        <div class="links__item --white">stagebedrijven</div>
+        <div class="links__item --white">werkgevers</div>
+        <div class="links__item --white">inloggen</div>
 				<n-space>
 					<n-button class="--font" color="#FFFFFF" text-color="Black" round
 						>Registreren</n-button
@@ -126,8 +130,24 @@ export default defineComponent({
 	display: flex;
 	justify-content: space-between;
 }
-.navbar__links {
+.links {
 	display: none;
+  gap: 20px;
+}
+.links__item {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.links__item:hover {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-bottom: 2px solid orange;
+  height: calc(100% - 2px);
+  margin-top: 2px;
+  cursor: pointer;
 }
 .navbar__item {
 	padding-left: 20px;
@@ -183,11 +203,11 @@ export default defineComponent({
 }
 
 /* Media queries */
-@media (min-width: 640px) {
+@media (min-width: 1024px) {
 	.navbar__menu {
 		display: none;
 	}
-	.navbar__links {
+	.links {
 		display: flex;
 		justify-content: center;
 		align-items: center;
