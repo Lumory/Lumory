@@ -1,39 +1,57 @@
 <template>
 	<div>
-		<nav class="navbar">
-			<div class="navbar__logo navbar__item">
-				<img
-					class="navbarLogo__img"
-					src="~/assets/img/Logo horizontal.svg"
-					alt="Logo Lumory"
-				/>
-			</div>
-			<div class="links navbar__item">
-        <div class="links__item --white">studenten</div>
-        <div class="links__item --white">stagebedrijven</div>
-        <div class="links__item --white">werkgevers</div>
-        <div class="links__item --white">inloggen</div>
-				<n-space>
-					<n-button class="--font" color="#FFFFFF" text-color="Black" round
-						>Registreren</n-button
+		<div class="navbarContainer">
+			<nav class="navbar">
+				<div class="navbar__logo navbar__item">
+					<NuxtLink to="/">
+						<img
+							class="navbarLogo__img"
+							src="~/assets/img/Logo horizontal.svg"
+							alt="Logo Lumory"
+						/>
+					</NuxtLink>
+				</div>
+				<div class="links navbar__item">
+					<NuxtLink class="nuxtLink" to="/student">
+						<div tabindex="1" class="links__item --white">studenten</div>
+					</NuxtLink>
+					<NuxtLink class="nuxtLink" to="/stagebedrijf">
+						<div tabindex="2" class="links__item --white">stagebedrijven</div>
+					</NuxtLink>
+					<NuxtLink class="nuxtLink" to="/werkgever">
+						<div tabindex="3" class="links__item --white">werkgevers</div>
+					</NuxtLink>
+					<NuxtLink class="nuxtLink" to="/signin">
+						<div tabindex="4" class="links__item --white">inloggen</div>
+					</NuxtLink>
+					<n-space>
+						<n-button
+							focusable
+							tabindex="5"
+							class="--font"
+							color="#FFFFFF"
+							text-color="Black"
+							round
+							>Registreren</n-button
+						>
+					</n-space>
+				</div>
+				<div class="navbar__menu navbar__item" @click="menuShow = !menuShow">
+					<svg
+						class="navbar__burger"
+						xmlns="http://www.w3.org/2000/svg"
+						xmlns:xlink="http://www.w3.org/1999/xlink"
+						viewBox="0 0 24 24"
 					>
-				</n-space>
-			</div>
-			<div class="navbar__menu navbar__item" @click="menuShow = !menuShow">
-				<svg
-					class="navbar__burger"
-					xmlns="http://www.w3.org/2000/svg"
-					xmlns:xlink="http://www.w3.org/1999/xlink"
-					viewBox="0 0 24 24"
-				>
-					<path
-						class="navbar__menuImage--white"
-						d="M4 18h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zm0-5h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zM3 7c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1z"
-						fill="currentColor"
-					/>
-				</svg>
-			</div>
-		</nav>
+						<path
+							class="navbar__menuImage--white"
+							d="M4 18h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zm0-5h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zM3 7c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1z"
+							fill="currentColor"
+						/>
+					</svg>
+				</div>
+			</nav>
+		</div>
 		<div v-show="menuShow" class="mobileNavbar__overlay">
 			<div class="mobileNavbar__overlayHeader">
 				<div class="navbar__logo">
@@ -121,33 +139,46 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.navbar {
+.navbarContainer {
 	width: 100vw;
 	height: auto;
 	min-height: 64px;
 	background-color: var(--color-background-one);
+	display: flex;
+	justify-content: center;
+}
+.navbar {
+	width: 100%;
+	max-width: 1200px;
+	height: auto;
 
 	display: flex;
 	justify-content: space-between;
 }
 .links {
 	display: none;
-  gap: 20px;
+	gap: 20px;
+}
+.nuxtLink {
+	text-decoration: none;
+}
+.nuxtLink,
+.links__item {
+	height: 100%;
 }
 .links__item {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .links__item:hover {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  border-bottom: 2px solid orange;
-  height: calc(100% - 2px);
-  margin-top: 2px;
-  cursor: pointer;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	border-bottom: 2px solid orange;
+	height: calc(100% - 2px);
+	margin-top: 2px;
+	cursor: pointer;
 }
 .navbar__item {
 	padding-left: 20px;
@@ -161,6 +192,7 @@ export default defineComponent({
 }
 .navbarLogo__img {
 	height: 20px;
+	width: auto;
 }
 .navbar__burger,
 .navbar__close {
@@ -207,10 +239,17 @@ export default defineComponent({
 	.navbar__menu {
 		display: none;
 	}
+	.navbar {
+		min-height: 80px;
+	}
 	.links {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+	.navbarLogo__img {
+		height: 30px;
+		width: auto;
 	}
 }
 </style>
