@@ -1,3 +1,3 @@
 <template>
-  <h1>hoi</h1>
+	<h1>Dit is de user pagina</h1>
 </template>

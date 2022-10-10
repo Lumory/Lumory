@@ -13,30 +13,35 @@
 				</div>
 				<div class="links navbar__item">
 					<NuxtLink class="nuxtLink" to="/student">
-						<div tabindex="1" class="links__item --white">studenten</div>
+						<div class="links__item --white">studenten</div>
 					</NuxtLink>
 					<NuxtLink class="nuxtLink" to="/stagebedrijf">
-						<div tabindex="2" class="links__item --white">stagebedrijven</div>
+						<div class="links__item --white">stagebedrijven</div>
 					</NuxtLink>
 					<NuxtLink class="nuxtLink" to="/werkgever">
-						<div tabindex="3" class="links__item --white">werkgevers</div>
+						<div class="links__item --white">werkgevers</div>
 					</NuxtLink>
 					<NuxtLink class="nuxtLink" to="/signin">
-						<div tabindex="4" class="links__item --white">inloggen</div>
+						<div class="links__item --white">inloggen</div>
 					</NuxtLink>
 					<n-space>
-						<n-button
-							focusable
-							tabindex="5"
-							class="--font"
-							color="#FFFFFF"
-							text-color="Black"
-							round
-							>Registreren</n-button
-						>
+						<NuxtLink to="signup" @show="!menuShow">
+							<n-button
+								:focusable="true"
+								color="#FFFFFF"
+								text-color="Black"
+								round
+								>Registreren</n-button
+							>
+						</NuxtLink>
 					</n-space>
 				</div>
-				<div class="navbar__menu navbar__item" @click="menuShow = !menuShow">
+				<div
+					tabindex="0"
+					@keyup.enter="menuShow = !menuShow"
+					class="navbar__menu navbar__item"
+					@click="menuShow = !menuShow"
+				>
 					<svg
 						class="navbar__burger"
 						xmlns="http://www.w3.org/2000/svg"
@@ -63,6 +68,8 @@
 				</div>
 				<div class="navbar__menu">
 					<svg
+						tabindex="0"
+						@keyup.enter="menuShow = !menuShow"
 						class="navbar__close navbar__item"
 						@click="menuShow = !menuShow"
 						xmlns="http://www.w3.org/2000/svg"
@@ -77,46 +84,43 @@
 					</svg>
 				</div>
 			</div>
-			<div class="navbarOverlay__item">
-				<NuxtLink
-					to="/signup"
-					@click="menuShow = !menuShow"
-					class="link--styling --white"
-					>Registreren</NuxtLink
-				>
-			</div>
-			<div class="navbarOverlay__item">
-				<NuxtLink
-					to="/signin"
-					@click="menuShow = !menuShow"
-					class="link--styling --white"
-					>Inloggen</NuxtLink
-				>
-			</div>
-			<div class="navbarOverlay__item">
-				<NuxtLink
-					to="/student"
-					@click="menuShow = !menuShow"
-					class="link--styling --white"
-					>Voor studenten</NuxtLink
-				>
-			</div>
-			<div class="navbarOverlay__item">
-				<NuxtLink
-					to="/stagebedrijf"
-					@click="menuShow = !menuShow"
-					class="link--styling --white"
-					>Voor stagebedrijven</NuxtLink
-				>
-			</div>
-			<div class="navbarOverlay__item">
-				<NuxtLink
+			<NuxtLink
+				to="/signup"
+				@click="menuShow = !menuShow"
+				class="link--styling --white"
+				><div class="navbarOverlay__item">Registreren</div></NuxtLink
+			>
+			<NuxtLink
+				to="/signin"
+				@click="menuShow = !menuShow"
+				class="link--styling --white"
+				><div class="navbarOverlay__item">Inloggen</div></NuxtLink
+			>
+			<NuxtLink
+				to="/student"
+				@click="menuShow = !menuShow"
+				class="link--styling --white"
+				><div class="navbarOverlay__item">Voor studenten</div></NuxtLink
+			>
+			<NuxtLink
+				to="/stagebedrijf"
+				@click="menuShow = !menuShow"
+				class="link--styling --white"
+				><div class="navbarOverlay__item">Voor stagebedrijven</div></NuxtLink
+			>
+			<NuxtLink
+				to="/werkgever"
+				@click="menuShow = !menuShow"
+				class="link--styling --white"
+				><div class="navbarOverlay__item">Voor werkgevers</div></NuxtLink
+			>
+
+			<!-- <NuxtLink
 					to="/werkgever"
 					@click="menuShow = !menuShow"
 					class="link--styling --white"
 					>Voor werkgevers</NuxtLink
-				>
-			</div>
+				> -->
 		</div>
 	</div>
 </template>
@@ -214,6 +218,7 @@ export default defineComponent({
 
 	display: flex;
 	flex-direction: column;
+	gap: 5px;
 }
 .mobileNavbar__overlayHeader {
 	display: flex;
