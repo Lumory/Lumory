@@ -3,3 +3,7 @@
 :root {
 	font-family: 'Raleway', sans-serif;
 }
+
+[class$='--white'] {
+	color: white;
+}
