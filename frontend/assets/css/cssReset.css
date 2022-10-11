@@ -18,9 +18,9 @@ time, mark, audio, video {
     font: inherit;
     vertical-align: baseline;
 }
-html, body {
+/* html, body {
     overflow-x: hidden;
-}
+} */
 /* Remove underline from a element */
 a {
     text-decoration-line: none;

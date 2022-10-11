@@ -12,7 +12,7 @@
 					</NuxtLink>
 				</div>
 				<div class="links navbar__item">
-					<NuxtLink class="nuxtLink" to="/student">
+					<NuxtLink class="nuxtLink" to="/students">
 						<div class="links__item --white">Studenten</div>
 					</NuxtLink>
 					<NuxtLink class="nuxtLink" to="/stagebedrijf">
@@ -90,7 +90,7 @@
 			<NuxtLink to="/signin" @click="menuShow = !menuShow" class="--white"
 				><div class="nav-overlay__item">Inloggen</div></NuxtLink
 			>
-			<NuxtLink to="/student" @click="menuShow = !menuShow" class="--white"
+			<NuxtLink to="/students" @click="menuShow = !menuShow" class="--white"
 				><div class="nav-overlay__item">Voor studenten</div></NuxtLink
 			>
 			<NuxtLink to="/stagebedrijf" @click="menuShow = !menuShow" class="--white"
@@ -122,7 +122,7 @@ export default defineComponent({
 
 <style scoped>
 .container {
-	width: 100vw;
+	width: calc(100vw - (100vw - 100%));
 	height: auto;
 	min-height: 64px;
 	background-color: var(--color-background-one);
@@ -178,6 +178,7 @@ export default defineComponent({
 }
 
 .nav-overlay {
+	z-index: 99999;
 	width: 100vw;
 	height: 100vh;
 	background-color: var(--color-background-one);
