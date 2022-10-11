@@ -13,16 +13,16 @@
 				</div>
 				<div class="links navbar__item">
 					<NuxtLink class="nuxtLink" to="/student">
-						<div class="links__item --white">studenten</div>
+						<div class="links__item --white">Studenten</div>
 					</NuxtLink>
 					<NuxtLink class="nuxtLink" to="/stagebedrijf">
-						<div class="links__item --white">stagebedrijven</div>
+						<div class="links__item --white">Stagebedrijven</div>
 					</NuxtLink>
 					<NuxtLink class="nuxtLink" to="/werkgever">
-						<div class="links__item --white">werkgevers</div>
+						<div class="links__item --white">Werkgevers</div>
 					</NuxtLink>
 					<NuxtLink class="nuxtLink" to="/signin">
-						<div class="links__item --white">inloggen</div>
+						<div class="links__item --white">Inloggen</div>
 					</NuxtLink>
 					<n-space>
 						<NuxtLink to="signup" @show="!menuShow">
