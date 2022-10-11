@@ -11,5 +11,8 @@
     "naive-ui": "^2.33.3",
     "nuxt": "3.0.0-rc.11"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@vicons/ionicons5": "^0.12.0",
+    "@vicons/material": "^0.12.0"
+  }
 }

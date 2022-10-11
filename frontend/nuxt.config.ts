@@ -5,4 +5,13 @@ export default defineNuxtConfig({
 		'@/assets/css/cssReset.css',
 		'@/assets/css/typography.css',
 	],
+  alias: {
+    '~  ': '<rootDir>/assets'
+  },
+  head: {
+    meta: [
+      {name: 'viewport', content: 'width=device-width, initial-scale=1'}
+    ],
+  },
+  ssr: false,
 });
