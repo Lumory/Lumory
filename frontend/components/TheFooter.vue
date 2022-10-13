@@ -78,7 +78,7 @@ export default {
   color: #a9a9a9;
 }
 .footer-menu a:hover, .footer-menu a:active {
-  color: white;
+  color: var(--white);
 }
 .footer-copyright {
   margin-top: 20px;
