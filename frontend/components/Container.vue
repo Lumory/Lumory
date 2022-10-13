@@ -11,9 +11,26 @@
 }
 @media (min-width: 640px) {
   .container {
-    max-width: 1200px;
+    width: 100%;
+    max-width: 620px;
     margin: 0 auto;
-    padding: 0;
+    padding: 0 10px;
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    width: 100%;
+    max-width: 1084px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+}
+@media (min-width: 1280px) {
+  .container {
+    width: 1200px;
+    max-width: unset;
+    margin: 0 auto;
+    padding: 0 40px;
   }
 }
 </style>
