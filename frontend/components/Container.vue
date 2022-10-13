@@ -20,7 +20,7 @@
 @media (min-width: 1024px) {
   .container {
     width: 100%;
-    max-width: 1084px;
+    max-width: 984px;
     margin: 0 auto;
     padding: 0 20px;
   }
