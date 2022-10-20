@@ -1,52 +1,45 @@
 <template>
-  <n-space class="steps-container" vertical>
+  <n-space class="steps-container" vertical justify="start">
     <div class="wrapper option-1 option-1-1">
       <ol class="c-stepper">
-        <li class="c-stepper__item">
-          <a @click="step=1">
-            <h3 class="c-stepper__title">Step 1</h3>
-            <p class="c-stepper__desc">You can add a description</p>
-          </a>
-        </li>
-        <li class="c-stepper__item">
-          <a @click="step=2">
-            <h3 class="c-stepper__title">Step 2</h3>
-            <p class="c-stepper__desc">Or do without.</p>
-          </a>
-        </li>
-        <li class="c-stepper__item">
-          <a @click="step=3">
-            <h3 class="c-stepper__title">Step 3</h3>
+        <li class="c-stepper__item" v-for="(step, index) in steps">
+          <a @click="currentStep=index">
+            <h3 class="c-stepper__title">{{ step.title }}</h3>
+            <p class="c-stepper__desc">{{ step.description }}</p>
           </a>
         </li>
       </ol>
     </div>
 
   <!-- Steps content -->
-    <div v-if="step === 1">
-      <step/>
-      step 1
-    </div>
-    <div v-if="step === 2">
-      <h1>Step 2</h1>
-    </div>
-    <div v-if="step === 3">
-      <h1>Step 3</h1>
-    </div>
+    <component :is="steps[currentStep].component"></component>
 
   <!-- Steps controls -->
-    <n-button type="primary" class="stepper-next-button" @click="step++">Volgende stap</n-button>
+    <n-button type="primary" class="stepper-next-button" @click="currentStep++">Volgende stap</n-button>
   </n-space>
 </template>
 
 <script>
-import Step from "./Step";
+import Step1 from "./SignUpStep1";
+import Step2 from "./SignUpStep2";
 import { NButton, NSpace } from "naive-ui"
 export default {
-  components: {Step, NButton, NSpace},
+  components: {Step1, Step2, NButton, NSpace},
   data() {
     return {
-      step: 1
+      currentStep: 0,
+      steps: [
+        {
+          title: "Stap 1",
+          description: "Je kunt een beschrijving toevoegen",
+          component: "Step1"
+        },
+        {
+          title: "Stap 2",
+          description: "Of niet.",
+          component: "step2"
+        }
+      ]
     }
   }
 }

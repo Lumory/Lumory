@@ -8,6 +8,9 @@
 .container {
   width: calc(100% - 20px);
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 @media (min-width: 640px) {
   .container {

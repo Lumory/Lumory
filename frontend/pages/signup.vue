@@ -1,6 +1,6 @@
 <template>
   <container>
-    <n-space vertical align="center">
+    <n-space vertical justify="start" align="center">
       <n-image
           class="lumory-logo"
           src="/assets/img/Logo-horizontal.svg"
