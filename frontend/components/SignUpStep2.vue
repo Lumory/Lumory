@@ -1,13 +1,13 @@
 <template>
   <n-space vertical align="center">
     <h1>Persoonlijke informatie</h1>
-    <n-space align="center" vertical>
+    <n-space vertical>
 
 
-      <n-form ref="formRef" :model="model" size="large">
+      <n-form ref="formRef" :model="model" size="large" :rules="rules">
         <n-grid :span="24" :x-gap="24">
           <n-form-item-gi :span="12" path="firstName" label="firstName">
-            <n-input v-model:value="model.firstName" @keydown.enter.prevent />
+            <n-input v-model:value="model.firstName" placeholder="Whatever" @keydown.enter.prevent />
           </n-form-item-gi>
 
           <n-form-item-gi :span="12" path="lastName" label="LastName">
@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import {NSpace, NForm, NRow, NCol, NButton, NFormItem, NInput, FormInst, NFormItemGi, NGrid} from 'naive-ui'
+import {NSpace, NForm, NRow, NCol, NButton, NFormItem, NInput, FormInst, NFormItemGi, NGrid, FormRules, FormItemRule} from 'naive-ui'
 import { defineComponent, ref } from 'vue'
 
 interface ModelType {
@@ -50,10 +50,33 @@ export default defineComponent({
       email: null,
       password: null,
     })
+    const rules: FormRules = {
+      firstName: [
+        {
+          required: true,
+          message: 'Voornaam is verplicht.',
+          trigger: ['blur']
+        },
+      ],
+      email: [
+        {
+          required: true,
+          validator (rule: FormItemRule, value: string) {
+            if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)) {
+              console.log('ongeldige email')
+              return new Error('Age should be an integer')
+            }
+          },
+          message: 'Vul een geldig email adres in.',
+          trigger: ['blur']
+        }
+      ]
+    }
 
     return {
       formRef,
       model: modelRef,
+      rules,
       formValue: ref({
         firstName: '',
         lastName: '',
@@ -67,22 +90,7 @@ export default defineComponent({
 
 <style scoped>
 h1 {
-  text-align: center;
-}
-.n-radio-group .n-radio-button {
-  width: 250px;
-  height: 200px;
-  padding: 25px;
-  transition: all 250ms ease;
-  will-change: transition;
-  display: inline-block;
-  text-align: center;
-  cursor: pointer;
-  position: relative;
-  font-weight: 900;
-  border-radius: 15px;
-  border: 3px solid #d9d9d9;
-  font-family: "Roboto";
+  text-align: left;
 }
 p {
   text-align: left;
