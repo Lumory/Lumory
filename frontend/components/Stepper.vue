@@ -15,7 +15,8 @@
     <component :is="steps[currentStep].component"></component>
 
   <!-- Steps controls -->
-    <n-button type="primary" class="stepper-next-button" @click="currentStep++">Volgende stap</n-button>
+    <n-button type="primary" class="stepper-next-button" size="large" :disabled="!currentStep < steps.length -1" @click="currentStep < steps.length && currentStep++">
+      Volgende stap</n-button>
   </n-space>
 </template>
 
@@ -23,23 +24,32 @@
 import Step1 from "./SignUpStep1";
 import Step2 from "./SignUpStep2";
 import { NButton, NSpace } from "naive-ui"
+
+const steps = [
+  {
+    title: "Stap 1",
+    description: "Je kunt een beschrijving toevoegen",
+    component: "Step1",
+    required: true,
+  },
+  {
+    title: "Stap 2",
+    description: "Of niet.",
+    component: "step2",
+    required: true,
+  }
+];
+let currentStep = 0;
+let hasNextStep = currentStep < steps.length -1;
+
+
 export default {
   components: {Step1, Step2, NButton, NSpace},
   data() {
     return {
-      currentStep: 0,
-      steps: [
-        {
-          title: "Stap 1",
-          description: "Je kunt een beschrijving toevoegen",
-          component: "Step1"
-        },
-        {
-          title: "Stap 2",
-          description: "Of niet.",
-          component: "step2"
-        }
-      ]
+      currentStep,
+      steps,
+      hasNextStep
     }
   }
 }
