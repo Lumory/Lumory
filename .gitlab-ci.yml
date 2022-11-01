@@ -4,5 +4,5 @@ stages:
 docker_build:
   stage: build
   script:
-    - docker build -t lumory/lumory-dev .
+    - docker build -t lumory-dev .
     - docker run lumory-dev
