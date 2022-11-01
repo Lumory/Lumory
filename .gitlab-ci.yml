@@ -4,4 +4,4 @@ stages:
 docker_build:
   stage: build
   script:
-    - docker build /oi/lumory/-/blob/dev/frontend/Dockerfile
+    - docker build /frontend/Dockerfile
