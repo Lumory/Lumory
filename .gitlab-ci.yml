@@ -4,4 +4,4 @@ stages:
 docker_build:
   stage: build
   script:
-    - docker-compose build
+    - docker build https://git.lumory.nl/oi/lumory/-/blob/dev/frontend/Dockerfile
