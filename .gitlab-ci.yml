@@ -11,4 +11,4 @@ docker_build:
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
   script:
-    - ssh -i $ID_RSA $SERVER_USER@$SERVER_IP ./pipeline.sh
+    - ssh -oStrictHostKeyChecking=no -i $ID_RSA $SERVER_USER@$SERVER_IP ./pipeline.sh
