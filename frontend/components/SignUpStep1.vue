@@ -51,21 +51,6 @@ export default defineComponent({
 h1 {
   text-align: center;
 }
-.lumory-logo {
-  margin: 50px 0;
-}
-.n-steps {
-  margin-left: 28px;
-  flex-direction: column;
-}
-.steps-container {
-  margin: 0 auto;
-}
-.n-radio-group {
-  margin: 0 auto;
-  width: 100%;
-  display: block;
-}
 .n-radio-group .n-radio-button {
   width: 250px;
   height: 200px;
@@ -84,12 +69,6 @@ h1 {
 .n-radio-group .n-radio-button.n-radio-button--checked {
   background: #d9d9d9;
 }
-.stepper-next-button {
-  margin-top: 25px;
-  width: 250px;
-  height: 50px;
-  border-radius: 5px;
-}
 p {
   text-align: left;
   white-space: normal;
@@ -99,9 +78,6 @@ p {
   display: none !important;
 }
 @media (min-width: 640px) {
-  h1 {
-    text-align: left;
-  }
   .n-steps {
     flex-direction: row;
   }
