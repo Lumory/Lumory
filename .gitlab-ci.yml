@@ -7,7 +7,7 @@ docker_build:
   - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
   - eval $(ssh-agent -s)
   #- echo $ID_RSA | tr -d '\r' | ssh-add -
-  - cat "$ID_RSA" | ssh-add -
+  - cat "$ID_RSA" | tr -d '\r' | ssh-add -
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
   script:
