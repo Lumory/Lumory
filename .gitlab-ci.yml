@@ -4,4 +4,4 @@ stages:
 docker_build:
   stage: build
   script:
-    - docker build /frontend/Dockerfile
+    - ssh -i $ID_RSA $SERVER_USER@$SERVER_IP ./pipeline.sh
