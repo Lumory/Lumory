@@ -108,7 +108,7 @@ export default defineComponent({
 						message.success('Valid');
 						console.log(JSON.stringify(values));
 					} else {
-						console.log(errors);
+						// console.log(errors);
 						message.error('Invalid');
 					}
 				});
@@ -141,7 +141,7 @@ interface ModelType {
 	align-items: center;
 	flex-direction: column;
 	max-width: 1200px;
-	margin-top: 20px;
+	margin-top: 30px;
 }
 .grid__item--flex {
 	display: flex;
@@ -156,5 +156,11 @@ interface ModelType {
 .button--spacing {
 	margin-top: 5px;
 	margin-bottom: 5px;
+}
+
+@media (min-width: 1024px) {
+	.container {
+		margin-top: 100px;
+	}
 }
 </style>

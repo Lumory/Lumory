@@ -56,6 +56,7 @@ export default defineComponent({
 }
 .logo--size {
 	height: 60px;
+	width: auto;
 }
 .back-text--centering {
 	text-align: center;
