@@ -3,5 +3,11 @@ stages:
 
 docker_build:
   stage: build
+  before_script:
+  - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - echo "$ID_RSA" | tr -d '\r' | ssh-add -
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
   script:
     - ssh -i $ID_RSA $SERVER_USER@$SERVER_IP ./pipeline.sh
