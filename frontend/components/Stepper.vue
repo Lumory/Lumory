@@ -12,10 +12,10 @@
     </div>
 
   <!-- Steps content -->
-    <component :is="steps[currentStep].component"></component>
+    <component :is="steps[currentStep].component" @userTypeSelected="onUserTypeSelected"></component>
 
   <!-- Steps controls -->
-    <n-button type="primary" class="stepper-next-button" size="large" :disabled="!currentStep < steps.length -1" @click="currentStep < steps.length && currentStep++">
+    <n-button type="primary" class="stepper-next-button" size="large" @click="onNextButtonClick(currentStep)">
       Volgende stap</n-button>
   </n-space>
 </template>
@@ -23,6 +23,7 @@
 <script>
 import Step1 from "./SignUpStep1";
 import Step2 from "./SignUpStep2";
+import Step3 from "./SignUpStep2Internship";
 import { NButton, NSpace } from "naive-ui"
 
 const steps = [
@@ -33,23 +34,49 @@ const steps = [
     required: true,
   },
   {
-    title: "Stap 2",
+    title: "Stap 2.1",
     description: "Of niet.",
     component: "step2",
     required: true,
+    userType: "student"
+  },
+  {
+    title: "Stap 2.2",
+    component: "Step3",
+    required: true,
+    userType: "internshipCompany"
+  },
+  {
+    title: "Stap 3",
+    required: true,
+    userType: "internshipCompany"
   }
 ];
 let currentStep = 0;
 let hasNextStep = currentStep < steps.length -1;
+let userType = null;
 
 
 export default {
-  components: {Step1, Step2, NButton, NSpace},
+  components: {Step1, Step2, Step3, NButton, NSpace},
+  methods: {
+    onUserTypeSelected (value) {
+      userType = value
+      console.log(value)
+    },
+    onNextButtonClick (step) {
+      console.log(steps[currentStep].component)
+      currentStep++
+
+      // step < steps.length && currentStep++
+    }
+  },
   data() {
     return {
       currentStep,
       steps,
-      hasNextStep
+      hasNextStep,
+      userType,
     }
   }
 }
