@@ -12,10 +12,10 @@
     </div>
 
   <!-- Steps content -->
-    <component :is="steps[currentStep].component" @userTypeSelected="onUserTypeSelected"></component>
+    <component :is="steps[currentStep].component" v-model="currentStep" @userTypeSelected="onUserTypeSelected"></component>
 
   <!-- Steps controls -->
-    <n-button type="primary" class="stepper-next-button" size="large" @click="onNextButtonClick(currentStep)">
+    <n-button type="primary" class="stepper-next-button" :key="steps[currentStep]" size="large" @click="onNextButtonClick">
       Volgende stap</n-button>
   </n-space>
 </template>
@@ -64,11 +64,13 @@ export default {
       userType = value
       console.log(value)
     },
-    onNextButtonClick (step) {
-      console.log(steps[currentStep].component)
-      currentStep++
-
-      // step < steps.length && currentStep++
+    onNextButtonClick () {
+      this.currentStep++
+    }
+  },
+  computed: {
+    computedStep() {
+      return currentStep++
     }
   },
   data() {
