@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="log-in-container">
 		<h2>Inloggen</h2>
 		<div class="inlog-form">
 			<n-form
@@ -27,10 +27,7 @@
 						>
 					</n-form-item-gi>
 					<n-gi class="grid__item--flex">
-						<NuxtLink
-							class="wachtwoord-vergeten--alignment"
-							to="/forgotpassword"
-						>
+						<NuxtLink class="forgot-password--alignment" to="/forgotpassword">
 							<u>Wachtwoord vergeten?</u>
 						</NuxtLink>
 					</n-gi>
@@ -135,20 +132,19 @@ interface ModelType {
 </script>
 
 <style scoped>
-.container {
+.log-in-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	max-width: 1200px;
-	margin-top: 30px;
 }
 .grid__item--flex {
 	display: flex;
 	align-items: center;
 }
-.wachtwoord-vergeten--alignment {
+.forgot-password--alignment {
 	height: 40px;
+	text-align: end;
 }
 .button--size {
 	width: 100%;
@@ -159,7 +155,7 @@ interface ModelType {
 }
 
 @media (min-width: 1024px) {
-	.container {
+	.log-in-container {
 		margin-top: 100px;
 	}
 }

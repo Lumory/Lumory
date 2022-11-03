@@ -1,6 +1,8 @@
 <template>
 	<div class="content--center">
-		<LogInForm />
+		<Container>
+			<LogInForm />
+		</Container>
 	</div>
 </template>
 

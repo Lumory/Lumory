@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<Container>
 		<n-grid :cols="3" class="grid--position">
 			<n-gi justify="center" class="back-button--position">
 				<NuxtLink to="/" class="back-text--centering">
@@ -17,7 +17,7 @@
 			</n-gi>
 			<n-gi />
 		</n-grid>
-	</div>
+	</Container>
 </template>
 
 <script lang="ts">
@@ -31,14 +31,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.container {
-	width: calc(100vw - (100vw - 100%));
-	height: auto;
-	min-height: 80px;
-	display: flex;
-	justify-content: center;
-}
-
 .grid--position {
 	padding-top: 20px;
 	min-height: 80px;
