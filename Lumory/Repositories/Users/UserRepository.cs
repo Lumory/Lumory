@@ -30,6 +30,11 @@ public class UserRepository
     {
         return _ctx.Users.Where((User u) => u.Id == id).SingleOrDefault();
     }
+    
+    public User? FindUserByEmail(string email)
+    {
+        return _ctx.Users.Where((User u) => u.Email == email).SingleOrDefault();
+    }
 
     public void RemoveUser(User user)
     {

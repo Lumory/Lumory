@@ -28,6 +28,11 @@ public class UserService
     {
         return _repository.FindUserById(id);
     }
+    
+    public User? FindUserByEmail(string email)
+    {
+        return _repository.FindUserByEmail(email);
+    }
 
     public void DeleteUser(User user)
     {
