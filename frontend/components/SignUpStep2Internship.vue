@@ -120,7 +120,4 @@ p {
 .form-item--left-align {
   text-align: left !important;
 }
-@media (min-width: 640px) {
-
-}
 </style>
