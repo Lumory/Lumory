@@ -1,6 +1,6 @@
 <template>
   <n-space vertical align="center" item-style="width: 100%">
-    <h1>Persoonlijke informatie</h1>
+    <h1>Contactpersoon toevoegen</h1>
     <n-form ref="formRef" :model="formValue" size="large" :rules="rules">
       <n-grid cols="12" :x-gap="24" item-responsive responsive="screen">
         <n-form-item-gi class="form-item--left-align" span="12 s:6" path="firstName" label="Voornaam">
@@ -11,12 +11,6 @@
         </n-form-item-gi>
         <n-form-item-gi class="form-item--left-align" :span="12" path="email" label="E-mail">
           <n-input v-model:value="formValue.email" placeholder="johndoe@e.mail" @keydown.enter.prevent />
-        </n-form-item-gi>
-        <n-form-item-gi class="form-item--left-align" :span="12" path="password" label="Wachtwoord">
-          <n-input v-model:value="formValue.password" placeholder="Wachtwoord" @keydown.enter.prevent type="password" show-password-on="click"/>
-        </n-form-item-gi>
-        <n-form-item-gi class="form-item--left-align" :span="12" path="repeatPassword" label="Herhaal wachtwoord">
-          <n-input v-model:value="formValue.repeatPassword" placeholder="Herhaal wachtwoord" @keydown.enter.prevent on-change="" type="password" show-password-on="click"/>
         </n-form-item-gi>
       </n-grid>
     </n-form>
@@ -31,8 +25,6 @@ interface ModelType {
   firstName: string | null
   lastName: string | null
   email: string | null
-  password: string | null
-  repeatPassword: string | null
 }
 
 export default defineComponent({
@@ -45,8 +37,6 @@ export default defineComponent({
       firstName: '',
       lastName: '',
       email: '',
-      password: '',
-      repeatPassword: '',
     });
     const rules: FormRules = {
       firstName: [
@@ -76,27 +66,6 @@ export default defineComponent({
           trigger: ['blur']
         }
       ],
-      password: [
-        {
-          required: true,
-          message: 'Wachtwoord is verplicht.',
-          trigger: ['blur']
-        },
-      ],
-      repeatPassword: [
-        {
-          validator (rule: FormItemRule, value: string) {
-            return value == formValue.value.password;
-          },
-          message: 'Wachtwoord komt niet overeen.',
-          trigger: ['blur']
-        },
-        {
-          required: true,
-          message: 'Herhaal wachtwoord is verplicht.',
-          trigger: ['blur']
-        },
-      ],
     }
 
     return {
@@ -119,8 +88,5 @@ p {
 }
 .form-item--left-align {
   text-align: left !important;
-}
-@media (min-width: 640px) {
-
 }
 </style>

@@ -1,16 +1,16 @@
 <template>
   <n-space vertical align="center" item-style="width: 100%">
-    <h1>Persoonlijke informatie</h1>
+    <h1>Bedrijf informatie</h1>
     <n-form ref="formRef" :model="formValue" size="large" :rules="rules">
       <n-grid cols="12" :x-gap="24" item-responsive responsive="screen">
-        <n-form-item-gi class="form-item--left-align" span="12 s:6" path="firstName" label="Voornaam">
-          <n-input v-model:value="formValue.firstName" placeholder="John" @keydown.enter.prevent />
+        <n-form-item-gi class="form-item--left-align" span="12" path="companyName" label="Bedrijfsnaam">
+          <n-input v-model:value="formValue.companyName" placeholder="Bedrijf" @keydown.enter.prevent />
         </n-form-item-gi>
-        <n-form-item-gi class="form-item--left-align" span="12 s:6" path="lastName" label="Achternaam">
-          <n-input v-model:value="formValue.lastName" placeholder="Doe" @keydown.enter.prevent />
+        <n-form-item-gi class="form-item--left-align" span="12" path="KVK" label="KVK-nummer">
+          <n-input v-model:value="formValue.KVK" placeholder="1234 5678 9012" @keydown.enter.prevent />
         </n-form-item-gi>
         <n-form-item-gi class="form-item--left-align" :span="12" path="email" label="E-mail">
-          <n-input v-model:value="formValue.email" placeholder="johndoe@e.mail" @keydown.enter.prevent />
+          <n-input v-model:value="formValue.email" placeholder="hr@bedrijf.nl" @keydown.enter.prevent />
         </n-form-item-gi>
         <n-form-item-gi class="form-item--left-align" :span="12" path="password" label="Wachtwoord">
           <n-input v-model:value="formValue.password" placeholder="Wachtwoord" @keydown.enter.prevent type="password" show-password-on="click"/>
@@ -28,8 +28,8 @@ import {NSpace, NForm, NRow, NCol, NButton, NFormItem, NInput, FormInst, NFormIt
 import { defineComponent, ref } from 'vue'
 
 interface ModelType {
-  firstName: string | null
-  lastName: string | null
+  companyName: string | null
+  KVK: string | null
   email: string | null
   password: string | null
   repeatPassword: string | null
@@ -42,24 +42,24 @@ export default defineComponent({
   setup() {
     const formRef = ref<FormInst | null>(null)
     let formValue = ref(<ModelType>{
-      firstName: '',
-      lastName: '',
+      companyName: '',
+      KVK: '',
       email: '',
       password: '',
       repeatPassword: '',
     });
     const rules: FormRules = {
-      firstName: [
+      companyName: [
         {
           required: true,
-          message: 'Voornaam is verplicht.',
+          message: 'Bedrijfsnaam is verplicht.',
           trigger: ['blur']
         },
       ],
-      lastName: [
+      KVK: [
         {
           required: true,
-          message: 'Achternaam is verplicht.',
+          message: 'KVK-nummer is verplicht.',
           trigger: ['blur']
         },
       ],
@@ -119,8 +119,5 @@ p {
 }
 .form-item--left-align {
   text-align: left !important;
-}
-@media (min-width: 640px) {
-
 }
 </style>

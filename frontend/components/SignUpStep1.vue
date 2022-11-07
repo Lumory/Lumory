@@ -4,7 +4,7 @@
     <n-space align="center" vertical>
       <n-radio-group v-model:value="value" name="radiogroup">
         <n-space style="gap: 8px 50px;" justify="center" align="center">
-          <n-radio-button value="w">
+          <n-radio-button value="w" @click="onClickButton('student')">
             <n-space class="radio-button" align="start" vertical>
               <n-icon size="24">
                 <groups-filled />
@@ -13,7 +13,7 @@
               <p>Ik ben een student op zoek naar een stage</p>
             </n-space>
           </n-radio-button>
-          <n-radio-button value="w2">
+          <n-radio-button value="w2" @click="onClickButton('internshipCompany')">
             <n-space class="radio-button" align="start" vertical>
               <n-icon size="24">
                 <person-filled />
@@ -43,6 +43,16 @@ export default defineComponent({
     NIcon,
     GroupsFilled,
     PersonFilled
+  },
+  methods: {
+    onClickButton (val) {
+      this.$emit('userTypeSelected', val)
+    }
+  },
+  data() {
+    return {
+      value: ref(null)
+    }
   }
 })
 </script>
