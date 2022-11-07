@@ -13,7 +13,7 @@
               <p>Ik ben een student op zoek naar een stage</p>
             </n-space>
           </n-radio-button>
-          <n-radio-button value="w2" @click="onClickButton('stagebedrijf')">
+          <n-radio-button value="w2" @click="onClickButton('internshipCompany')">
             <n-space class="radio-button" align="start" vertical>
               <n-icon size="24">
                 <person-filled />
@@ -49,6 +49,11 @@ export default defineComponent({
       this.$emit('userTypeSelected', val)
     }
   },
+  data() {
+    return {
+      value: ref(null)
+    }
+  }
 })
 </script>
 

@@ -2,12 +2,14 @@
   <n-space class="steps-container" vertical justify="start">
     <div class="wrapper option-1 option-1-1">
       <ol class="c-stepper">
-        <li class="c-stepper__item" v-for="(step, index) in steps">
-          <a @click="currentStep=index">
-            <h3 class="c-stepper__title">{{ step.title }}</h3>
-            <p class="c-stepper__desc">{{ step.description }}</p>
-          </a>
-        </li>
+        <template v-for="(step, index) in this.steps">
+          <li class="c-stepper__item" v-if="step.userType === this.userType || step.userType === undefined">
+              <a @click="currentStep=index">
+                <h3 class="c-stepper__title">{{ step.title }}</h3>
+                <p class="c-stepper__desc">{{ step.description }}</p>
+              </a>
+          </li>
+        </template>
       </ol>
     </div>
 
@@ -24,58 +26,62 @@
 import Step1 from "./SignUpStep1";
 import Step2 from "./SignUpStep2";
 import Step3 from "./SignUpStep2Internship";
+import Step4 from "./SignUpInternshipCompanyContactPerson";
 import { NButton, NSpace } from "naive-ui"
 
 const steps = [
   {
     title: "Stap 1",
-    description: "Je kunt een beschrijving toevoegen",
+    description: "Account type",
     component: "Step1",
     required: true,
   },
   {
-    title: "Stap 2.1",
-    description: "Of niet.",
+    title: "Stap 2",
+    description: "Persoonlijke informatie",
     component: "step2",
     required: true,
     userType: "student"
   },
   {
-    title: "Stap 2.2",
+    title: "Stap 2",
+    description: "Bedrijfsinformatie",
     component: "Step3",
     required: true,
     userType: "internshipCompany"
   },
   {
     title: "Stap 3",
+    description: "Contactpersoon",
+    component: "Step4",
     required: true,
     userType: "internshipCompany"
   }
 ];
 let currentStep = 0;
 let hasNextStep = currentStep < steps.length -1;
-let userType = null;
+let userType = "student";
 
 
 export default {
-  components: {Step1, Step2, Step3, NButton, NSpace},
+  components: {Step1, Step2, Step3, Step4, NButton, NSpace},
   methods: {
     onUserTypeSelected (value) {
-      userType = value
-      console.log(value)
+      this.userType = value
+      console.log(userType)
     },
     onNextButtonClick () {
       this.currentStep++
     }
   },
   computed: {
-    computedStep() {
-      return currentStep++
+    computedSteps(userType) {
+      return steps.filter(step => step.userType===userType)
     }
   },
   data() {
     return {
-      currentStep,
+      currentStep: 0,
       steps,
       hasNextStep,
       userType,
