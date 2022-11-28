@@ -1,10 +1,8 @@
 <template>
-	<div>
+	<Container>
 		<h1>{{ $route.path }}</h1>
 		<h1>{{ $route.path }}</h1>
 		<h1>{{ $route.path }}</h1>
 		<h1>{{ $route.path }}</h1>
-		<h1>{{ $route.path }}</h1>
-		<h1>{{ $route.path }}</h1>
-	</div>
+	</Container>
 </template>
