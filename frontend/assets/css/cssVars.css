@@ -1,6 +1,7 @@
 :root {
 	--color-white: white;
-	--color-primary: orange;
+	--color-primary: #FEBF00;
+	--color-subtitle: #999999;
 	--color-background: #F6F7F9;
 	--color-background-one: black;
 	--color-background-two: rgb(60, 60, 60);

@@ -1,37 +1,127 @@
 <template>
 	<Container>
-		<div class="page-grid"></div>
+		<div class="page-grid">
+			<div class="banner">
+				<div class="banner-landscape">
+					<img src="@/assets/img/Test.jpg" alt="Banner landscape image" class="banner-landscape-image">
+				</div>
+				<div class="banner-content--positioning">
+					<div class="banner-profile-picture">
+						<img src="@/assets/img/test2.jpg" alt="Profile picture" class="banner-profile-picture-image">
+					</div>
+					<div class="banner__content-wrapper">
+						<div class="banner__content">
+							<h3 class="banner__content-name">Niels Berning</h3>
+							<h4 class="banner__content-subtitle">Open-ICT, Hogeschool Utrecht</h4>
+						</div>
+						<n-dropdown trigger="click" :options="options" @select="handleSelect">
+							<ellipsis-vertical class="banner__options-icon"></ellipsis-vertical>
+						</n-dropdown>
+					</div>
+				</div>
+			</div>
+			<StudentProfileField class="page-grid__col-span-2" title="Opleiding">
+				<n-grid cols="1 m:2" responsive="screen" x-gap="10px" y-gap="20px" class="education">
+					<n-gi class="education__name">
+						<school-outline class="icon--size icon--padding icon--color" />
+						<div class="opleiding-field__content-wrapper">
+							<p class="opleiding-field__title">Naam opleiding</p>
+							<p class="opleiding-field__subtitle">HBO Open-ICT</p>
+						</div>
+					</n-gi>
+					<n-gi class="grade">
+						<school-outline class="icon--size icon--padding icon--color" />
+						<div class="opleiding-field__content-wrapper">
+							<p class="opleiding-field__title">Leerjaar</p>
+							<p class="opleiding-field__subtitle">Leerjaar 3</p>
+						</div>
+					</n-gi>
+					<n-gi class="education-authority">
+						<account-balance-outlined class="icon--size icon--padding icon--color" />
+						<div class="opleiding-field__content-wrapper">
+							<p class="opleiding-field__title">Onderwijsinstantie</p>
+							<p class="opleiding-field__subtitle">Hogeschool Utrecht</p>
+						</div>
+					</n-gi>
+					<n-gi class="propaedeutic">
+						<document-text-outline class="icon--size icon--padding icon--color" />
+						<div class="opleiding-field__content-wrapper">
+							<p class="opleiding-field__title">Propedeuse behaald</p>
+							<p class="opleiding-field__subtitle">Ja</p>
+						</div>
+					</n-gi>
+				</n-grid>
+			</StudentProfileField>
+			
+			<StudentProfileField title="Externe links">
+					<li class="external-links__list-item">
+						<logo-linkedin class="icon--padding icon--size" color="#0072b1" />
+						<a href=""><u>Linkedin</u></a>
+					</li>
+			</StudentProfileField>
 
-		<div class="banner">
-			<div class="banner-landscape">
-				<img src="@/assets/img/Test.jpg" alt="Banner landscape image" class="banner-landscape-image">
-			</div>
-			<div class="banner-content--positioning">
-				<div class="banner-profile-picture">
-					<img src="@/assets/img/test2.jpg" alt="Profile picture" class="banner-profile-picture-image">
+			<StudentProfileField class="page-grid__cv" title="CV">
+				<div class="cv-container">
+					<div class="cv-wrapper">
+						<document-outline class="icon--size icon--padding" />
+						<p>CV_niels_berning</p>
+					</div>
+					<download-filled class="icon--size download-icon" />
 				</div>
-				<div class="banner__content">
-					<h3 class="banner__content-name">Niels Berning</h3>
-					<h4 class="banner__content-subtitle">Open-ICT, Hogeschool Utrecht</h4>
-				</div>
-			</div>
+
+			</StudentProfileField>
+
+			<StudentProfilePreferenceField class="page-grid__col-span-2 page-grid__preference-field" title="Stagevoorkeuren" ></StudentProfilePreferenceField>
+			<StudentProfilePreferenceField class="page-grid__col-span-2" title="Stagebedrijf voorkeuren" ></StudentProfilePreferenceField>
+			<StudentProfilePreferenceField class="page-grid__col-span-2" title="persoonlijkheid" ></StudentProfilePreferenceField>
+
+			<StudentProfileField class="page-grid__skills" title="Vaardigheden"></StudentProfileField>
 		</div>
-
-		<div>opleiding</div>
-		<div>externe links</div>
-		<div>cv</div>
-		<div>stagevoorkeuren</div>
-		<div>stagebedrijf voorkeuren</div>
-		<div>persoonlijkheidskenmerken</div>
-		<div>vaardigheden</div>
 	</Container>
 </template>
+
+<script lang="ts">
+import { EllipsisVertical, LogoLinkedin, DocumentOutline, SchoolOutline, DocumentTextOutline } from "@vicons/ionicons5";
+import { DownloadFilled, AccountBalanceOutlined } from "@vicons/material";
+import { useMessage, NDropdown, NGrid, NGi } from "naive-ui";
+export default {
+	components: {
+		NDropdown,
+		NGrid,
+		NGi,
+		EllipsisVertical,
+		LogoLinkedin,
+		DocumentOutline,
+		DownloadFilled,
+		SchoolOutline,
+		DocumentTextOutline,
+		AccountBalanceOutlined
+	},
+	props: {
+		title: String,
+	},
+	setup() {
+		const message = useMessage();
+		return {
+			options: [
+				{
+					label: 'edit',
+					key: 'edit',
+				}
+			],
+			handleSelect(key: string | number) {
+				message.info(String(key))
+			}
+		}
+	}
+}
+</script>
 
 <style scoped>
 .page-grid {
 	width: 100%;
-	background-color: orange;
 	display: grid;
+	gap: 20px;
 }
 .banner {
 	width: 100%;
@@ -52,6 +142,7 @@
 }
 .banner-content--positioning {
 	display: flex;
+	justify-content: space-between;
 	min-height: 100px;
 }
 .banner-profile-picture {
@@ -79,9 +170,70 @@
 .banner__content-subtitle {
 	font-weight: 500;
 }
+.banner__content-wrapper {
+	display: flex;
+	justify-content: space-between; 
+	width: 85%;
+}
+.banner__options-icon {
+	height: 25px;
+	padding-top: 10px;
+}
+.external-links__list-item {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+}
+.cv__icon, .icon--padding {
+	padding-right: 20px;
+}
+.icon--size {
+	width: 20px;
+}
+.cv-container {
+	display: flex;
+	justify-content: space-between;
+}
+.cv-wrapper {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.download-icon:hover {
+	cursor: pointer;
+}
+.propaedeutic, .education__name, .grade, .education-authority {
+	display: flex;
+}
+.opleiding-field__title {
+	font-weight: bold;
+}
+.opleiding-field__subtitle, .icon--color {
+	color: var(--color-subtitle);
+}
 
 @media (min-width: 640px) {
+	.page-grid {
+		grid-template-columns: 
+		repeat(3, 1fr);
+	}
+	.page-grid__col-span-2 {
+		grid-column: span 2;
+	}
+	.page-grid__cv {
+		grid-column-start: 3;
+	}
+	.page-grid__preference-field {
+		grid-row-start: 3;
+	}
+	.page-grid__skills {
+		grid-column-start: 1;
+	}
+	.banner {
+		grid-column: span 3;
+	}
 	.banner-profile-picture {
+		min-width: 150px;
 		width: 150px;
 		height: 150px;
 		margin-left: 60px;
@@ -94,8 +246,7 @@
 		margin-left: 25px;
 	}
 	.banner-content--positioning {
-	min-height: 130px;
+		min-height: 130px;
 	}
 }
-
 </style>
