@@ -3,7 +3,7 @@
 		<div class="field-header">
 			<h3 class="field-header__title">{{ title }}</h3>
 			<n-dropdown trigger="click" :options="options" @select="handleSelect" >
-				<ellipsis-vertical class="field__options-icon"></ellipsis-vertical>
+				<ellipsis-vertical class="field-header__options-icon"></ellipsis-vertical>
 			</n-dropdown>
 		</div>
 		<slot />
@@ -55,10 +55,10 @@ export default {
 .field-header__title {
 	padding: 0;
 }
-.field__options-icon {
+.field-header__options-icon {
 	height: 20px;
 }
-.field__options-icon:hover {
+.field-header__options-icon:hover {
 	cursor: pointer;
 }
 </style>

@@ -2,12 +2,12 @@
 	<Container>
 		<div class="page-grid">
 			<div class="banner">
-				<div class="banner-landscape">
-					<img src="@/assets/img/Test.jpg" alt="Banner landscape image" class="banner-landscape-image">
+				<div class="banner__landscape">
+					<img src="@/assets/img/Test.jpg" alt="Banner landscape image" class="banner__landscape-image">
 				</div>
-				<div class="banner-content--positioning">
-					<div class="banner-profile-picture">
-						<img src="@/assets/img/test2.jpg" alt="Profile picture" class="banner-profile-picture-image">
+				<div class="banner__content--positioning">
+					<div class="banner__profile-picture">
+						<img src="@/assets/img/test2.jpg" alt="Profile picture" class="banner__profile-picture-image">
 					</div>
 					<div class="banner__content-wrapper">
 						<div class="banner__content">
@@ -22,28 +22,28 @@
 			</div>
 			<StudentProfileField class="page-grid__col-span-2" title="Opleiding">
 				<n-grid cols="1 m:2" responsive="screen" x-gap="10px" y-gap="20px" class="education">
-					<n-gi class="education__name">
+					<n-gi class="education-field">
 						<school-outline class="icon--size icon--padding icon--color" />
 						<div class="education-field__content-wrapper">
 							<p class="education-field__title">Naam opleiding</p>
 							<p class="education-field__subtitle">HBO Open-ICT</p>
 						</div>
 					</n-gi>
-					<n-gi class="grade">
+					<n-gi class="education-field">
 						<school-outline class="icon--size icon--padding icon--color" />
 						<div class="education-field__content-wrapper">
 							<p class="education-field__title">Leerjaar</p>
 							<p class="education-field__subtitle">Leerjaar 3</p>
 						</div>
 					</n-gi>
-					<n-gi class="education-authority">
+					<n-gi class="education-field">
 						<account-balance-outlined class="icon--size icon--padding icon--color" />
 						<div class="education-field__content-wrapper">
 							<p class="education-field__title">Onderwijsinstantie</p>
 							<p class="education-field__subtitle">Hogeschool Utrecht</p>
 						</div>
 					</n-gi>
-					<n-gi class="propaedeutic">
+					<n-gi class="education-field">
 						<document-text-outline class="icon--size icon--padding icon--color" />
 						<div class="education-field__content-wrapper">
 							<p class="education-field__title">Propedeuse behaald</p>
@@ -76,7 +76,7 @@
 			<StudentProfilePreferenceField class="page-grid__col-span-2" title="persoonlijkheid" ></StudentProfilePreferenceField>
 
 			<StudentProfileField class="page-grid__skills" title="Vaardigheden">
-				<div class="vaardigheden-container">
+				<div class="skills">
 					<n-tag class="skills__tag" :bordered="false">Business</n-tag>
 					<n-tag class="skills__tag" :bordered="false">Product owner</n-tag>
 					<n-tag class="skills__tag" :bordered="false">Organiseren</n-tag>
@@ -139,22 +139,21 @@ export default {
 	-webkit-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.05); 
 	box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.05);
 }
-.banner-landscape {
-	/* max-height: 168px; */
+.banner__landscape {
 	overflow: hidden;
 }
-.banner-landscape-image {
+.banner__landscape-image {
 	width: 100%;
 	max-height: 168px;
 	object-fit: cover;
 	object-position: 50% 50%;
 }
-.banner-content--positioning {
+.banner__content--positioning {
 	display: flex;
 	justify-content: space-between;
 	min-height: 100px;
 }
-.banner-profile-picture {
+.banner__profile-picture {
 	min-width: 100px;
 	width: 100px;
 	height: 100px;
@@ -164,7 +163,7 @@ export default {
 	margin-top: -30px;
 	margin-left: 10px;
 }
-.banner-profile-picture-image {
+.banner__profile-picture-image {
 	object-fit: cover;
 	object-position: center;
 	max-width: 150px;
@@ -179,17 +178,19 @@ export default {
 .banner__content-subtitle {
 	font-weight: 500;
 }
-.banner__content-wrapper {
+.banner__content-wrapper, .external-links__list-item, .cv-container, .cv-wrapper, .education-field {
 	display: flex;
+}
+.banner__content-wrapper {
 	justify-content: space-between; 
 	width: 85%;
 }
 .banner__options-icon {
-	height: 25px;
+	height: 20px;
 	padding-top: 10px;
+	margin-right: 25px;
 }
-.external-links__list-item {
-	display: flex;
+.external-links__list-item, .cv-wrapper {
 	align-items: center;
 	flex-direction: row;
 }
@@ -200,19 +201,10 @@ export default {
 	width: 20px;
 }
 .cv-container {
-	display: flex;
 	justify-content: space-between;
 }
-.cv-wrapper {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-}
-.download-icon:hover {
+.download-icon:hover, .banner__options-icon:hover {
 	cursor: pointer;
-}
-.propaedeutic, .education__name, .grade, .education-authority {
-	display: flex;
 }
 .education-field__title {
 	font-weight: bold;
@@ -248,20 +240,20 @@ export default {
 	.page-grid__skills {
 		grid-column: span 2;
 	}
-	.banner-profile-picture {
+	.banner__profile-picture {
 		min-width: 150px;
 		width: 150px;
 		height: 150px;
 		margin-left: 60px;
 		margin-top: -45px;
 	}
-	.banner-profile-picture-image {
+	.banner__profile-picture-image {
 		max-height: none;
 	}
 	.banner__content {
 		margin-left: 25px;
 	}
-	.banner-content--positioning {
+	.banner__content--positioning {
 		min-height: 130px;
 	}
 }
