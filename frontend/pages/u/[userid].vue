@@ -24,30 +24,30 @@
 				<n-grid cols="1 m:2" responsive="screen" x-gap="10px" y-gap="20px" class="education">
 					<n-gi class="education__name">
 						<school-outline class="icon--size icon--padding icon--color" />
-						<div class="opleiding-field__content-wrapper">
-							<p class="opleiding-field__title">Naam opleiding</p>
-							<p class="opleiding-field__subtitle">HBO Open-ICT</p>
+						<div class="education-field__content-wrapper">
+							<p class="education-field__title">Naam opleiding</p>
+							<p class="education-field__subtitle">HBO Open-ICT</p>
 						</div>
 					</n-gi>
 					<n-gi class="grade">
 						<school-outline class="icon--size icon--padding icon--color" />
-						<div class="opleiding-field__content-wrapper">
-							<p class="opleiding-field__title">Leerjaar</p>
-							<p class="opleiding-field__subtitle">Leerjaar 3</p>
+						<div class="education-field__content-wrapper">
+							<p class="education-field__title">Leerjaar</p>
+							<p class="education-field__subtitle">Leerjaar 3</p>
 						</div>
 					</n-gi>
 					<n-gi class="education-authority">
 						<account-balance-outlined class="icon--size icon--padding icon--color" />
-						<div class="opleiding-field__content-wrapper">
-							<p class="opleiding-field__title">Onderwijsinstantie</p>
-							<p class="opleiding-field__subtitle">Hogeschool Utrecht</p>
+						<div class="education-field__content-wrapper">
+							<p class="education-field__title">Onderwijsinstantie</p>
+							<p class="education-field__subtitle">Hogeschool Utrecht</p>
 						</div>
 					</n-gi>
 					<n-gi class="propaedeutic">
 						<document-text-outline class="icon--size icon--padding icon--color" />
-						<div class="opleiding-field__content-wrapper">
-							<p class="opleiding-field__title">Propedeuse behaald</p>
-							<p class="opleiding-field__subtitle">Ja</p>
+						<div class="education-field__content-wrapper">
+							<p class="education-field__title">Propedeuse behaald</p>
+							<p class="education-field__subtitle">Ja</p>
 						</div>
 					</n-gi>
 				</n-grid>
@@ -75,7 +75,15 @@
 			<StudentProfilePreferenceField class="page-grid__col-span-2" title="Stagebedrijf voorkeuren" ></StudentProfilePreferenceField>
 			<StudentProfilePreferenceField class="page-grid__col-span-2" title="persoonlijkheid" ></StudentProfilePreferenceField>
 
-			<StudentProfileField class="page-grid__skills" title="Vaardigheden"></StudentProfileField>
+			<StudentProfileField class="page-grid__skills" title="Vaardigheden">
+				<div class="vaardigheden-container">
+					<n-tag class="skills__tag" :bordered="false">Business</n-tag>
+					<n-tag class="skills__tag" :bordered="false">Product owner</n-tag>
+					<n-tag class="skills__tag" :bordered="false">Organiseren</n-tag>
+					<n-tag class="skills__tag" :bordered="false">Interviewen</n-tag>
+					<n-tag class="skills__tag" :bordered="false">User story mapping</n-tag>
+				</div>
+			</StudentProfileField>
 		</div>
 	</Container>
 </template>
@@ -83,7 +91,7 @@
 <script lang="ts">
 import { EllipsisVertical, LogoLinkedin, DocumentOutline, SchoolOutline, DocumentTextOutline } from "@vicons/ionicons5";
 import { DownloadFilled, AccountBalanceOutlined } from "@vicons/material";
-import { useMessage, NDropdown, NGrid, NGi } from "naive-ui";
+import { useMessage, NDropdown, NGrid, NGi, NTag } from "naive-ui";
 export default {
 	components: {
 		NDropdown,
@@ -95,7 +103,8 @@ export default {
 		DownloadFilled,
 		SchoolOutline,
 		DocumentTextOutline,
-		AccountBalanceOutlined
+		AccountBalanceOutlined, 
+		NTag
 	},
 	props: {
 		title: String,
@@ -205,11 +214,15 @@ export default {
 .propaedeutic, .education__name, .grade, .education-authority {
 	display: flex;
 }
-.opleiding-field__title {
+.education-field__title {
 	font-weight: bold;
 }
-.opleiding-field__subtitle, .icon--color {
+.education-field__subtitle, .icon--color {
 	color: var(--color-subtitle);
+}
+
+.skills__tag {
+	margin: 5px;
 }
 
 @media (min-width: 640px) {
@@ -231,6 +244,9 @@ export default {
 	}
 	.banner {
 		grid-column: span 3;
+	}
+	.page-grid__skills {
+		grid-column: span 2;
 	}
 	.banner-profile-picture {
 		min-width: 150px;
