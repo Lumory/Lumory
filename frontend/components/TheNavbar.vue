@@ -6,7 +6,7 @@
 					<NuxtLink to="/">
 						<img
 							class="logo--size"
-							src="~/assets/img/Logo horizontal.svg"
+							src="~/assets/img/Logo-horizontal.svg"
 							alt="Logo Lumory"
 						/>
 					</NuxtLink>
@@ -62,7 +62,7 @@
 				<div class="logo">
 					<img
 						class="logo--size navbar__item"
-						src="~/assets/img/Logo horizontal.svg"
+						src="~/assets/img/Logo-horizontal.svg"
 						alt="Logo Lumory"
 					/>
 				</div>
