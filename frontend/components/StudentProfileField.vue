@@ -3,7 +3,7 @@
 		<div class="field-header">
 			<h3 class="field-header__title">{{ title }}</h3>
 			<n-dropdown trigger="click" :options="options" @select="handleSelect" >
-				<ellipsis-vertical class="field-header__options-icon"></ellipsis-vertical>
+				<ellipsis-vertical class="field-header__options-icon"/>
 			</n-dropdown>
 		</div>
 		<slot />

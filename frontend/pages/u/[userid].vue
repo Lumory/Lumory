@@ -15,7 +15,7 @@
 							<h4 class="banner__content-subtitle">Open-ICT, Hogeschool Utrecht</h4>
 						</div>
 						<n-dropdown trigger="click" :options="options" @select="handleSelect">
-							<ellipsis-vertical class="banner__options-icon"></ellipsis-vertical>
+							<ellipsis-vertical class="banner__options-icon"/>
 						</n-dropdown>
 					</div>
 				</div>
@@ -71,9 +71,9 @@
 
 			</StudentProfileField>
 
-			<StudentProfilePreferenceField class="page-grid__col-span-2 page-grid__preference-field" title="Stagevoorkeuren" ></StudentProfilePreferenceField>
-			<StudentProfilePreferenceField class="page-grid__col-span-2" title="Stagebedrijf voorkeuren" ></StudentProfilePreferenceField>
-			<StudentProfilePreferenceField class="page-grid__col-span-2" title="Persoonlijkheid" ></StudentProfilePreferenceField>
+			<StudentProfilePreferenceField class="page-grid__col-span-2 page-grid__preference-field" title="Stagevoorkeuren" />
+			<StudentProfilePreferenceField class="page-grid__col-span-2" title="Stagebedrijf voorkeuren" />
+			<StudentProfilePreferenceField class="page-grid__col-span-2" title="Persoonlijkheid" />
 
 			<StudentProfileField class="page-grid__skills" title="Vaardigheden">
 				<div class="skills">
@@ -92,6 +92,7 @@
 import { EllipsisVertical, LogoLinkedin, DocumentOutline, SchoolOutline, DocumentTextOutline } from "@vicons/ionicons5";
 import { DownloadFilled, AccountBalanceOutlined } from "@vicons/material";
 import { useMessage, NDropdown, NGrid, NGi, NTag } from "naive-ui";
+
 export default {
 	components: {
 		NDropdown,
