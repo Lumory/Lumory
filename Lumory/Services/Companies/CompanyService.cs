@@ -1,5 +1,6 @@
 ﻿using Lumory.Models;
 using Lumory.Repositories.Companies;
+using BCrypt.Net;
 
 namespace Lumory.Services.Companies;
 
@@ -12,7 +13,7 @@ public class CompanyService
         _repository = repository;
     }
 
-    public IEnumerable<Company> ListCompanies()
+    public List<Company> ListCompanies()
     {
         return _repository.GetCompanies();
     }
@@ -24,11 +25,13 @@ public class CompanyService
 
     public void DeleteCompany(Company company)
     {
-        _repository.DeleteCompany(company);
+        _repository.RemoveCompany(company);
     }
 
     public Company CreateCompany(Company company)
     {
+        company.Password = BCrypt.Net.BCrypt.HashPassword(company.Password);
+        
         return _repository.CreateCompany(company);
     }
 

@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using Lumory.Data;
+using Lumory.Dto.Companies;
 using Lumory.Models;
 using Lumory.Services.Companies;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +21,10 @@ public class CompanyController : ControllerBase
     [HttpGet]
     public IActionResult Get()
     {
-        return Ok(_service.ListCompanies());
+        return Ok(
+            _service.ListCompanies()
+                .Select(c => new CompanyDto(c))
+        );
     }
 
     [HttpGet]
@@ -34,7 +38,7 @@ public class CompanyController : ControllerBase
             return NotFound();
         }
         
-        return Ok(company);
+        return Ok(new CompanyDto(company));
     }
 
     [HttpDelete]
@@ -58,7 +62,7 @@ public class CompanyController : ControllerBase
     {
         company = _service.CreateCompany(company);        
         
-        return Ok(company);
+        return Ok(new CompanyDto(company));
     }
     
     [HttpPut]
@@ -74,6 +78,6 @@ public class CompanyController : ControllerBase
 
         newCompany = _service.UpdateCompany(oldCompany, newCompany);
         
-        return Ok(newCompany);
+        return Ok(new CompanyDto(newCompany));
     }
 }

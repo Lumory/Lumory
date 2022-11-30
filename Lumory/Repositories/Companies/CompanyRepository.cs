@@ -12,7 +12,7 @@ public class CompanyRepository
         _ctx = ctx;
     }
 
-    public IEnumerable<Company> GetCompanies()
+    public List<Company> GetCompanies()
     {
         return _ctx.Companies.ToList();
     }
@@ -22,7 +22,7 @@ public class CompanyRepository
         return _ctx.Companies.Where((Company c) => c.Id == id).SingleOrDefault();
     }
 
-    public void DeleteCompany(Company company)
+    public void RemoveCompany(Company company)
     {
         _ctx.Companies.Remove(company);
 

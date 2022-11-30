@@ -33,4 +33,10 @@ public class Company
     [StringLength(128)]
     public string City { get; set; }
     
+    [Timestamp]
+    public DateTime? CreatedAt { get; set; }
+    
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+    [Timestamp]
+    public DateTime? UpdatedAt { get; set; }
 }
