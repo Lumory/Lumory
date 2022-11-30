@@ -73,7 +73,7 @@
 
 			<StudentProfilePreferenceField class="page-grid__col-span-2 page-grid__preference-field" title="Stagevoorkeuren" ></StudentProfilePreferenceField>
 			<StudentProfilePreferenceField class="page-grid__col-span-2" title="Stagebedrijf voorkeuren" ></StudentProfilePreferenceField>
-			<StudentProfilePreferenceField class="page-grid__col-span-2" title="persoonlijkheid" ></StudentProfilePreferenceField>
+			<StudentProfilePreferenceField class="page-grid__col-span-2" title="Persoonlijkheid" ></StudentProfilePreferenceField>
 
 			<StudentProfileField class="page-grid__skills" title="Vaardigheden">
 				<div class="skills">
@@ -162,6 +162,7 @@ export default {
 	z-index: 1;
 	margin-top: -30px;
 	margin-left: 10px;
+	border: solid 2px var(--color-white);
 }
 .banner__profile-picture-image {
 	object-fit: cover;
