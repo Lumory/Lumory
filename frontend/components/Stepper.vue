@@ -17,8 +17,12 @@
     <component :is="steps[currentStep].component" v-model="currentStep" @userTypeSelected="onUserTypeSelected"></component>
 
   <!-- Steps controls -->
-    <n-button type="primary" class="stepper__next-button" :key="this.steps[currentStep]" size="large" @click="onNextButtonClick">
-      Volgende stap</n-button>
+    <n-space class="stepper-controls" justify="end">
+      <n-button quaternary :key="this.steps[currentStep]" size="large" @click="onNextButtonClick">
+        Terug </n-button>
+      <n-button quaternary class="stepper__next-button" :key="this.steps[currentStep]" size="large" @click="onNextButtonClick">
+        Volgende stap</n-button>
+    </n-space>
   </n-space>
 </template>
 
@@ -109,6 +113,9 @@ export default {
 .c-stepper {
   display: flex;
 }
+.stepper-controls {
+  margin-top: 25px;
+}
 
 .c-stepper__item {
   display: flex;
@@ -158,25 +165,13 @@ export default {
   margin: 2rem auto 0;
 }
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-
 .steps-container {
   width: 100%;
   margin: 0 auto;
 }
 .stepper__next-button {
-  width: 100%;
-  margin-top: 25px;
   background: var(--color-primary);
   border: none;
-}
-
-.stepper__next-button:hover {
-  background: var(--color-primary);
 }
 
 @media (min-width: 640px) {

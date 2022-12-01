@@ -7,19 +7,19 @@
           <n-radio-button value="w" @click="onClickButton('student')">
             <n-space class="radio-button" align="start" vertical>
               <n-icon size="24">
-                <groups-filled />
+                <person-filled />
               </n-icon>
-              <p>Stage</p>
-              <p>Ik ben een student op zoek naar een stage</p>
+              <p class="radio-button__title">Stage</p>
+              <p class="radio-button__subtitle">Ik ben een student op zoek naar een stage</p>
             </n-space>
           </n-radio-button>
           <n-radio-button value="w2" @click="onClickButton('internshipCompany')">
             <n-space class="radio-button" align="start" vertical>
               <n-icon size="24">
-                <person-filled />
+                <groups-filled />
               </n-icon>
-              <p>Stagiairen</p>
-              <p>Ik ben een stagebedrijf op zoek naar stagiairen</p>
+              <p class="radio-button__title">Stagiairen</p>
+              <p class="radio-button__subtitle">Ik ben een stagebedrijf op zoek naar stagiairen</p>
             </n-space>
           </n-radio-button>
         </n-space>
@@ -64,20 +64,32 @@ h1 {
 .n-radio-group .n-radio-button {
   width: 250px;
   height: 200px;
-  padding: 25px;
   transition: all 250ms ease;
   will-change: transition;
-  display: inline-block;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 25px;
+  gap: 13px;
   cursor: pointer;
   position: relative;
-  font-weight: 900;
   border-radius: 15px;
   border: none;
   font-family: "Roboto";
+  font-style: normal;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
-  color: #333;
   background: #fff;
+}
+.radio-button__title {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 38px;
+}
+.radio-button__subtitle {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--color-subtitle)
 }
 .n-radio-group .n-radio-button:hover, .n-radio-group .n-radio-button:not(.n-radio-button--disabled):hover:not(.n-radio-button--checked) {
   color: #333;
