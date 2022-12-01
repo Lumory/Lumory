@@ -3,7 +3,7 @@
     <div class="wrapper option-1 option-1-1">
       <ol class="c-stepper">
         <template v-for="(step, index) in this.steps">
-          <li class="c-stepper__item" v-if="step.userType === this.userType || step.userType === undefined">
+          <li class="c-stepper__item" >
               <a @click="currentStep=index">
                 <h3 class="c-stepper__title">{{ step.title }}</h3>
                 <p class="c-stepper__desc">{{ step.description }}</p>
@@ -17,7 +17,7 @@
     <component :is="steps[currentStep].component" v-model="currentStep" @userTypeSelected="onUserTypeSelected"></component>
 
   <!-- Steps controls -->
-    <n-button type="primary" class="stepper-next-button" :key="steps[currentStep]" size="large" @click="onNextButtonClick">
+    <n-button type="primary" class="stepper__next-button" :key="this.steps[currentStep]" size="large" @click="onNextButtonClick">
       Volgende stap</n-button>
   </n-space>
 </template>
@@ -29,7 +29,7 @@ import Step3 from "./SignUpStep2Internship";
 import Step4 from "./SignUpInternshipCompanyContactPerson";
 import { NButton, NSpace } from "naive-ui"
 
-const steps = [
+const studentSteps = [
   {
     title: "Stap 1",
     description: "Account type",
@@ -42,6 +42,15 @@ const steps = [
     component: "step2",
     required: true,
     userType: "student"
+  }
+];
+
+const internshipSteps = [
+  {
+    title: "Stap 1",
+    description: "Account type",
+    component: "Step1",
+    required: true,
   },
   {
     title: "Stap 2",
@@ -58,17 +67,19 @@ const steps = [
     userType: "internshipCompany"
   }
 ];
-let currentStep = 0;
-let hasNextStep = currentStep < steps.length -1;
-let userType = "student";
-
 
 export default {
   components: {Step1, Step2, Step3, Step4, NButton, NSpace},
   methods: {
     onUserTypeSelected (value) {
       this.userType = value
-      console.log(userType)
+      if (value === "internshipCompany") {
+        this.steps = internshipSteps
+      }
+      else if (value === "student") {
+        this.steps = studentSteps
+      }
+      console.log(this.steps)
     },
     onNextButtonClick () {
       this.currentStep++
@@ -82,9 +93,8 @@ export default {
   data() {
     return {
       currentStep: 0,
-      steps,
-      hasNextStep,
-      userType,
+      steps: studentSteps,
+      userType: "student",
     }
   }
 }
@@ -117,7 +127,7 @@ export default {
    width: var(--circle-size);
    height: var(--circle-size);
    border-radius: 50%;
-   background-color: #FEBF00;
+   background-color: var(--color-primary);
    margin: 0 auto 1rem;
 }
 .c-stepper__item:not(:last-child):after {
@@ -154,17 +164,19 @@ export default {
   box-sizing: border-box;
 }
 
-h1 {
-  text-align: center;
-}
 .steps-container {
   width: 100%;
   margin: 0 auto;
 }
-
-.stepper-next-button {
+.stepper__next-button {
   width: 100%;
-  margin: 0 auto;
+  margin-top: 25px;
+  background: var(--color-primary);
+  border: none;
+}
+
+.stepper__next-button:hover {
+  background: var(--color-primary);
 }
 
 @media (min-width: 640px) {

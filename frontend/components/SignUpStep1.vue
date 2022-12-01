@@ -73,12 +73,19 @@ h1 {
   position: relative;
   font-weight: 900;
   border-radius: 15px;
-  border: 3px solid #d9d9d9;
+  border: none;
   font-family: "Roboto";
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
+  color: #333;
+  background: #fff;
+}
+.n-radio-group .n-radio-button:hover, .n-radio-group .n-radio-button:not(.n-radio-button--disabled):hover:not(.n-radio-button--checked) {
+  color: #333;
 }
 .n-radio-group .n-radio-button.n-radio-button--checked {
-  background: #d9d9d9;
+  background: var(--color-primary);
 }
+
 p {
   text-align: left;
   white-space: normal;
@@ -95,21 +102,6 @@ p {
     margin: 0 auto;
     width: 550px;
     display: block;
-  }
-  .n-radio-group .n-radio-button {
-    width: 250px;
-    height: 200px;
-    padding: 25px;
-    transition: all 250ms ease;
-    will-change: transition;
-    display: inline-block;
-    text-align: center;
-    cursor: pointer;
-    position: relative;
-    font-weight: 900;
-    border-radius: 15px;
-    border: 3px solid #d9d9d9;
-    font-family: "Roboto";
   }
   .stepper-next-button {
     width: 550px;
