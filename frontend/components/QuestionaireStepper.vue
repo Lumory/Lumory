@@ -14,7 +14,7 @@
     </div>
 
   <!-- Steps content -->
-    <component :is="steps[currentStep].component" v-model="currentStep" @userTypeSelected="onUserTypeSelected" ref="stepRef"></component>
+    <component :is="steps[currentStep].component" v-model="currentStep"></component>
 
   <!-- Steps controls -->
     <n-space class="stepper-controls" justify="end">
@@ -32,82 +32,39 @@
 </template>
 
 <script>
-import Step1 from "./SignUpStep1";
-import Step2 from "./SignUpStep2";
-import Step3 from "./SignUpStep2Internship";
-import Step4 from "./SignUpInternshipCompanyContactPerson";
+import Step1 from "./QuestionaireStep1";
 import { NButton, NSpace } from "naive-ui"
 
-const studentSteps = [
+const steps = [
   {
     title: "Stap 1",
-    description: "Account type",
+    description: "Voorkeuren stage",
     component: "Step1",
     required: true,
   },
   {
     title: "Stap 2",
-    description: "Persoonlijke informatie",
-    component: "step2",
-    required: true,
-    userType: "student"
-  }
-];
-
-const internshipSteps = [
-  {
-    title: "Stap 1",
-    description: "Account type",
+    description: "Voorkeuren Stagebedrijf",
     component: "Step1",
     required: true,
-  },
-  {
-    title: "Stap 2",
-    description: "Bedrijfsinformatie",
-    component: "Step3",
-    required: true,
-    userType: "internshipCompany"
   },
   {
     title: "Stap 3",
-    description: "Contactpersoon",
-    component: "Step4",
+    description: "Persoonlijkheid",
+    component: "Step1",
     required: true,
-    userType: "internshipCompany"
   }
 ];
 
 export default {
-  components: {Step1, Step2, Step3, Step4, NButton, NSpace},
+  components: {Step1, NButton, NSpace},
   methods: {
-    onUserTypeSelected (value) {
-      this.userType = value
-      if (value === "internshipCompany") {
-        this.steps = internshipSteps
-      }
-      else if (value === "student") {
-        this.steps = studentSteps
-      }
-    },
-    validateForm () {
-      this.$refs.stepRef.handleValidateClick()
-
-      // this.$refs.stepRef.formRef.value?.validate((errors) => {
-      //   if (!errors) {
-      //     console.log('Valid')
-      //   } else {
-      //     console.log(errors)
-      //     console.log('Invalid')
-      //   }
-      // })
-    },
     onPreviousButtonClick () {
       if(this.currentStep > 0) {
         this.currentStep--
       }
     },
     onNextButtonClick () {
-      this.validateForm()
       if(this.currentStep < this.steps.length -1) {
         this.currentStep++
       }
@@ -119,7 +76,7 @@ export default {
   data() {
     return {
       currentStep: 0,
-      steps: studentSteps,
+      steps,
       userType: "student",
     }
   }

@@ -1,31 +1,39 @@
 <template>
   <n-space vertical align="center" item-style="width: 100%">
-    <h1>Bedrijf informatie</h1>
-    <n-form ref="formRef" :model="formValue" size="large" :rules="rules">
-      <n-grid cols="12" :x-gap="24" item-responsive responsive="screen">
-        <n-form-item-gi class="form-item--left-align" span="12" path="companyName" label="Bedrijfsnaam">
-          <n-input v-model:value="formValue.companyName" placeholder="Bedrijf" @keydown.enter.prevent />
-        </n-form-item-gi>
-        <n-form-item-gi class="form-item--left-align" span="12" path="KVK" label="KVK-nummer">
-          <n-input v-model:value="formValue.KVK" placeholder="1234 5678 9012" @keydown.enter.prevent />
-        </n-form-item-gi>
-        <n-form-item-gi class="form-item--left-align" :span="12" path="email" label="E-mail">
-          <n-input v-model:value="formValue.email" placeholder="hr@bedrijf.nl" @keydown.enter.prevent />
-        </n-form-item-gi>
-        <n-form-item-gi class="form-item--left-align" :span="12" path="password" label="Wachtwoord">
-          <n-input v-model:value="formValue.password" placeholder="Wachtwoord" @keydown.enter.prevent type="password" show-password-on="click"/>
-        </n-form-item-gi>
-        <n-form-item-gi class="form-item--left-align" :span="12" path="repeatPassword" label="Herhaal wachtwoord">
-          <n-input v-model:value="formValue.repeatPassword" placeholder="Herhaal wachtwoord" @keydown.enter.prevent on-change="" type="password" show-password-on="click"/>
-        </n-form-item-gi>
-      </n-grid>
-    </n-form>
+    <h1>Persoonlijke informatie</h1>
+    <n-radio-group class="radio-group" v-model:value="value" name="radiogroup">
+      <p class="radio-group__question">Hoeveel begeleiding zou je willen?</p>
+      <n-space justify="space-between" class="radio-group__buttons">
+        <p class="radio-group__label">Weinig</p>
+        <n-radio
+            key="1"
+            value="test1"
+        />
+        <n-radio
+            key="2"
+            value="test2"
+        />
+        <n-radio
+            key="3"
+            value="test3"
+        />
+        <n-radio
+            key="4"
+            value="test4"
+        />
+        <n-radio
+            key="5"
+            value="test5"
+        />
+        <p class="radio-group__label">Veel</p>
+      </n-space>
+    </n-radio-group>
   </n-space>
 </template>
 
 <script lang="ts">
-import {NSpace, NForm, NRow, NCol, NButton, NFormItem, NInput, FormInst, NFormItemGi, NGrid, FormRules, FormItemRule} from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import {NSpace, NRadioGroup, NRadio, NButton, FormInst, FormRules, FormItemRule} from 'naive-ui'
+import {defineComponent, ref} from "vue";
 
 interface ModelType {
   companyName: string | null
@@ -37,7 +45,7 @@ interface ModelType {
 
 export default defineComponent({
   components: {
-    NSpace, NForm, NRow, NCol, NButton, NFormItem, NInput, NFormItemGi, NGrid
+    NSpace, NButton, NRadio, NRadioGroup
   },
   setup() {
     const formRef = ref<FormInst | null>(null)
@@ -106,6 +114,7 @@ export default defineComponent({
     }
 
     return {
+      value: ref(null),
       formRef,
       formValue,
       rules,
@@ -113,6 +122,8 @@ export default defineComponent({
     }
   }
 })
+
+
 </script>
 
 <style scoped>
@@ -122,9 +133,31 @@ h1 {
 p {
   text-align: left;
   white-space: normal;
-  font-family: "Roboto";
 }
-.form-item--left-align {
-  text-align: left !important;
+.radio-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 25px;
+}
+.radio-group__question {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+}
+.radio-group__buttons {
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+.radio-group__label {
+  color: #999999;
+}
+@media (min-width: 640px) {
+
 }
 </style>
