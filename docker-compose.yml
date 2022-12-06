@@ -25,10 +25,10 @@ services:
   phpmyadmin:
     image: phpmyadmin
     restart: unless-stopped
-    depends_on:
-      - db
     ports:
       - 3002:80
+    depends_on:
+      - db
     links:
       - db
 
