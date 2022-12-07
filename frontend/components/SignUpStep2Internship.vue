@@ -26,6 +26,7 @@
 <script lang="ts">
 import {NSpace, NForm, NRow, NCol, NButton, NFormItem, NInput, FormInst, NFormItemGi, NGrid, FormRules, FormItemRule} from 'naive-ui'
 import { defineComponent, ref } from 'vue'
+import {ValidateError} from "async-validator";
 
 interface ModelType {
   companyName: string | null
@@ -39,7 +40,7 @@ export default defineComponent({
   components: {
     NSpace, NForm, NRow, NCol, NButton, NFormItem, NInput, NFormItemGi, NGrid
   },
-  setup() {
+  setup(props, context) {
     const formRef = ref<FormInst | null>(null)
     let formValue = ref(<ModelType>{
       companyName: '',
@@ -100,10 +101,17 @@ export default defineComponent({
     }
 
     const handleValidateClick = () => {
-      formRef.value?.validate((errors) => {
-        return !!errors
-      })
+      return formRef.value?.validate(errors => errors)
+          // .then(errors => {
+          //   return errors}
+          // )
+          // .catch(err => {
+          //   console.log(err);
+          //   return err
+          // })
     }
+
+    context.expose({ handleValidateClick })
 
     return {
       formRef,
@@ -117,7 +125,7 @@ export default defineComponent({
 
 <style scoped>
 h1 {
-  text-align: center;
+  text-align                                                                                                                                                                       : center;
 }
 p {
   text-align: left;

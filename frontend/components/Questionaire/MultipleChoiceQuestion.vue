@@ -46,3 +46,39 @@ definePageMeta({
   layout: 'minimal-header',
 });
 </script>
+
+<style scoped>
+h1 {
+  text-align: center;
+}
+p {
+  text-align: left;
+  white-space: normal;
+}
+.radio-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 25px;
+}
+.radio-group__question {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+}
+.radio-group__buttons {
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+.radio-group__label {
+  color: #999999;
+}
+@media (min-width: 640px) {
+
+}
+</style>

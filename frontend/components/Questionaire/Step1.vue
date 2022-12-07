@@ -47,7 +47,7 @@ export default defineComponent({
 
     const handleValidateClick = () => {
       formRef.value?.validate((errors) => {
-        return !!errors
+        console.table(errors)
       })
     }
 

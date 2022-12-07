@@ -90,7 +90,15 @@ export default {
       }
     },
     validateForm () {
-      this.$refs.stepRef.handleValidateClick()
+      return this.$refs.stepRef.handleValidateClick()
+          .then(err => {
+            console.log(err)
+            return err
+          })
+          .catch(err => {
+            console.log(err)
+            return err
+          })
 
       // this.$refs.stepRef.formRef.value?.validate((errors) => {
       //   if (!errors) {
@@ -107,10 +115,16 @@ export default {
       }
     },
     onNextButtonClick () {
-      this.validateForm()
-      if(this.currentStep < this.steps.length -1) {
-        this.currentStep++
-      }
+      let test = this.validateForm()
+        .then(value => {
+          if(value) {
+            return
+          }
+          if(this.currentStep < this.steps.length -1) {
+            this.currentStep++
+          }
+          return value
+        })
     },
     onCompleteButtonClick () {
       console.log("Verstuurd!")
