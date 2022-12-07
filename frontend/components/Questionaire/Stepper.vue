@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import Step1 from "./QuestionaireStep1";
+import Step1 from "./Step1";
 import { NButton, NSpace } from "naive-ui"
 
 const steps = [

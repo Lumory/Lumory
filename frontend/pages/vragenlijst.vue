@@ -7,7 +7,6 @@
 </template>
 
 <script setup>
-import QuestionaireStepper from "../components/QuestionaireStepper";
 
 definePageMeta({
   layout: 'minimal-header',
