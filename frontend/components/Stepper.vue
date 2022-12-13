@@ -3,28 +3,31 @@
     <div class="wrapper option-1 option-1-1">
       <ol class="c-stepper">
         <template v-for="(step, index) in this.steps">
-          <li class="c-stepper__item" >
-              <a @click="currentStep=index">
-                <h3 class="c-stepper__title">{{ step.title }}</h3>
-                <p class="c-stepper__desc">{{ step.description }}</p>
-              </a>
+          <li class="c-stepper__item">
+            <a @click="currentStep=index">
+              <h3 class="c-stepper__title">{{ step.title }}</h3>
+              <p class="c-stepper__desc">{{ step.description }}</p>
+            </a>
           </li>
         </template>
       </ol>
     </div>
 
-  <!-- Steps content -->
-    <component :is="steps[currentStep].component" v-model="currentStep" @userTypeSelected="onUserTypeSelected" ref="stepRef"></component>
+    <!-- Steps content -->
+    <component :is="steps[currentStep].component" v-model="currentStep" @userTypeSelected="onUserTypeSelected"
+               ref="stepRef"></component>
 
-  <!-- Steps controls -->
+    <!-- Steps controls -->
     <n-space class="stepper-controls" justify="end">
       <n-button quaternary strong size="large" @click="onPreviousButtonClick" v-if="this.currentStep != 0">
         Terug
       </n-button>
-      <n-button secondary strong class="stepper__next-button" size="large" @click="onNextButtonClick" v-if="this.currentStep < this.steps.length -1">
+      <n-button secondary strong class="stepper__next-button" size="large" @click="onNextButtonClick"
+                v-if="this.currentStep < this.steps.length -1">
         Volgende stap
       </n-button>
-      <n-button secondary strong class="stepper__next-button" size="large" @click="onCompleteButtonClick" v-if="this.currentStep === this.steps.length -1">
+      <n-button secondary strong class="stepper__next-button" size="large" @click="onCompleteButtonClick"
+                v-if="this.currentStep === this.steps.length -1">
         Voltooien
       </n-button>
     </n-space>
@@ -36,7 +39,7 @@ import Step1 from "./SignUpStep1";
 import Step2 from "./SignUpStep2";
 import Step3 from "./SignUpStep2Internship";
 import Step4 from "./SignUpInternshipCompanyContactPerson";
-import { NButton, NSpace } from "naive-ui"
+import {NButton, NSpace} from "naive-ui"
 
 const studentSteps = [
   {
@@ -80,53 +83,41 @@ const internshipSteps = [
 export default {
   components: {Step1, Step2, Step3, Step4, NButton, NSpace},
   methods: {
-    onUserTypeSelected (value) {
+    onUserTypeSelected(value) {
       this.userType = value
       if (value === "internshipCompany") {
         this.steps = internshipSteps
-      }
-      else if (value === "student") {
+      } else if (value === "student") {
         this.steps = studentSteps
       }
     },
-    validateForm () {
+    validateCurrentStep() {
       return this.$refs.stepRef.handleValidateClick()
-          .then(err => {
-            console.log(err)
-            return err
+          .then(() => {
+            return true
           })
-          .catch(err => {
-            console.log(err)
-            return err
+          .catch(() => {
+            return false
           })
-
-      // this.$refs.stepRef.formRef.value?.validate((errors) => {
-      //   if (!errors) {
-      //     console.log('Valid')
-      //   } else {
-      //     console.log(errors)
-      //     console.log('Invalid')
-      //   }
-      // })
     },
-    onPreviousButtonClick () {
-      if(this.currentStep > 0) {
+    onPreviousButtonClick() {
+      if (this.currentStep > 0) {
         this.currentStep--
       }
     },
-    onNextButtonClick () {
-      let test = this.validateForm()
-        .then(value => {
-          if(value) {
-            return
-          }
-          if(this.currentStep < this.steps.length -1) {
-            this.currentStep++
-          }
-          return value
-        })
+    onNextButtonClick() {
+      this.validateCurrentStep()
+          .then(isValid => {
+            if (!isValid) {
+              return
+            }
+            if (this.currentStep < this.steps.length - 1) {
+              this.currentStep++
+            }
+            return isValid
+          })
     },
-    onCompleteButtonClick () {
+    onCompleteButtonClick() {
       console.log("Verstuurd!")
     }
   },
@@ -149,6 +140,7 @@ export default {
 .c-stepper {
   display: flex;
 }
+
 .stepper-controls {
   margin-top: 25px;
 }
@@ -159,20 +151,22 @@ export default {
   flex: 1;
   text-align: center;
 }
+
 .c-stepper__item a {
   cursor: pointer;
 }
 
 .c-stepper__item:before {
-   --size: 3rem;
-   content: "";
-   display: block;
-   width: var(--circle-size);
-   height: var(--circle-size);
-   border-radius: 50%;
-   background-color: var(--color-primary);
-   margin: 0 auto 1rem;
+  --size: 3rem;
+  content: "";
+  display: block;
+  width: var(--circle-size);
+  height: var(--circle-size);
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  margin: 0 auto 1rem;
 }
+
 .c-stepper__item:not(:last-child):after {
   content: "";
   position: relative;
@@ -196,6 +190,7 @@ export default {
   padding-left: var(--spacing);
   padding-right: var(--spacing);
 }
+
 .wrapper {
   max-width: 1000px;
   margin: 2rem auto 0;
@@ -205,6 +200,7 @@ export default {
   width: 100%;
   margin: 0 auto;
 }
+
 .stepper__next-button {
   background: var(--color-primary);
   border: none;

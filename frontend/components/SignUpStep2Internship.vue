@@ -101,17 +101,8 @@ export default defineComponent({
     }
 
     const handleValidateClick = () => {
-      return formRef.value?.validate(errors => errors)
-          // .then(errors => {
-          //   return errors}
-          // )
-          // .catch(err => {
-          //   console.log(err);
-          //   return err
-          // })
+      return formRef.value?.validate()
     }
-
-    context.expose({ handleValidateClick })
 
     return {
       formRef,

@@ -1,6 +1,6 @@
 <template>
   <n-radio-group class="radio-group" v-model:value="value" name="radiogroup">
-    <p class="radio-group__question">Hoeveel begeleiding zou je willen?</p>
+    <p class="radio-group__question">{{question}}</p>
     <n-space justify="space-between" class="radio-group__buttons">
       <p class="radio-group__label">Weinig</p>
       <n-radio
@@ -37,6 +37,7 @@ export default defineComponent({
   components: {
     NSpace, NButton, NRadio, NRadioGroup
   },
+  props: ['question'],
 })
 </script>
 

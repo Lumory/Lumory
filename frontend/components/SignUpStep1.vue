@@ -44,14 +44,26 @@ export default defineComponent({
     GroupsFilled,
     PersonFilled
   },
-  methods: {
-    onClickButton (val) {
-      this.$emit('userTypeSelected', val)
-    }
-  },
   data() {
     return {
       value: ref(null)
+    }
+  },
+  setup(props, context) {
+    const userTypeSetRef = ref(false)
+    const onClickButton = (val) => {
+      userTypeSetRef.value = true
+      context.emit('userTypeSelected', val)
+    }
+    const handleValidateClick = () => {
+      if(!userTypeSetRef.value) {
+        throw new TypeError("Please select your user type")
+      }
+      return Promise.resolve(userTypeSetRef.value)
+    }
+    return {
+      onClickButton,
+      handleValidateClick
     }
   }
 })

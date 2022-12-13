@@ -1,6 +1,6 @@
 <template>
   <n-space class="steps-container" vertical justify="start">
-    <div class="wrapper option-1 option-1-1">
+    <div class="wrapper">
       <ol class="c-stepper">
         <template v-for="(step, index) in this.steps">
           <li class="c-stepper__item" >
@@ -14,7 +14,7 @@
     </div>
 
   <!-- Steps content -->
-    <component :is="steps[currentStep].component" v-model="currentStep"></component>
+    <component :is="steps[currentStep].component" v-model="currentStep" ref="stepRef"></component>
 
   <!-- Steps controls -->
     <n-space class="stepper-controls" justify="end">
@@ -59,15 +59,31 @@ const steps = [
 export default {
   components: {Step1, NButton, NSpace},
   methods: {
+    validateCurrentStep () {
+      return this.$refs.stepRef.handleValidateClick()
+          .then(() => {
+            return true
+          })
+          .catch(() => {
+            return false
+          })
+    },
     onPreviousButtonClick () {
       if(this.currentStep > 0) {
         this.currentStep--
       }
     },
     onNextButtonClick () {
-      if(this.currentStep < this.steps.length -1) {
-        this.currentStep++
-      }
+      this.validateCurrentStep()
+          .then(isValid => {
+            if(!isValid) {
+              return
+            }
+            if(this.currentStep < this.steps.length -1) {
+              this.currentStep++
+            }
+            return isValid
+          })
     },
     onCompleteButtonClick () {
       console.log("Verstuurd!")
