@@ -25,7 +25,7 @@
     width: 100%;
     max-width: 984px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 15px;
   }
 }
 @media (min-width: 1280px) {
