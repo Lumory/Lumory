@@ -61,6 +61,7 @@ import {
 	NFormItemGi,
 	FormInst,
 } from 'naive-ui';
+import axios from 'axios';
 
 export default defineComponent({
 	setup() {
@@ -103,7 +104,16 @@ export default defineComponent({
 				formRef.value.validate((errors: any) => {
 					if (!errors) {
 						message.success('Valid');
-						console.log(JSON.stringify(values));
+						const config = {
+							"email": values.email,
+							"password": values.password
+						}
+						console.log(config)
+						const data = axios.post('/Auth/Login', config).then((x) => {
+							console.log(x)
+						}).catch((error) => {
+							console.log(error)
+						})
 					} else {
 						// console.log(errors);
 						message.error('Invalid');
