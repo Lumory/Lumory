@@ -13,9 +13,9 @@ public class AuthController : ControllerBase
 {
     private readonly TokenService _tokenService;
     private readonly UserService _service;
-    private readonly ConfigurationManager _config;
+    private readonly IConfiguration _config;
 
-    public AuthController(TokenService tokenService, UserService userService, ConfigurationManager config)
+    public AuthController(TokenService tokenService, UserService userService, IConfiguration config)
     {
         _tokenService = tokenService;
         _service = userService;
@@ -49,12 +49,12 @@ public class AuthController : ControllerBase
         var generatedToken =
             _tokenService.BuildToken(_config["Jwt:Key"], _config["Jwt:Issuer"], user);
 
-        if (generatedToken == null)
+        if (generatedToken is null)
         {
             return BadRequest();
         }
-
-        HttpContext.Session.SetString("Token", generatedToken);
+        
+        //HttpContext.Session.SetString("Token", generatedToken);
         return Ok(generatedToken);
     }
 }

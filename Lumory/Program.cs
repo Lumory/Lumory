@@ -35,7 +35,6 @@ builder.Services.AddTransient<UserService>();
 builder.Services.AddScoped<ConfigurationManager>();
 
 // start of auth
-
 builder.Services.AddTransient<TokenService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -51,7 +50,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]))
     };
 });
-
 // end of auth
 
 var app = builder.Build();

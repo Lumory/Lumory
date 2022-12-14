@@ -3,10 +3,12 @@ using Lumory.Data;
 using Lumory.Dto.Companies;
 using Lumory.Models;
 using Lumory.Services.Companies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lumory.Controllers.Companies;
 
+//[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class CompanyController : ControllerBase
