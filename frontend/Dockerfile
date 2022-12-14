@@ -2,7 +2,7 @@ FROM node:lts as builder
 
 WORKDIR /app
 
-COPY . .
+COPY ["yarn.lock", "package.json", "package-lock.json*", "./"]
 
 RUN yarn install \
   --prefer-offline \
