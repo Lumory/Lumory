@@ -10,7 +10,7 @@ public class Company
     public int Id { get; set; }
     
     [Required]
-    [StringLength(128)]
+    [StringLength(256)]
     public string Email { get; set; }
     
     [Required]
@@ -22,7 +22,7 @@ public class Company
     public string Name { get; set; }
     
     [Required]
-    [StringLength(128)]
+    [StringLength(2048)]
     public string Website { get; set; }
     
     [Required]
@@ -32,6 +32,10 @@ public class Company
     [Required]
     [StringLength(128)]
     public string City { get; set; }
+    
+    [Required]
+    [StringLength(2048)]
+    public string Description { get; set; }
     
     [Timestamp]
     public DateTime? CreatedAt { get; set; }

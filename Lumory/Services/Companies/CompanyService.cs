@@ -42,6 +42,7 @@ public class CompanyService
         oldCompany.Name = newCompany.Name;
         oldCompany.Website = newCompany.Website;
         oldCompany.StreetAddress = newCompany.StreetAddress;
+        oldCompany.Description = newCompany.Description;
 
         return _repository.UpdateCompany(oldCompany);
     }

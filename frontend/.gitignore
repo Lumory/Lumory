@@ -8,3 +8,5 @@ node_modules
 dist
 ToDo.md
 .idea
+.vscode
+

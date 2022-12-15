@@ -9,6 +9,7 @@ public class CompanyDto
     public string Website { get; set; }
     public string StreetAddress { get; set; }
     public string City { get; set; }
+    public string Description { get; set; }
     public DateTime? CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 
@@ -19,6 +20,7 @@ public class CompanyDto
         Website = company.Website;
         StreetAddress = company.StreetAddress;
         City = company.City;
+        Description = company.Description;
         CreatedAt = company.CreatedAt;
         UpdatedAt = company.UpdatedAt;
     }
