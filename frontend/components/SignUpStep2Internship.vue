@@ -54,7 +54,7 @@ export default defineComponent({
   components: {
     NSpace, NForm, NRow, NCol, NButton, NFormItem, NInput, NFormItemGi, NGrid
   },
-  setup(props, context) {
+  setup() {
     const formRef = ref<FormInst | null>(null)
     let formValue = ref(<ModelType>{
       companyName: '',
@@ -116,6 +116,8 @@ export default defineComponent({
 
     const handleValidateClick = () => {
       return formRef.value?.validate()
+          .then(() => Promise.resolve(formValue.value))
+          .catch((errors) => Promise.reject(errors))
     }
 
     return {

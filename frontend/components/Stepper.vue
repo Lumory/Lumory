@@ -19,7 +19,7 @@
 
     <!-- Steps controls -->
     <n-space class="stepper-controls" justify="end">
-      <n-button quaternary strong size="large" @click="onPreviousButtonClick" v-if="this.currentStep != 0">
+      <n-button quaternary strong size="large" @click="onPreviousButtonClick" v-if="this.currentStep !== 0">
         Terug
       </n-button>
       <n-button secondary strong class="stepper__next-button" size="large" @click="onNextButtonClick"
@@ -27,6 +27,7 @@
         Volgende stap
       </n-button>
       <n-button secondary strong class="stepper__next-button" size="large" @click="onCompleteButtonClick"
+                :loading="isSubmitting"
                 v-if="this.currentStep === this.steps.length -1">
         Voltooien
       </n-button>
@@ -39,7 +40,11 @@ import Step1 from "./SignUpStep1";
 import Step2 from "./SignUpStep2";
 import Step3 from "./SignUpStep2Internship";
 import Step4 from "./SignUpInternshipCompanyContactPerson";
-import {NButton, NSpace} from "naive-ui"
+import {NButton, NSpace, useMessage} from "naive-ui"
+import {postNewUser} from "../services/UserService";
+import {ref} from "vue";
+
+const message = useMessage()
 
 const studentSteps = [
   {
@@ -71,14 +76,22 @@ const internshipSteps = [
     required: true,
     userType: "internshipCompany"
   },
-  {
-    title: "Stap 3",
-    description: "Contactpersoon",
-    component: "Step4",
-    required: true,
-    userType: "internshipCompany"
-  }
 ];
+const isSubmitting = ref(false)
+
+let studentData = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+}
+
+let internshipCompanyData = {
+  companyName: '',
+  KVK: '',
+  email: '',
+  password: '',
+}
 
 export default {
   components: {Step1, Step2, Step3, Step4, NButton, NSpace},
@@ -93,12 +106,14 @@ export default {
     },
     validateCurrentStep() {
       return this.$refs.stepRef.handleValidateClick()
-          .then(() => {
-            return true
-          })
-          .catch(() => {
-            return false
-          })
+    },
+    assignFormValues(formValues) {
+      if(this.userType==='student') {
+        Object.assign(studentData, formValues)
+      }
+      if(this.userType==='internshipCompany') {
+        Object.assign(internshipCompanyData, formValues)
+      }
     },
     onPreviousButtonClick() {
       if (this.currentStep > 0) {
@@ -107,18 +122,44 @@ export default {
     },
     onNextButtonClick() {
       this.validateCurrentStep()
-          .then(isValid => {
-            if (!isValid) {
-              return
-            }
+          .then((formValues) => {
+            this.assignFormValues(formValues)
             if (this.currentStep < this.steps.length - 1) {
               this.currentStep++
             }
-            return isValid
+          })
+          .catch((val) => {
+            console.log(val)
           })
     },
-    onCompleteButtonClick() {
-      console.log("Verstuurd!")
+    async onCompleteButtonClick() {
+      isSubmitting.value = true
+
+      this.validateCurrentStep()
+          .then((formValues) => {
+            this.assignFormValues(formValues)
+            if (this.currentStep < this.steps.length - 1) {
+              this.currentStep++
+            }
+          })
+          .catch((val) => {
+            console.log(val)
+          })
+
+      // postNewUser({
+      //   "firstName": "Test",
+      //   "lastName": "User",
+      //   "email": "test@gmail.com",
+      //   "password": "test"
+      // }).then(res => {
+      //   message.success('New user created')
+      // })
+      //   .catch(error => {
+      //     console.log(error)
+      //     message.error(error.message)
+      //   })
+
+      isSubmitting.value = false
     }
   },
   data() {
@@ -126,6 +167,7 @@ export default {
       currentStep: 0,
       steps: studentSteps,
       userType: "student",
+      isSubmitting,
     }
   }
 }
