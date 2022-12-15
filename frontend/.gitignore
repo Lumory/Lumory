@@ -7,4 +7,6 @@ node_modules
 .env
 dist
 ToDo.md
+.idea
 .vscode
+
