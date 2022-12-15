@@ -109,11 +109,20 @@ export default {
     },
     assignFormValues(formValues) {
       if(this.userType==='student') {
-        Object.assign(studentData, formValues)
+        Object.keys(formValues).forEach(function(key) {
+          if (key in studentData) {
+            studentData[key] = formValues[key];
+          }
+        });
       }
       if(this.userType==='internshipCompany') {
-        Object.assign(internshipCompanyData, formValues)
+        Object.keys(formValues).forEach(function(key) {
+          if (key in internshipCompanyData) {
+            internshipCompanyData[key] = formValues[key];
+          }
+        });
       }
+
     },
     onPreviousButtonClick() {
       if (this.currentStep > 0) {
@@ -138,26 +147,18 @@ export default {
       this.validateCurrentStep()
           .then((formValues) => {
             this.assignFormValues(formValues)
-            if (this.currentStep < this.steps.length - 1) {
-              this.currentStep++
-            }
+            console.log(studentData)
+            postNewUser(studentData).then(() => {
+              message.success('New user created')
+            })
+                .catch(error => {
+                  console.log(error)
+                  message.error(error.message)
+                })
           })
           .catch((val) => {
             console.log(val)
           })
-
-      // postNewUser({
-      //   "firstName": "Test",
-      //   "lastName": "User",
-      //   "email": "test@gmail.com",
-      //   "password": "test"
-      // }).then(res => {
-      //   message.success('New user created')
-      // })
-      //   .catch(error => {
-      //     console.log(error)
-      //     message.error(error.message)
-      //   })
 
       isSubmitting.value = false
     }
