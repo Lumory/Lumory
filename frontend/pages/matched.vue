@@ -1,25 +1,20 @@
 <template>
-  <Container class="input-container">
-    <h1 style="font-size: 34px">Gematchte stages</h1>
-  </Container>
-  <Container class="card-container">
-    <n-scrollbar style="max-height: 500px" trigger="none">
-      <n-list style=" margin-right: 25px" class="scrollable-cards">
-        <n-list-item v-for="(matchedresult, index) in matchedresults" style=" box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25); border-radius: 3px; margin-bottom: 25px">
-          <MatchedCard @click="cardClick(index)" :internship="matchedresult"/>
-        </n-list-item>
-      </n-list>
-    </n-scrollbar>
-    <n-scrollbar style="max-height: 500px" trigger="none">
-      <ResultCard v-if="matchedresults" :internship="matchedresults[this.currentHighlightedInternship]">
-        <h1>test</h1>
-      </ResultCard>
-    </n-scrollbar>
-  </Container>
+    <Container class="input-container">
+      <h1 style="font-size: 34px">Gematchte stages</h1>
+    </Container>
+    <Container class="card-container">
+      <n-scrollbar style="max-height: 700px; padding-right:15px" trigger="none">
+        <MatchedCard v-for="(matchedresult, index) in matchedresults" style="border-radius: 3px; margin-bottom: 15px"
+                     @click="cardClick(index)" :internship="matchedresult"/>
+      </n-scrollbar>
+      <n-scrollbar style="max-height: 700px; padding-right:15px" trigger="none">
+        <ResultCard v-if="matchedresults" :internship="matchedresults[this.currentHighlightedInternship]"/>
+      </n-scrollbar>
+    </Container>
 </template>
 <script>
 import Container from "../components/Container";
-import {NList, NListItem, NThing, NTag, NSpace, NScrollbar, NButton, NInput} from "naive-ui";
+import {NList, NListItem, NThing, NTag, NScrollbar, NButton, NInput, NSpace} from "naive-ui";
 import axios from "axios"
 
 export default {
@@ -36,21 +31,19 @@ export default {
   name: 'Matched',
   data() {
     return {
-      myStyle: {
-        backgroundColor: "#16a085"
-      },
+      clicked: false,
       matchedresults: [],
       currentHighlightedInternship: 0
     }
   },
 
   mounted: function () {
-    axios.get('https://run.mocky.io/v3/7070ec6f-57eb-4834-81bd-e51f808c0d2c', {
+    axios.get('http://localhost:3001/Company', {
       headers: {
         'accept': '/',
-        'Access-Control-Allow-Origin': '<origin>'
+        'Access-Control-Allow-Origin': '<*>'
       }
-    }) .then(response => this.matchedresults = response.data)
+    }).then(response => this.matchedresults = response.data)
   },
   methods: {
     cardClick(index) {
@@ -75,7 +68,7 @@ export default {
 .card-container {
   display: flex;
   flex-direction: row;
-  gap: 50px;
+  gap: 10px;
   margin-top: 25px;
 }
 </style>

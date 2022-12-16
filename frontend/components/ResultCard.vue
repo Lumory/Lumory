@@ -1,14 +1,19 @@
 <template #description>
-    <n-card style="padding: 5px">
-      <h1 style="font-size: 25px; padding: 0rem">
+    <n-card>
+      <h1 style="font-size: 36px; padding: 0rem">
         {{internship?.name}}
       </h1>
-      <p>
+      <p style="color: grey;">
         {{internship?.website}}
       </p>
       <n-tag style="margin-right: 15px">Marketing</n-tag>
       <n-tag>Advertising</n-tag>
       <br>
+      <br>
+      <div class="tutoring-container" style="display:flex; flex-direction: row">
+        <person-sharp size="20" class="field-header__options-icon"/>
+        <p class="tutoring">Gemiddelde begeleiding</p>
+      </div>
       <br>
       <p style="font-weight: bolder;">Volledige vacaturetekst</p>
       <p>
@@ -18,10 +23,12 @@
 </template>
 
 <script>
-import {NCard, NTag, NScrollbar, NSpace} from "naive-ui";
+import {PersonSharp} from "@vicons/ionicons5";
+import {NCard, NTag, NScrollbar, NSpace, NIcon} from "naive-ui";
 
 export default {
   components: {
+    PersonSharp,
     NCard,
     NTag,
     NScrollbar,
@@ -42,4 +49,7 @@ export default {
 }
 </script>
 <style scoped>
+.field-header__options-icon {
+  height: 20px;
+}
 </style>
