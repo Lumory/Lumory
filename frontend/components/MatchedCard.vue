@@ -2,14 +2,15 @@
   <n-card :bordered="false" class="matched-container" hoverable
   >
     <ellipsis-vertical style="float: right" size="20" class="field-header__options-icon"/>
-      <h1 style="font-size: 36px; padding: 0rem">
-        {{ this.internship.name }}
-      </h1>
-    <p style="color: grey;">
+    <h1 style="font-size: 32px; font-weight: bolder; padding: 0;  margin: 0;">
+      {{ this.internship.name }}
+    </h1>
+    <p style="color: grey; font-size: 14px; padding: 0; margin:0; line-height: 1;">
       {{ this.internship.city }}
     </p>
-    <n-tag style="margin-right: 15px">Marketing</n-tag>
-    <n-tag>Advertising</n-tag>
+    <br>
+    <n-tag style="margin-right: 15px; color: grey">Marketing</n-tag>
+    <n-tag style="color: grey">Advertising</n-tag>
     <br>
     <br>
     <div class="tutoring-container" style="display:flex; flex-direction: row">
@@ -17,9 +18,9 @@
       <p>Gemiddelde begeleiding</p>
     </div>
     <br>
-    <p>
-      {{ this.internship.description }}
-    </p>
+    <li v-for="(item, index) in items">
+      {{ item.message }}
+    </li>
     <br>
     <p style="color:grey">
       15 dagen geleden geplaatst
@@ -47,6 +48,10 @@ export default {
   name: "MatchedCard",
   data() {
     return {
+      items: [
+        {message: 'Leuke stage'},
+        {message: 'Veel leermogelijkheden'}
+      ],
       currentHighlightedInternship: ""
     }
   },

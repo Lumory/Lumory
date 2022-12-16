@@ -1,7 +1,8 @@
 <template>
     <Container class="input-container">
-      <h1 style="font-size: 34px">Gematchte stages</h1>
+      <h1 style="font-size: 32px; font-weight:lighter">Gematchte stages</h1>
     </Container>
+  <div class="underline" style="border-bottom: 1px solid #EFEFEF"/>
     <Container class="card-container">
       <n-scrollbar style="max-height: 700px; padding-right:15px" trigger="none">
         <MatchedCard v-for="(matchedresult, index) in matchedresults" style="border-radius: 3px; margin-bottom: 15px"

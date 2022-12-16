@@ -1,13 +1,14 @@
 <template #description>
     <n-card>
-      <h1 style="font-size: 36px; padding: 0rem">
+      <h1 style="font-size: 32px; font-weight: bolder; padding: 0rem;  line-height: 1;">
         {{internship?.name}}
       </h1>
-      <p style="color: grey;">
-        {{internship?.website}}
+      <p style="color: grey; font-size: 14px">
+        {{internship?.city}}
       </p>
-      <n-tag style="margin-right: 15px">Marketing</n-tag>
-      <n-tag>Advertising</n-tag>
+      <br>
+      <n-tag style="margin-right: 15px; color: grey;">Marketing</n-tag>
+      <n-tag style="color: grey">Advertising</n-tag>
       <br>
       <br>
       <div class="tutoring-container" style="display:flex; flex-direction: row">
@@ -16,7 +17,7 @@
       </div>
       <br>
       <p style="font-weight: bolder;">Volledige vacaturetekst</p>
-      <p>
+      <p style="font-size: 14px">
         {{this.internship?.description}}
       </p>
     </n-card>
