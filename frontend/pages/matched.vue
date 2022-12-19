@@ -9,7 +9,7 @@
                    @click="cardClick(index)" :internship="matchedresult"/>
     </n-scrollbar>
     <n-scrollbar style="max-height: 700px; padding-right:15px" trigger="none">
-      <ResultCard v-if="matchedresults" :internship="matchedresults[this.currentHighlightedInternship]"/>
+      <DetailedCard v-if="matchedresults" :internship="matchedresults[this.currentHighlightedInternship]"/>
     </n-scrollbar>
   </Container>
 </template>

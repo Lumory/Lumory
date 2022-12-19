@@ -34,7 +34,7 @@ export default {
     NCard,
     NTag,
   },
-  name: "ResultCard",
+  name: "DetailedCard",
   matchedresults: [],
   props: {
     internship: {}
