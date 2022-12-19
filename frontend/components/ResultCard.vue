@@ -36,7 +36,6 @@ export default {
   },
   name: "ResultCard",
   matchedresults: [],
-  currentHighlightedInternship: '',
   props: {
     internship: {}
   },
