@@ -3,23 +3,30 @@
     <h1 class="title">Gematchte stages</h1>
   </Container>
   <div class="underline"/>
-  <Container class="card-container">
+  <Container class="card-container" v-if="matchedresults.length">
     <n-scrollbar class="scroll" style="max-height: 700px; padding-right:15px" trigger="none">
       <MatchedCard v-for="(matchedresult, index) in matchedresults" style="border-radius: 3px; margin-bottom: 15px"
                    @click="cardClick(index)" :internship="matchedresult"/>
     </n-scrollbar>
     <n-scrollbar style="max-height: 700px; padding-right:15px" trigger="none">
-      <DetailedCard v-if="matchedresults" :internship="matchedresults[this.currentHighlightedInternship]"/>
+      <DetailedCard :internship="matchedresults[this.currentHighlightedInternship]"/>
     </n-scrollbar>
   </Container>
+  <n-card class="card-container" v-else>
+    <div class="errorText">
+      <h1>Oops! Er is iets foutgegaan</h1>
+      <p>Herlaad de pagina of check het internet even. Probeer het later anders even opnieuw.</p>
+    </div>
+  </n-card>
 </template>
 <script>
-import {NScrollbar} from "naive-ui";
+import {NScrollbar, NCard} from "naive-ui";
 import axios from "axios"
 
 export default {
   components: {
     NScrollbar,
+    NCard
   },
   name: 'Matched',
   data() {
@@ -31,7 +38,7 @@ export default {
   },
 
   mounted: function () {
-    axios.get('http://localhost:3001/Company', {}).then(response => this.matchedresults = response.data)
+    axios.get('http://lsocalhost:3001/Company', {}).then(response => this.matchedresults = response.data)
   },
   methods: {
     cardClick(index) {
@@ -46,6 +53,9 @@ export default {
   font-weight: lighter;
 }
 
+.errorText {
+  text-align: center;
+}
 .underline {
   border-bottom: 1px solid #EFEFEF;
 }
@@ -55,5 +65,6 @@ export default {
   flex-direction: row;
   gap: 10px;
   margin-top: 25px;
+  line-height: 1;
 }
 </style>
