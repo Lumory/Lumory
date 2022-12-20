@@ -3,7 +3,7 @@
     <h1 class="title">Gematchte stages</h1>
   </Container>
   <div class="underline"/>
-  <Container class="card-container" v-if="matchedresults.length">
+    <Container class="card-container" v-if="matchedresults.length">
     <n-scrollbar class="scroll" style="max-height: 700px; padding-right:15px" trigger="none">
       <MatchedCard v-for="(matchedresult, index) in matchedresults" style="border-radius: 3px; margin-bottom: 15px"
                    @click="cardClick(index)" :internship="matchedresult"/>
@@ -38,7 +38,7 @@ export default {
   },
 
   mounted: function () {
-    axios.get('http://lsocalhost:3001/Company', {}).then(response => this.matchedresults = response.data)
+    axios.get('http://localhost:3001/Company', {}).then(response => this.matchedresults = response.data)
   },
   methods: {
     cardClick(index) {
