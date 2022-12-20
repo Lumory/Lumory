@@ -55,6 +55,6 @@ public class AuthController : ControllerBase
         }
         
         //HttpContext.Session.SetString("Token", generatedToken);
-        return Ok(generatedToken);
+        return Ok(new { generatedToken, user.Id });
     }
 }
