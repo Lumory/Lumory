@@ -1,0 +1,17 @@
+{
+  "duurzaamheid_strategie": {
+    "title": "Duurzaamheid strategie",
+    "description": "Duurzaamheid wordt een steeds belangrijkere thema voor bedrijven. Jij gaat opzoek naar de belangrijkste duurzaamheidstrends en gaat kijken hoe je de duurzaamheidsstrategie kan verwerken binnen het bedrijf.",
+    "imageURL": "/assets/img/questionaire/duurzaamheid_strategie.png"
+  },
+  "marketing_strategie": {
+    "title": "Marketing strategie",
+    "description": "Het (door)ontwikkelen van uw merk en promotiestrategieën op basis van klantonderzoek, om zo meer of andere klanten aan te spreken.",
+    "imageURL": "/assets/img/questionaire/marketing_strategie.png"
+  },
+  "juridische_vraagstukken": {
+    "title": "Juridisch vraagstukken",
+    "description": "Deze vraagstukken zijn meer gericht op vragen over de betekenis van het rechtssysteem, in de context van een bepaalde sociale situatie. Hierdoor komt het dat rechtsbronnen- en literatuuronderzoek een relatief belangrijke rol speelt bij juridisch onderzoek.",
+    "imageURL": "/assets/img/questionaire/juridische_vraagstukken.png"
+  }
+}

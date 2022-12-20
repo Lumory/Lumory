@@ -20,70 +20,75 @@
 					</div>
 				</div>
 			</div>
-			<StudentProfileField class="page-grid__col-span-2" title="Opleiding">
-				<n-grid cols="1 m:2" responsive="screen" x-gap="10px" y-gap="20px" class="education">
-					<n-gi class="education-field">
-						<school-outline class="icon--size icon--padding icon--color" />
-						<div class="education-field__content-wrapper">
-							<p class="education-field__title">Naam opleiding</p>
-							<p class="education-field__subtitle">HBO Open-ICT</p>
-						</div>
-					</n-gi>
-					<n-gi class="education-field">
-						<school-outline class="icon--size icon--padding icon--color" />
-						<div class="education-field__content-wrapper">
-							<p class="education-field__title">Leerjaar</p>
-							<p class="education-field__subtitle">Leerjaar 3</p>
-						</div>
-					</n-gi>
-					<n-gi class="education-field">
-						<account-balance-outlined class="icon--size icon--padding icon--color" />
-						<div class="education-field__content-wrapper">
-							<p class="education-field__title">Onderwijsinstantie</p>
-							<p class="education-field__subtitle">Hogeschool Utrecht</p>
-						</div>
-					</n-gi>
-					<n-gi class="education-field">
-						<document-text-outline class="icon--size icon--padding icon--color" />
-						<div class="education-field__content-wrapper">
-							<p class="education-field__title">Propedeuse behaald</p>
-							<p class="education-field__subtitle">Ja</p>
-						</div>
-					</n-gi>
-				</n-grid>
-			</StudentProfileField>
-			
-			<StudentProfileField title="Externe links">
-					<li class="external-links__list-item">
-						<logo-linkedin class="icon--padding icon--size" color="#0072b1" />
-						<a href=""><u>Linkedin</u></a>
-					</li>
-			</StudentProfileField>
+      <div class="page-grid__main-content page-grid__col-span-2">
+        <StudentProfileField class="page-grid__col-span-2" title="Opleiding">
+          <n-grid cols="1 m:2" responsive="screen" x-gap="10px" y-gap="20px" class="education">
+            <n-gi class="education-field">
+              <school-outline class="icon--size icon--padding icon--color" />
+              <div class="education-field__content-wrapper">
+                <p class="education-field__title">Naam opleiding</p>
+                <p class="education-field__subtitle">HBO Open-ICT</p>
+              </div>
+            </n-gi>
+            <n-gi class="education-field">
+              <school-outline class="icon--size icon--padding icon--color" />
+              <div class="education-field__content-wrapper">
+                <p class="education-field__title">Leerjaar</p>
+                <p class="education-field__subtitle">Leerjaar 3</p>
+              </div>
+            </n-gi>
+            <n-gi class="education-field">
+              <account-balance-outlined class="icon--size icon--padding icon--color" />
+              <div class="education-field__content-wrapper">
+                <p class="education-field__title">Onderwijsinstantie</p>
+                <p class="education-field__subtitle">Hogeschool Utrecht</p>
+              </div>
+            </n-gi>
+            <n-gi class="education-field">
+              <document-text-outline class="icon--size icon--padding icon--color" />
+              <div class="education-field__content-wrapper">
+                <p class="education-field__title">Propedeuse behaald</p>
+                <p class="education-field__subtitle">Ja</p>
+              </div>
+            </n-gi>
+          </n-grid>
+        </StudentProfileField>
 
-			<StudentProfileField class="page-grid__cv" title="CV">
-				<div class="cv-container">
-					<div class="cv-wrapper">
-						<document-outline class="icon--size icon--padding" />
-						<p>CV_niels_berning</p>
-					</div>
-					<download-filled class="icon--size download-icon" />
-				</div>
+        <StudentProfilePreferenceHeader class="page-grid__col-span-2" title="Dit wil ik graag leren tijdens mijn stage"/>
+        <StudentProfilePreferenceField class="page-grid__col-span-2 " size="medium" :skill="questionnaire['duurzaamheid_strategie']" />
+        <div class="page-grid__col-span-2 preference-field__answers">
+          <StudentProfilePreferenceField v-for="data in questionnaire" class="page-grid__col-span-2" size="small" :skill="data" />
+        </div>
+        <StudentProfileField class="page-grid__skills" title="Vaardigheden">
+          <div class="skills">
+            <n-tag class="skills__tag" :bordered="false">Business</n-tag>
+            <n-tag class="skills__tag" :bordered="false">Product owner</n-tag>
+            <n-tag class="skills__tag" :bordered="false">Organiseren</n-tag>
+            <n-tag class="skills__tag" :bordered="false">Interviewen</n-tag>
+            <n-tag class="skills__tag" :bordered="false">User story mapping</n-tag>
+          </div>
+        </StudentProfileField>
+      </div>
+      <div class="page-grid__side-bar">
 
-			</StudentProfileField>
+        <StudentProfileField title="Externe links">
+          <li class="external-links__list-item">
+            <logo-linkedin class="icon--padding icon--size" color="#0072b1" />
+            <a href=""><u>Linkedin</u></a>
+          </li>
+        </StudentProfileField>
 
-			<StudentProfilePreferenceField class="page-grid__col-span-2 page-grid__preference-field" title="Stagevoorkeuren" />
-			<StudentProfilePreferenceField class="page-grid__col-span-2" title="Stagebedrijf voorkeuren" />
-			<StudentProfilePreferenceField class="page-grid__col-span-2" title="Persoonlijkheid" />
+        <StudentProfileField class="page-grid__cv" title="CV">
+          <div class="cv-container">
+            <div class="cv-wrapper">
+              <document-outline class="icon--size icon--padding" />
+              <p>CV_niels_berning</p>
+            </div>
+            <download-filled class="icon--size download-icon" />
+          </div>
 
-			<StudentProfileField class="page-grid__skills" title="Vaardigheden">
-				<div class="skills">
-					<n-tag class="skills__tag" :bordered="false">Business</n-tag>
-					<n-tag class="skills__tag" :bordered="false">Product owner</n-tag>
-					<n-tag class="skills__tag" :bordered="false">Organiseren</n-tag>
-					<n-tag class="skills__tag" :bordered="false">Interviewen</n-tag>
-					<n-tag class="skills__tag" :bordered="false">User story mapping</n-tag>
-				</div>
-			</StudentProfileField>
+        </StudentProfileField>
+      </div>
 		</div>
 	</Container>
 </template>
@@ -92,6 +97,7 @@
 import { EllipsisVertical, LogoLinkedin, DocumentOutline, SchoolOutline, DocumentTextOutline } from "@vicons/ionicons5";
 import { DownloadFilled, AccountBalanceOutlined } from "@vicons/material";
 import { useMessage, NDropdown, NGrid, NGi, NTag } from "naive-ui";
+import questionnaireData from '../../assets/json/questionaire.json'
 
 export default {
 	components: {
@@ -121,7 +127,8 @@ export default {
 			],
 			handleSelect(key: string | number) {
 				message.info(String(key))
-			}
+			},
+      questionnaire: questionnaireData,
 		}
 	}
 }
@@ -192,6 +199,20 @@ export default {
 	padding-top: 10px;
 	margin-right: 25px;
 }
+.page-grid__main-content {
+  display: grid;
+  gap: 20px;
+}
+.page-grid__side-bar {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
+.preference-field__answers {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
 .external-links__list-item, .cv-wrapper {
 	align-items: center;
 	flex-direction: row;
@@ -226,15 +247,6 @@ export default {
 	}
 	.page-grid__col-span-2 {
 		grid-column: span 2;
-	}
-	.page-grid__cv {
-		grid-column-start: 3;
-	}
-	.page-grid__preference-field {
-		grid-row-start: 3;
-	}
-	.page-grid__skills {
-		grid-column-start: 1;
 	}
 	.banner {
 		grid-column: span 3;
