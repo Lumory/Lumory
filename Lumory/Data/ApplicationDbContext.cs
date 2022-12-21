@@ -11,6 +11,8 @@ public class ApplicationDbContext : DbContext
     
     public DbSet<Company> Companies { get; set; }
     public DbSet<User> Users { get; set; }
+    
+    public DbSet<UserQuestionnaire> UserQuestionnaires { get; set; }
     // public DbSet<Internship> Internships { get; set; }
     // public DbSet<Category> Categories { get; set; }
     // public DbSet<InternshipCategory> InternshipCategories { get; set; }
@@ -25,5 +27,9 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<User>()
         .Property(u => u.CreatedAt)
         .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+        
+        modelBuilder.Entity<UserQuestionnaire>()
+            .Property(u => u.CreatedAt)
+            .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
     }
 }
