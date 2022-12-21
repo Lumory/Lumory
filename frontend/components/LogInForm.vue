@@ -62,6 +62,7 @@ import {
 	FormInst,
 } from 'naive-ui';
 import axios from 'axios';
+import authService from '../services/AuthService.js';
 
 export default defineComponent({
 	setup() {
@@ -109,11 +110,7 @@ export default defineComponent({
 							"password": values.password
 						}
 						console.log(config)
-						const data = axios.post('/Auth/Login', config).then((x) => {
-							console.log(x)
-						}).catch((error) => {
-							console.log(error)
-						})
+						authService.logIn(config)
 					} else {
 						// console.log(errors);
 						message.error('Invalid');
