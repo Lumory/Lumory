@@ -104,16 +104,20 @@ export default defineComponent({
 			handleValidateClick(values) {
 				formRef.value.validate((errors: any) => {
 					if (!errors) {
-						message.success('Valid');
 						const config = {
 							"email": values.email,
 							"password": values.password
 						}
 						console.log(config)
-						authService.logIn(config)
+						authService.logIn(config).then(response => {
+							console.log(response);
+						})
+						.catch(error => {
+							console.log(error);
+						})
+						
 					} else {
-						// console.log(errors);
-						message.error('Invalid');
+						message.error('Incorrect wachtwoord en/of e-mail adres');
 					}
 				});
 			},
