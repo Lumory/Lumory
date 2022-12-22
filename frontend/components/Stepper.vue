@@ -44,8 +44,6 @@ import {NButton, NSpace, useMessage} from "naive-ui"
 import {postNewUser} from "../services/UserService";
 import {ref} from "vue";
 
-const message = useMessage()
-
 const studentSteps = [
   {
     title: "Stap 1",
@@ -149,11 +147,12 @@ export default {
             this.assignFormValues(formValues)
             console.log(studentData)
             postNewUser(studentData).then(() => {
-              message.success('New user created')
+              console.log('New user created')
+              this.message.success('New user created')
             })
                 .catch(error => {
                   console.log(error)
-                  message.error(error.message)
+                  this.message.error(error.message)
                 })
           })
           .catch((val) => {
@@ -165,6 +164,7 @@ export default {
   },
   data() {
     return {
+      message: useMessage(),
       currentStep: 0,
       steps: studentSteps,
       userType: "student",
