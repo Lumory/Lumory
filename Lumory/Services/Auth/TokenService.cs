@@ -40,7 +40,8 @@ public class TokenService
                     ValidIssuer = issuer,
                     ValidAudience = issuer, 
                     IssuerSigningKey = mySecurityKey,
-                }, out SecurityToken validatedToken);            
+                }, out SecurityToken validatedToken);    
+            
         }
         catch
         {
