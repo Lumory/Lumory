@@ -63,6 +63,7 @@ import {
 } from 'naive-ui';
 import axios from 'axios';
 import authService from '../services/AuthService.js';
+import { strict } from 'assert';
 
 export default defineComponent({
 	setup() {
@@ -111,6 +112,12 @@ export default defineComponent({
 						console.log(config)
 						authService.logIn(config).then(response => {
 							console.log(response);
+							const user = useCookie<{ name: string, options: object }>('user', {
+								maxAge: 30,
+								sameSite: 'strict'
+							})
+							user.value = response
+							navigateTo(`/u/${user.value['id']}`)
 						})
 						.catch(error => {
 							console.log(error);
