@@ -61,7 +61,7 @@ p {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px;
+  padding: 0;
   gap: 25px;
 }
 .radio-group__question {
@@ -78,8 +78,5 @@ p {
 }
 .radio-group__label {
   color: #999999;
-}
-@media (min-width: 640px) {
-
 }
 </style>

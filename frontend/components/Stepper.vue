@@ -1,12 +1,12 @@
 <template>
   <n-space class="steps-container" vertical justify="start">
-    <div class="wrapper option-1 option-1-1">
-      <ol class="c-stepper">
+    <div class="wrapper">
+      <ol class="stepper">
         <template v-for="(step, index) in this.steps">
-          <li class="c-stepper__item">
+          <li class="stepper__item">
             <a @click="currentStep=index">
-              <h3 class="c-stepper__title">{{ step.title }}</h3>
-              <p class="c-stepper__desc">{{ step.description }}</p>
+              <h3 class="stepper__title">{{ step.title }}</h3>
+              <p class="stepper__desc">{{ step.description }}</p>
             </a>
           </li>
         </template>
@@ -175,12 +175,12 @@ export default {
 </script>
 
 <style scoped>
-.c-stepper {
+.stepper {
   --circle-size: clamp(1.5rem, 5vw, 3rem);
   --spacing: clamp(0.25rem, 2vw, 0.5rem);
 }
 
-.c-stepper {
+.stepper {
   display: flex;
 }
 
@@ -188,18 +188,18 @@ export default {
   margin-top: 25px;
 }
 
-.c-stepper__item {
+.stepper__item {
   display: flex;
   flex-direction: column;
   flex: 1;
   text-align: center;
 }
 
-.c-stepper__item a {
+.stepper__item a {
   cursor: pointer;
 }
 
-.c-stepper__item:before {
+.stepper__item:before {
   --size: 3rem;
   content: "";
   display: block;
@@ -210,7 +210,7 @@ export default {
   margin: 0 auto 1rem;
 }
 
-.c-stepper__item:not(:last-child):after {
+.stepper__item:not(:last-child):after {
   content: "";
   position: relative;
   top: calc(var(--circle-size) / 2);
@@ -221,13 +221,13 @@ export default {
   order: -1;
 }
 
-.c-stepper__title {
+.stepper__title {
   font-weight: bold;
   font-size: clamp(1rem, 4vw, 1.25rem);
   margin-bottom: 0.5rem;
 }
 
-.c-stepper__desc {
+.stepper__desc {
   color: grey;
   font-size: clamp(0.85rem, 2vw, 1rem);
   padding-left: var(--spacing);
