@@ -14,4 +14,14 @@ To run lumory:
 docker-compose up
 ```
 
+To update the database: 
+```sh
+- Change appsettings.Development line 10 lumory-mariadb to localhost
+- Run docker-compose up --build
+- While docker is running use dotnet ef database update
+- Stop docker 
+- Change appsettings.Development back to lumory-mariadb
+- Run docker-compose up --build
+```
+
 The frontend runs on port 3000, the backend on port 3001, phpMyAdmin on port 3002 and the database on port 3306
