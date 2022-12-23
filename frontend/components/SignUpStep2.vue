@@ -99,10 +99,17 @@ export default defineComponent({
       ],
     }
 
+    const handleValidateClick = () => {
+      return formRef.value?.validate()
+        .then(() => Promise.resolve(formValue.value))
+        .catch((errors) => Promise.reject(errors))
+    }
+
     return {
       formRef,
       formValue,
       rules,
+      handleValidateClick
     }
   }
 })

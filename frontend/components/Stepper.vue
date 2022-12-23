@@ -1,24 +1,37 @@
 <template>
   <n-space class="steps-container" vertical justify="start">
-    <div class="wrapper option-1 option-1-1">
-      <ol class="c-stepper">
+    <div class="wrapper">
+      <ol class="stepper">
         <template v-for="(step, index) in this.steps">
-          <li class="c-stepper__item" v-if="step.userType === this.userType || step.userType === undefined">
-              <a @click="currentStep=index">
-                <h3 class="c-stepper__title">{{ step.title }}</h3>
-                <p class="c-stepper__desc">{{ step.description }}</p>
-              </a>
+          <li class="stepper__item">
+            <a @click="currentStep=index">
+              <h3 class="stepper__title">{{ step.title }}</h3>
+              <p class="stepper__desc">{{ step.description }}</p>
+            </a>
           </li>
         </template>
       </ol>
     </div>
 
-  <!-- Steps content -->
-    <component :is="steps[currentStep].component" v-model="currentStep" @userTypeSelected="onUserTypeSelected"></component>
+    <!-- Steps content -->
+    <component :is="steps[currentStep].component" v-model="currentStep" @userTypeSelected="onUserTypeSelected"
+               ref="stepRef"></component>
 
-  <!-- Steps controls -->
-    <n-button type="primary" class="stepper-next-button" :key="steps[currentStep]" size="large" @click="onNextButtonClick">
-      Volgende stap</n-button>
+    <!-- Steps controls -->
+    <n-space class="stepper-controls" justify="end">
+      <n-button quaternary strong size="large" @click="onPreviousButtonClick" v-if="this.currentStep !== 0">
+        Terug
+      </n-button>
+      <n-button secondary strong class="stepper__next-button" size="large" @click="onNextButtonClick"
+                v-if="this.currentStep < this.steps.length -1">
+        Volgende stap
+      </n-button>
+      <n-button secondary strong class="stepper__next-button" size="large" @click="onCompleteButtonClick"
+                :loading="isSubmitting"
+                v-if="this.currentStep === this.steps.length -1">
+        Voltooien
+      </n-button>
+    </n-space>
   </n-space>
 </template>
 
@@ -27,9 +40,11 @@ import Step1 from "./SignUpStep1";
 import Step2 from "./SignUpStep2";
 import Step3 from "./SignUpStep2Internship";
 import Step4 from "./SignUpInternshipCompanyContactPerson";
-import { NButton, NSpace } from "naive-ui"
+import {NButton, NSpace, useMessage} from "naive-ui"
+import {postNewUser} from "../services/UserService";
+import {ref} from "vue";
 
-const steps = [
+const studentSteps = [
   {
     title: "Stap 1",
     description: "Account type",
@@ -42,6 +57,15 @@ const steps = [
     component: "step2",
     required: true,
     userType: "student"
+  }
+];
+
+const internshipSteps = [
+  {
+    title: "Stap 1",
+    description: "Account type",
+    component: "Step1",
+    required: true,
   },
   {
     title: "Stap 2",
@@ -50,77 +74,143 @@ const steps = [
     required: true,
     userType: "internshipCompany"
   },
-  {
-    title: "Stap 3",
-    description: "Contactpersoon",
-    component: "Step4",
-    required: true,
-    userType: "internshipCompany"
-  }
 ];
-let currentStep = 0;
-let hasNextStep = currentStep < steps.length -1;
-let userType = "student";
+const isSubmitting = ref(false)
 
+let studentData = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+}
+
+let internshipCompanyData = {
+  companyName: '',
+  KVK: '',
+  email: '',
+  password: '',
+}
 
 export default {
   components: {Step1, Step2, Step3, Step4, NButton, NSpace},
   methods: {
-    onUserTypeSelected (value) {
+    onUserTypeSelected(value) {
       this.userType = value
-      console.log(userType)
+      if (value === "internshipCompany") {
+        this.steps = internshipSteps
+      } else if (value === "student") {
+        this.steps = studentSteps
+      }
     },
-    onNextButtonClick () {
-      this.currentStep++
-    }
-  },
-  computed: {
-    computedSteps(userType) {
-      return steps.filter(step => step.userType===userType)
+    validateCurrentStep() {
+      return this.$refs.stepRef.handleValidateClick()
+    },
+    assignFormValues(formValues) {
+      if(this.userType==='student') {
+        Object.keys(formValues).forEach(function(key) {
+          if (key in studentData) {
+            studentData[key] = formValues[key];
+          }
+        });
+      }
+      if(this.userType==='internshipCompany') {
+        Object.keys(formValues).forEach(function(key) {
+          if (key in internshipCompanyData) {
+            internshipCompanyData[key] = formValues[key];
+          }
+        });
+      }
+
+    },
+    onPreviousButtonClick() {
+      if (this.currentStep > 0) {
+        this.currentStep--
+      }
+    },
+    onNextButtonClick() {
+      this.validateCurrentStep()
+          .then((formValues) => {
+            this.assignFormValues(formValues)
+            if (this.currentStep < this.steps.length - 1) {
+              this.currentStep++
+            }
+          })
+          .catch((val) => {
+            console.log(val)
+          })
+    },
+    async onCompleteButtonClick() {
+      isSubmitting.value = true
+
+      this.validateCurrentStep()
+          .then((formValues) => {
+            this.assignFormValues(formValues)
+            console.log(studentData)
+            postNewUser(studentData).then(() => {
+              console.log('New user created')
+              this.message.success('New user created')
+            })
+                .catch(error => {
+                  console.log(error)
+                  this.message.error(error.message)
+                })
+          })
+          .catch((val) => {
+            console.log(val)
+          })
+
+      isSubmitting.value = false
     }
   },
   data() {
     return {
+      message: useMessage(),
       currentStep: 0,
-      steps,
-      hasNextStep,
-      userType,
+      steps: studentSteps,
+      userType: "student",
+      isSubmitting,
     }
   }
 }
 </script>
 
 <style scoped>
-.c-stepper {
+.stepper {
   --circle-size: clamp(1.5rem, 5vw, 3rem);
   --spacing: clamp(0.25rem, 2vw, 0.5rem);
 }
 
-.c-stepper {
+.stepper {
   display: flex;
 }
 
-.c-stepper__item {
+.stepper-controls {
+  margin-top: 25px;
+}
+
+.stepper__item {
   display: flex;
   flex-direction: column;
   flex: 1;
   text-align: center;
 }
-.c-stepper__item a {
+
+.stepper__item a {
   cursor: pointer;
 }
 
-.c-stepper__item:before {
-   --size: 3rem;
-   content: "";
-   display: block;
-   width: var(--circle-size);
-   height: var(--circle-size);
-   border-radius: 50%;
-   background-color: #FEBF00;
-   margin: 0 auto 1rem;
+.stepper__item:before {
+  --size: 3rem;
+  content: "";
+  display: block;
+  width: var(--circle-size);
+  height: var(--circle-size);
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  margin: 0 auto 1rem;
 }
-.c-stepper__item:not(:last-child):after {
+
+.stepper__item:not(:last-child):after {
   content: "";
   position: relative;
   top: calc(var(--circle-size) / 2);
@@ -131,40 +221,32 @@ export default {
   order: -1;
 }
 
-.c-stepper__title {
+.stepper__title {
   font-weight: bold;
   font-size: clamp(1rem, 4vw, 1.25rem);
   margin-bottom: 0.5rem;
 }
 
-.c-stepper__desc {
+.stepper__desc {
   color: grey;
   font-size: clamp(0.85rem, 2vw, 1rem);
   padding-left: var(--spacing);
   padding-right: var(--spacing);
 }
+
 .wrapper {
   max-width: 1000px;
   margin: 2rem auto 0;
 }
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-
-h1 {
-  text-align: center;
-}
 .steps-container {
   width: 100%;
   margin: 0 auto;
 }
 
-.stepper-next-button {
-  width: 100%;
-  margin: 0 auto;
+.stepper__next-button {
+  background: var(--color-primary);
+  border: none;
 }
 
 @media (min-width: 640px) {
