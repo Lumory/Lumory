@@ -112,7 +112,7 @@ export default defineComponent({
 						authService.logIn(config).then(response => {
 							console.log(response);
 							const user = useCookie<{ name: string, options: object }>('user', {
-								maxAge: 30,
+								maxAge: 300,
 								sameSite: 'strict'
 							})
 							user.value = response
