@@ -63,7 +63,6 @@ import {
 } from 'naive-ui';
 import axios from 'axios';
 import authService from '../services/AuthService.js';
-import { strict } from 'assert';
 
 export default defineComponent({
 	setup() {

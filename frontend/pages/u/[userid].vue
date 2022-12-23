@@ -93,7 +93,12 @@ import { EllipsisVertical, LogoLinkedin, DocumentOutline, SchoolOutline, Documen
 import { DownloadFilled, AccountBalanceOutlined } from "@vicons/material";
 import { useMessage, NDropdown, NGrid, NGi, NTag } from "naive-ui";
 
+definePageMeta({
+	middleware: "check-auth"
+})
+
 export default {
+	middleware: '',
 	components: {
 		NDropdown,
 		NGrid,
