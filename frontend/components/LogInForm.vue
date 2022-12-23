@@ -108,9 +108,7 @@ export default defineComponent({
 							"email": values.email,
 							"password": values.password
 						}
-						console.log(config)
 						authService.logIn(config).then(response => {
-							console.log(response);
 							const user = useCookie<{ name: string, options: object }>('user', {
 								maxAge: 300,
 								sameSite: 'strict'
@@ -119,11 +117,17 @@ export default defineComponent({
 							navigateTo(`/u/${user.value['id']}`)
 						})
 						.catch(error => {
-							console.log(error);
+							if (error.response.status === 401) {
+								message.error('Incorrect password')
+							} else if (error.response.status === 404) {
+								message.error('Invalid email address')
+							} else {
+								message.error('Please message our customer service')
+							}
 						})
 						
 					} else {
-						message.error('Incorrect wachtwoord en/of e-mail adres');
+						message.error('Ongeldig wachtwoord en/of e-mail adres');
 					}
 				});
 			},

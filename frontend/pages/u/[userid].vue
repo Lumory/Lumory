@@ -98,7 +98,6 @@ definePageMeta({
 })
 
 export default {
-	middleware: '',
 	components: {
 		NDropdown,
 		NGrid,
