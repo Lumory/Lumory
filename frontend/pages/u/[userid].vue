@@ -55,9 +55,9 @@
         </StudentProfileField>
 
         <StudentProfilePreferenceHeader class="page-grid__col-span-2" title="Dit wil ik graag leren tijdens mijn stage"/>
-        <StudentProfilePreferenceField class="page-grid__col-span-2 " size="medium" :skill="questionnaire['duurzaamheid_strategie']" />
+        <StudentProfilePreferenceField v-for="problem in this.data.problem" class="page-grid__col-span-2 " size="medium" :skill="questionnaire[problem]" />
         <div class="page-grid__col-span-2 preference-field__answers">
-          <StudentProfilePreferenceField v-for="data in questionnaire" class="page-grid__col-span-2" size="small" :skill="data" />
+          <StudentProfilePreferenceField v-for="skill in this.data.skillsToLearn" class="page-grid__col-span-2" size="small" :key="skill" :skill="questionnaire[skill]" />
         </div>
         <StudentProfileField class="page-grid__skills" title="Vaardigheden">
           <div class="skills">
@@ -98,6 +98,8 @@ import { EllipsisVertical, LogoLinkedin, DocumentOutline, SchoolOutline, Documen
 import { DownloadFilled, AccountBalanceOutlined } from "@vicons/material";
 import { useMessage, NDropdown, NGrid, NGi, NTag } from "naive-ui";
 import questionnaireData from '../../assets/json/questionaire.json'
+import axios from "axios"
+import {PropType} from "vue";
 
 export default {
 	components: {
@@ -116,6 +118,25 @@ export default {
 	props: {
 		title: String,
 	},
+  data() {
+    return {
+      data: {
+        type: Object as PropType<StudentQuestionnaire>
+      },
+    }
+  },
+  created() {
+    axios.get('http://localhost:3001/Users/1/UserQuestionnaire').then(response => {
+      const obj = response.data
+      for (const key in obj) {
+        if (typeof obj[key] === 'string') {
+          obj[key] = obj[key].split(',')
+        }
+      }
+      this.data = obj
+      console.log(this.data.skillsToLearn)
+    })
+  },
 	setup() {
 		const message = useMessage();
 		return {
