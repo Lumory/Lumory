@@ -4,19 +4,21 @@
     <n-form ref="formRef" :model="formValue" size="large" :rules="rules">
       <n-grid cols="12" :x-gap="24" item-responsive responsive="screen">
         <n-form-item-gi class="form-item--left-align" span="12" path="companyName" label="Bedrijfsnaam">
-          <n-input v-model:value="formValue.companyName" placeholder="Bedrijf" @keydown.enter.prevent />
+          <n-input v-model:value="formValue.companyName" placeholder="Bedrijf" @keydown.enter.prevent/>
         </n-form-item-gi>
         <n-form-item-gi class="form-item--left-align" span="12" path="KVK" label="KVK-nummer">
-          <n-input v-model:value="formValue.KVK" placeholder="1234 5678 9012" @keydown.enter.prevent />
+          <n-input v-model:value="formValue.KVK" placeholder="1234 5678 9012" @keydown.enter.prevent/>
         </n-form-item-gi>
         <n-form-item-gi class="form-item--left-align" :span="12" path="email" label="E-mail">
-          <n-input v-model:value="formValue.email" placeholder="hr@bedrijf.nl" @keydown.enter.prevent />
+          <n-input v-model:value="formValue.email" placeholder="hr@bedrijf.nl" @keydown.enter.prevent/>
         </n-form-item-gi>
         <n-form-item-gi class="form-item--left-align" :span="12" path="password" label="Wachtwoord">
-          <n-input v-model:value="formValue.password" placeholder="Wachtwoord" @keydown.enter.prevent type="password" show-password-on="click"/>
+          <n-input v-model:value="formValue.password" placeholder="Wachtwoord" @keydown.enter.prevent type="password"
+                   show-password-on="click"/>
         </n-form-item-gi>
         <n-form-item-gi class="form-item--left-align" :span="12" path="repeatPassword" label="Herhaal wachtwoord">
-          <n-input v-model:value="formValue.repeatPassword" placeholder="Herhaal wachtwoord" @keydown.enter.prevent on-change="" type="password" show-password-on="click"/>
+          <n-input v-model:value="formValue.repeatPassword" placeholder="Herhaal wachtwoord" @keydown.enter.prevent
+                   on-change="" type="password" show-password-on="click"/>
         </n-form-item-gi>
       </n-grid>
     </n-form>
@@ -24,8 +26,21 @@
 </template>
 
 <script lang="ts">
-import {NSpace, NForm, NRow, NCol, NButton, NFormItem, NInput, FormInst, NFormItemGi, NGrid, FormRules, FormItemRule} from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import {
+  NSpace,
+  NForm,
+  NRow,
+  NCol,
+  NButton,
+  NFormItem,
+  NInput,
+  FormInst,
+  NFormItemGi,
+  NGrid,
+  FormRules,
+  FormItemRule
+} from 'naive-ui'
+import {defineComponent, ref} from 'vue'
 
 interface ModelType {
   companyName: string | null
@@ -66,7 +81,7 @@ export default defineComponent({
       email: [
         {
           required: true,
-          validator (rule: FormItemRule, value: string) {
+          validator(rule: FormItemRule, value: string) {
             if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)) {
               console.log('ongeldige email')
               return new Error('Invalid email format')
@@ -85,7 +100,7 @@ export default defineComponent({
       ],
       repeatPassword: [
         {
-          validator (rule: FormItemRule, value: string) {
+          validator(rule: FormItemRule, value: string) {
             return value == formValue.value.password;
           },
           message: 'Wachtwoord komt niet overeen.',
@@ -99,10 +114,17 @@ export default defineComponent({
       ],
     }
 
+    const handleValidateClick = () => {
+      return formRef.value?.validate()
+          .then(() => Promise.resolve(formValue.value))
+          .catch((errors) => Promise.reject(errors))
+    }
+
     return {
       formRef,
       formValue,
       rules,
+      handleValidateClick
     }
   }
 })
@@ -112,11 +134,13 @@ export default defineComponent({
 h1 {
   text-align: center;
 }
+
 p {
   text-align: left;
   white-space: normal;
   font-family: "Roboto";
 }
+
 .form-item--left-align {
   text-align: left !important;
 }

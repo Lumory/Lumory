@@ -41,6 +41,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<CompanyRepository>();
 builder.Services.AddScoped<CompanyService>();
+builder.Services.AddScoped<InternshipRepository>();
+builder.Services.AddScoped<InternshipService>();
+builder.Services.AddScoped<UserQuestionnaireRepository>();
+builder.Services.AddScoped<UserQuestionnaireService>();
 builder.Services.AddTransient<UserRepository>();
 builder.Services.AddTransient<UserService>();
 builder.Services.AddScoped<ConfigurationManager>();
@@ -60,6 +64,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidAudience = config["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]))
     };
+    builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options => {
+            options.Events = new JwtBearerEvents
+            {
+                OnMessageReceived = context =>
+                {
+                    context.Token = context.Request.Cookies["CookieName"];
+                    return Task.CompletedTask;
+                }
+            };
+        });
+
+    
 });
 // end of auth
 

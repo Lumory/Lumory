@@ -25,7 +25,7 @@
 						<div class="links__item --white">Inloggen</div>
 					</NuxtLink>
 					<n-space>
-						<NuxtLink to="signup" @show="!menuShow">
+						<NuxtLink to="/signup" @show="!menuShow">
 							<n-button
 								:focusable="true"
 								color="#FFFFFF"

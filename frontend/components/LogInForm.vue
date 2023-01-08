@@ -61,6 +61,8 @@ import {
 	NFormItemGi,
 	FormInst,
 } from 'naive-ui';
+import axios from 'axios';
+import authService from '../services/AuthService.js';
 
 export default defineComponent({
 	setup() {
@@ -102,11 +104,30 @@ export default defineComponent({
 			handleValidateClick(values) {
 				formRef.value.validate((errors: any) => {
 					if (!errors) {
-						message.success('Valid');
-						console.log(JSON.stringify(values));
+						const config = {
+							"email": values.email,
+							"password": values.password
+						}
+						authService.logIn(config).then(response => {
+							const user = useCookie<{ name: string, options: object }>('user', {
+								maxAge: 300,
+								sameSite: 'strict'
+							})
+							user.value = response
+							navigateTo(`/u/${user.value['id']}`)
+						})
+						.catch(error => {
+							if (error.response.status === 401) {
+								message.error('Incorrect password')
+							} else if (error.response.status === 404) {
+								message.error('Invalid email address')
+							} else {
+								message.error('Please message our customer service')
+							}
+						})
+						
 					} else {
-						// console.log(errors);
-						message.error('Invalid');
+						message.error('Ongeldig wachtwoord en/of e-mail adres');
 					}
 				});
 			},
