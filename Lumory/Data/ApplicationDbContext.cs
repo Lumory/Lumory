@@ -12,11 +12,9 @@ public class ApplicationDbContext : DbContext
     public DbSet<Company> Companies { get; set; }
     public DbSet<User> Users { get; set; }
     
+    public DbSet<Internship> Internships { get; set; }
     public DbSet<UserQuestionnaire> UserQuestionnaires { get; set; }
-    // public DbSet<Internship> Internships { get; set; }
-    // public DbSet<Category> Categories { get; set; }
-    // public DbSet<InternshipCategory> InternshipCategories { get; set; }
-    // public DbSet<InternshipContactPerson> InternshipContactPersons { get; set; }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -29,6 +27,10 @@ public class ApplicationDbContext : DbContext
         .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
         
         modelBuilder.Entity<UserQuestionnaire>()
+            .Property(u => u.CreatedAt)
+            .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+        
+        modelBuilder.Entity<Internship>()
             .Property(u => u.CreatedAt)
             .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
     }
