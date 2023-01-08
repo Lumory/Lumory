@@ -1,6 +1,5 @@
 ﻿using Lumory.Models;
 using Lumory.Repositories.Users;
-using Lumory.Services.Users;
 
 namespace Lumory.Services.Users;
 

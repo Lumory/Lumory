@@ -41,6 +41,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<CompanyRepository>();
 builder.Services.AddScoped<CompanyService>();
+builder.Services.AddScoped<InternshipRepository>();
+builder.Services.AddScoped<InternshipService>();
 builder.Services.AddScoped<UserQuestionnaireRepository>();
 builder.Services.AddScoped<UserQuestionnaireService>();
 builder.Services.AddTransient<UserRepository>();
