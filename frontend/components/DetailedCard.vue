@@ -1,38 +1,44 @@
 <template>
-  <n-card>
-    <h1 class="nameText">
-      {{ internship?.name }}
-    </h1>
-    <p class="cityText">
-      {{ internship?.city }}
-    </p>
-    <br>
-    <div>
-      <n-tag class="tag">Marketing</n-tag>
-      <n-tag class="tag">Advertising</n-tag>
-    </div>
-    <br>
-    <div class="tutoring-container">
-      <person-sharp size="20" class="field-header__person-icon"/>
-      <p class="tutoring">Gemiddelde begeleiding</p>
-    </div>
-    <br>
-    <p class="vacancyText">Volledige vacaturetekst</p>
-    <p class="descriptionText">
-      {{ this.internship?.description }}
-    </p>
-  </n-card>
+  <n-space vertical>
+    <n-card>
+      <template #header>
+        <n-space class="cardTitle">
+          {{ internship?.name }}
+        </n-space>
+        <n-space class="cardCity">
+          {{ internship?.city }}
+        </n-space>
+      </template>
+      <n-space>
+        <n-tag class="tag">Marketing</n-tag>
+        <n-tag class="tag">Advertising</n-tag>
+      </n-space>
+      <template class="tutoring-container">
+        <n-space>
+          <person-sharp size="20" class="field-header__person-icon"/>
+          <n-space class="tutoring">Gemiddelde begeleiding</n-space>
+        </n-space>
+      </template>
+      <n-space style="font-weight: bolder">
+        Volledige Vacaturetekst
+      </n-space>
+      <n-space class="descriptionText">
+        {{ this.internship?.description }}
+      </n-space>
+    </n-card>
+  </n-space>
 </template>
 
 <script>
 import {PersonSharp} from "@vicons/ionicons5";
-import {NCard, NTag} from "naive-ui";
+import {NCard, NTag, NSpace} from "naive-ui";
 
 export default {
   components: {
     PersonSharp,
     NCard,
     NTag,
+    NSpace
   },
   name: "DetailedCard",
   matchedresults: [],
@@ -42,19 +48,23 @@ export default {
 }
 </script>
 <style scoped>
-.vacancyText {
-  font-weight: bolder;
-}
+
 
 .field-header__person-icon {
   height: 20px;
+}
+
+.cardTitle {
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 1;
 }
 
 .descriptionText {
   font-size: 14px;
 }
 
-.cityText {
+.cardCity {
   color: grey;
   font-size: 14px;
 }
@@ -66,12 +76,7 @@ export default {
 .tutoring-container {
   display: flex;
   flex-direction: row;
-}
-
-.nameText {
-  font-size: 32px;
-  font-weight: bolder;
-  padding: 0rem;
-  line-height: 1;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 </style>

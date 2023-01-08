@@ -1,37 +1,42 @@
 <template>
-  <n-card :bordered="false" class="matched-container" hoverable
-  >
-    <ellipsis-vertical size="20" class="field-header__person-icon"/>
-    <h1 class="internshipText">
-      {{ this.internship.name }}
-    </h1>
-    <p class="cityText">
-      {{ this.internship.city }}
-    </p>
-    <br>
-    <div>
-      <n-tag class="tag">Marketing</n-tag>
-      <n-tag class="tag">Advertising</n-tag>
-    </div>
-    <br>
-    <div class="tutoring-container">
-      <person-sharp size="20" class="field-header__person-icon"/>
-      <p>Gemiddelde begeleiding</p>
-    </div>
-    <br>
-    <li v-for="(item) in items">
-      {{ item.message }}
-    </li>
-    <br>
-    <p class="lastPostedText">
-      15 dagen geleden geplaatst
-    </p>
-  </n-card>
+  <n-space vertical>
+    <n-card :bordered="false" class="matched-container" hoverable
+    >
+      <template #header>
+        <ellipsis-vertical size="20" class="field-header__person-icon"/>
+        <n-space class="internshipText">
+          {{ this.internship.name }}
+        </n-space>
+        <n-space class="cityText">
+          {{ this.internship.city }}
+        </n-space>
+      </template>
+      <n-space>
+        <n-tag class="tag">Marketing</n-tag>
+        <n-tag class="tag">Advertising</n-tag>
+      </n-space>
+      <template class="tutoring-container">
+        <n-space>
+          <person-sharp size="20" class="field-header__person-icon"/>
+          <n-space>Gemiddelde begeleiding</n-space>
+        </n-space>
+      </template>
+      <n-space vertical>
+        <n-space v-for="(item) in items">
+          -
+          {{ item.message }}
+        </n-space>
+        <n-space class="lastPostedText">
+          15 dagen geleden geplaatst
+        </n-space>
+      </n-space>
+    </n-card>
+  </n-space>
 </template>
 
 <script>
 import {PersonSharp, EllipsisVertical} from "@vicons/ionicons5";
-import {NTag, NCard} from "naive-ui";
+import {NTag, NCard, NSpace} from "naive-ui";
 
 export default {
   components: {
@@ -39,11 +44,12 @@ export default {
     EllipsisVertical,
     NTag,
     NCard,
-  },
-  props: {
-    internship: {}
+    NSpace,
   },
   name: "MatchedCard",
+  props: {
+    internship: ''
+  },
   data() {
     return {
       currentHighlightedInternship: "",
@@ -63,22 +69,27 @@ export default {
   margin: 0;
   line-height: 1;
 }
+
 .lastPostedText {
-  color:grey;
+  color: grey;
 }
+
 .cityText {
   color: grey;
   font-size: 14px;
   padding: 0;
-  margin:0;
+  margin: 0;
 }
+
 .tag {
   color: grey;
 }
-.tutoring-container{
-  display:flex;
+
+.tutoring-container {
+  display: flex;
   flex-direction: row;
 }
+
 .field-header__person-icon {
   height: 20px;
   float: right
@@ -86,5 +97,12 @@ export default {
 
 .matched-container:hover {
   border: 1.5px solid black;
+}
+
+.tutoring-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 </style>
