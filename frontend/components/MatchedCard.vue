@@ -5,7 +5,7 @@
       <template #header>
         <ellipsis-vertical size="20" class="field-header__person-icon"/>
         <n-space class="internshipText">
-          {{ this.internship.name }}
+          {{ this.internship.problem }}
         </n-space>
         <n-space class="cityText">
           {{ this.internship.city }}
@@ -22,9 +22,9 @@
         </n-space>
       </template>
       <n-space vertical>
-        <n-space v-for="(item) in items">
+        <n-space>
           -
-          {{ item.message }}
+          {{ this.internship?.sectorDescription }}
         </n-space>
         <n-space class="lastPostedText">
           15 dagen geleden geplaatst

@@ -3,7 +3,7 @@
     <n-card>
       <template #header>
         <n-space class="cardTitle">
-          {{ internship?.name }}
+          {{ internship?.problem }}
         </n-space>
         <n-space class="cardCity">
           {{ internship?.city }}
@@ -23,7 +23,7 @@
         Volledige Vacaturetekst
       </n-space>
       <n-space class="descriptionText">
-        {{ this.internship?.description }}
+        {{ this.internship?.problemDescription }}
       </n-space>
     </n-card>
   </n-space>

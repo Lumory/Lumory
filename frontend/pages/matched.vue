@@ -28,12 +28,11 @@
 import axios from 'axios';
 import {NScrollbar, NCard, NSpace, useMessage} from "naive-ui";
 import { defineComponent, ref } from 'vue';
-const message = useMessage();
 export default defineComponent({
   data() {
     return {
       clicked: false,
-      matchedresults: [],
+      matchedresults: '',
       currentHighlightedInternship: 0,
     }
   },
@@ -49,7 +48,7 @@ export default defineComponent({
         alert('Er is een fout opgetreden. Herlaad deze pagina.')
       }
     }))
-    axios.get('http://localhost:3001/Company', {})
+    axios.get('http://localhost:3001/Internships', {})
         .then(response =>
             this.matchedresults = response.data)
         .catch(error => {
