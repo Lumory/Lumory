@@ -11,8 +11,8 @@
 					</div>
 					<div class="banner__content-wrapper">
 						<div class="banner__content">
-							<h3 class="banner__content-name">Niels Berning</h3>
-							<h4 class="banner__content-subtitle">Open-ICT, Hogeschool Utrecht</h4>
+							<h3 class="banner__content-name">{{this.user?.firstName + ' ' + this.user?.lastName}}</h3>
+							<h4 class="banner__content-subtitle">{{this.userQuestionnaire?.study + ', ' + this.userQuestionnaire?.educationalInstitution}}</h4>
 						</div>
 						<n-dropdown trigger="click" :options="options" @select="handleSelect">
 							<ellipsis-vertical class="banner__options-icon"/>
@@ -21,53 +21,65 @@
 				</div>
 			</div>
       <div class="page-grid__main-content page-grid__col-span-2">
-        <StudentProfileField class="page-grid__col-span-2" title="Opleiding">
+        <StudentProfileField title="Opleiding">
           <n-grid cols="1 m:2" responsive="screen" x-gap="10px" y-gap="20px" class="education">
             <n-gi class="education-field">
               <school-outline class="icon--size icon--padding icon--color" />
               <div class="education-field__content-wrapper">
                 <p class="education-field__title">Naam opleiding</p>
-                <p class="education-field__subtitle">HBO Open-ICT</p>
+                <p class="education-field__subtitle">{{ this.userQuestionnaire?.study }}</p>
               </div>
             </n-gi>
             <n-gi class="education-field">
               <school-outline class="icon--size icon--padding icon--color" />
               <div class="education-field__content-wrapper">
-                <p class="education-field__title">Leerjaar</p>
-                <p class="education-field__subtitle">Leerjaar 3</p>
+                <p class="education-field__title">Woonplaats</p>
+                <p class="education-field__subtitle">{{ this.userQuestionnaire?.city }}</p>
               </div>
             </n-gi>
             <n-gi class="education-field">
               <account-balance-outlined class="icon--size icon--padding icon--color" />
               <div class="education-field__content-wrapper">
                 <p class="education-field__title">Onderwijsinstantie</p>
-                <p class="education-field__subtitle">Hogeschool Utrecht</p>
+                <p class="education-field__subtitle">{{ this.userQuestionnaire?.educationalInstitution }}</p>
               </div>
             </n-gi>
             <n-gi class="education-field">
               <document-text-outline class="icon--size icon--padding icon--color" />
               <div class="education-field__content-wrapper">
-                <p class="education-field__title">Propedeuse behaald</p>
-                <p class="education-field__subtitle">Ja</p>
+                <p class="education-field__title">Studie niveau</p>
+                <p class="education-field__subtitle">{{ this.userQuestionnaire?.studyNiveau }}</p>
               </div>
             </n-gi>
           </n-grid>
         </StudentProfileField>
 
-        <StudentProfilePreferenceHeader class="page-grid__col-span-2" title="Dit wil ik graag leren tijdens mijn stage"/>
-        <StudentProfilePreferenceField v-for="problem in this.data.problem" class="page-grid__col-span-2 " size="medium" :skill="questionnaire[problem]" />
-        <div class="page-grid__col-span-2 preference-field__answers">
-          <StudentProfilePreferenceField v-for="skill in this.data.skillsToLearn" class="page-grid__col-span-2" size="small" :key="skill" :skill="questionnaire[skill]" />
+
+        <StudentProfilePreferenceHeader title="Dit wil ik graag leren tijdens mijn stage"/>
+        <StudentProfilePreferenceField size="large" :skill="questionnaire[this.userQuestionnaire?.problem]" />
+        <div class="preference-field__answers">
+            <StudentProfilePreferenceField v-for="skill in this.userQuestionnaire?.skillsToLearn" size="small" :key="skill" :skill="questionnaire[skill]" />
         </div>
-        <StudentProfileField class="page-grid__skills" title="Vaardigheden">
-          <div class="skills">
-            <n-tag class="skills__tag" :bordered="false">Business</n-tag>
-            <n-tag class="skills__tag" :bordered="false">Product owner</n-tag>
-            <n-tag class="skills__tag" :bordered="false">Organiseren</n-tag>
-            <n-tag class="skills__tag" :bordered="false">Interviewen</n-tag>
-            <n-tag class="skills__tag" :bordered="false">User story mapping</n-tag>
-          </div>
-        </StudentProfileField>
+
+        <StudentProfilePreferenceHeader title="Dit zijn mijn superkrachten"/>
+        <div class="preference-field__answers">
+          <StudentProfilePreferenceField v-for="skill in this.userQuestionnaire?.strongQualities" size="small" :key="skill" :skill="questionnaire[skill]" />
+        </div>
+        <div class="preference-field__answers">
+          <StudentProfilePreferenceField v-for="skill in this.userQuestionnaire?.strongSkills" size="small" :key="skill" :skill="questionnaire[skill]" />
+        </div>
+
+        <StudentProfilePreferenceHeader title="Binnen deze sector wil ik stage lopen"/>
+        <div class="preference-field__answers">
+          <StudentProfilePreferenceField v-for="skill in this.userQuestionnaire?.sector" size="medium" :key="skill" :skill="questionnaire[skill]" />
+        </div>
+
+
+        <StudentProfilePreferenceHeader title="Zo wil ik graag mijn begeleiding hebben"/>
+        <StudentProfilePreferenceField size="large" :skill="questionnaire[this.userQuestionnaire?.teamwork]" />
+        <div class="preference-field__answers">
+          <StudentProfilePreferenceField v-for="skill in this.userQuestionnaire?.mentorship" size="medium" :key="skill" :skill="questionnaire[skill]" />
+        </div>
       </div>
       <div class="page-grid__side-bar">
 
@@ -120,9 +132,12 @@ export default {
 	},
   data() {
     return {
-      data: {
+      userQuestionnaire: {
         type: Object as PropType<StudentQuestionnaire>
       },
+      user: {
+        type: {}
+      }
     }
   },
   created() {
@@ -130,12 +145,19 @@ export default {
       const obj = response.data
       for (const key in obj) {
         if (typeof obj[key] === 'string') {
-          obj[key] = obj[key].split(',')
+          obj[key] = obj[key].split(', ')
+        }
+        if (obj[key].length <= 1) {
+          obj[key] = obj[key].toString()
         }
       }
-      this.data = obj
-      console.log(this.data.skillsToLearn)
+      this.userQuestionnaire = obj
     })
+    axios.get('http://localhost:3001/User/1/').then(response => {
+      console.log(response.data)
+      this.user = response.data
+    })
+
   },
 	setup() {
 		const message = useMessage();
@@ -221,7 +243,8 @@ export default {
 	margin-right: 25px;
 }
 .page-grid__main-content {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 .page-grid__side-bar {

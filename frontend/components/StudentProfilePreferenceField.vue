@@ -4,7 +4,7 @@
       <h3 class="preference-field__title">{{ skill?.title }}</h3>
       <p>{{skill?.description}}</p>
     </div>
-    <NImage width="100" height="100" :src="skill?.imageURL"/>
+    <NImage :width="preferenceFieldImageSize" :height="preferenceFieldImageSize" :src="skill?.imageURL"/>
 	</div>
 </template>
 
@@ -13,10 +13,7 @@
 import {defineComponent, PropType} from "vue";
 import {NImage} from "naive-ui";
 
-enum Size {
-  small,
-  large
-}
+type Size = 'small' | 'medium' | 'large'
 
 export default defineComponent({
   components: {
@@ -27,10 +24,21 @@ export default defineComponent({
       type: Object as PropType<Skill>
     },
     size: {
-      type: Number as PropType<Size>,
+      type: String as PropType<Size>,
       default: 'large'
     },
-	}
+	},
+  computed: {
+    preferenceFieldImageSize() {
+      if (this.size === 'small') {
+        return 168
+      }
+      if (this.size === 'medium') {
+        return 150
+      }
+      else return 100
+    }
+  }
 })
 </script>
 
@@ -49,6 +57,7 @@ export default defineComponent({
   gap: 10px;
   flex-grow: 1;
   flex-basis: 0;
+  font-size: 14px;
 }
 .preference-field.small {
   flex-direction: column-reverse;
@@ -59,14 +68,17 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   gap: 3px;
+  flex-grow: 1;
+  flex-basis: 0;
 }
 .preference-field__title {
 	font-size: 1.2rem;
+  word-break: break-word;
 }
 
 @media (min-width: 640px) {
 	.preference-field__title {
-		font-size: 1.5rem;
+		font-size: 1.25rem;
 	}
 }
 
