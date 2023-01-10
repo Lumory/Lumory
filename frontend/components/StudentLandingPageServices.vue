@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import {NGrid, NGridItem, NIcon} from "naive-ui";
+import {NGrid, NGridItem, NIcon, NSpace} from "naive-ui";
 import {PinDropOutlined} from "@vicons/material";
 
 export default {
@@ -36,7 +36,8 @@ export default {
     NGrid,
     NGridItem,
     PinDropOutlined,
-    NIcon
+    NIcon,
+    NSpace
   }
 }
 </script>
