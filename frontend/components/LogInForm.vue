@@ -109,11 +109,13 @@ export default defineComponent({
 							"password": values.password
 						}
 						authService.logIn(config).then(response => {
-							const user = useCookie<{ name: string, options: object }>('user', {
+							console.log(response)
+							const user = useCookie<{ name: string, options: object }>('JWT', {
 								maxAge: 300,
 								sameSite: 'strict'
 							})
 							user.value = response
+							// Doe nieuwe fetch om de user in een aparte cookie te zetten.
 							navigateTo(`/u/${user.value['id']}`)
 						})
 						.catch(error => {
