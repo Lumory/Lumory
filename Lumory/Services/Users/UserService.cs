@@ -14,7 +14,9 @@ public class UserService
 
     public User CreateUser(User user)
     {
+        user.UserType = "Student";
         user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+        
         
         return _repository.CreateUser(user);
     }
