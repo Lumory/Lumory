@@ -183,6 +183,9 @@ export default {
 	display: grid;
 	gap: 20px;
 }
+.page-grid__col-span-2 {
+  grid-column: span 3;
+}
 .banner {
 	width: 100%;
 	background-color: var(--color-white);
@@ -254,8 +257,9 @@ export default {
 }
 .preference-field__answers {
   display: flex;
-  flex-direction: row;
   gap: 20px;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 .external-links__list-item, .cv-wrapper {
 	align-items: center;
@@ -289,9 +293,6 @@ export default {
 		grid-template-columns: 
 		repeat(3, 1fr);
 	}
-	.page-grid__col-span-2 {
-		grid-column: span 2;
-	}
 	.banner {
 		grid-column: span 3;
 	}
@@ -314,5 +315,13 @@ export default {
 	.banner__content--positioning {
 		min-height: 130px;
 	}
+}
+@media (min-width: 1024px) {
+  .page-grid__col-span-2 {
+    grid-column: span 2;
+  }
+  .preference-field__answers {
+    flex-direction: row;
+  }
 }
 </style>

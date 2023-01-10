@@ -60,7 +60,7 @@ export default defineComponent({
   font-size: 14px;
 }
 .preference-field.small {
-  flex-direction: column-reverse;
+  flex-direction: row;
   align-items: center;
   justify-content: flex-end;
 }
@@ -75,11 +75,24 @@ export default defineComponent({
 	font-size: 1.2rem;
   word-break: break-word;
 }
-
 @media (min-width: 640px) {
 	.preference-field__title {
 		font-size: 1.25rem;
 	}
+  .preference-field {
+    max-width: calc(100% - 50px);
+  }
+}
+@media (min-width: 1024px) {
+  .preference-field.small {
+    max-width: calc(50% - 60px);
+    flex-direction: column-reverse;
+  }
+}
+@media (min-width: 1280px) {
+  .preference-field {
+    max-width: unset;
+  }
 }
 
 </style>
