@@ -187,7 +187,7 @@ export default {
   grid-column: span 3;
 }
 .banner {
-	width: 100%;
+	grid-column: span 3;
 	background-color: var(--color-white);
 	border-radius: 0 0 3px 3px;
 	-webkit-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.05); 
@@ -254,6 +254,7 @@ export default {
   display: flex;
   gap: 20px;
   flex-direction: column;
+  grid-column: span 3;
 }
 .preference-field__answers {
   display: flex;
@@ -322,6 +323,9 @@ export default {
   }
   .preference-field__answers {
     flex-direction: row;
+  }
+  .page-grid__side-bar {
+    grid-column: span 1;
   }
 }
 </style>
