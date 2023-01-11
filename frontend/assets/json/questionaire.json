@@ -1,0 +1,242 @@
+{
+  "Duurzaamheid strategie": {
+    "title": "Duurzaamheid strategie",
+    "description": "Duurzaamheid wordt een steeds belangrijkere thema voor bedrijven. Jij gaat opzoek naar de belangrijkste duurzaamheidstrends en gaat kijken hoe je de duurzaamheidsstrategie kan verwerken binnen het bedrijf.",
+    "imageURL": "/assets/img/questionaire/duurzaamheid_strategie.svg"
+  },
+  "Marketing strategie": {
+    "title": "Marketing strategie",
+    "description": "Het (door)ontwikkelen van uw merk en promotiestrategieën op basis van klantonderzoek, om zo meer of andere klanten aan te spreken.",
+    "imageURL": "/assets/img/questionaire/marketing_strategie.svg"
+  },
+  "HR-en werving strategie": {
+    "title": "HR-en werving strategie",
+    "description": "Werken aan interne uitdagende vraagstukken waar je bezig bent met de instroom, doorstroom en uitstroom  van werknemers binnen het bedrijf.",
+    "imageURL": "/assets/img/questionaire/hr_strategie_onderzoek.svg"
+  },
+  "Juridisch vraagstukken": {
+    "title": "Juridisch vraagstukken",
+    "description": "Deze vraagstukken zijn meer gericht op vragen over de betekenis van het rechtssysteem, in de context van een bepaalde sociale situatie. Hierdoor komt het dat rechtsbronnen- en literatuuronderzoek een relatief belangrijke rol speelt bij juridisch onderzoek.",
+    "imageURL": "/assets/img/questionaire/juridisch_onderzoek.svg"
+  },
+  "Markt & trend onderzoek": {
+    "title": "Markt & trend onderzoek",
+    "description": "De ontwikkelingen op de bestaande markt en op eventuele nieuwe markten. Grootte van de markt, is deze groeiende, stabiel of afnemend? De (potentiële) klanten, hun wensen en hoe de concurrenten zich bewegen binnen de markt.",
+    "imageURL": "/assets/img/questionaire/markt_onderzoek.svg"
+  },
+  "Evaluatie & analyse onderzoek": {
+    "title": "Evaluatie & analyse onderzoek",
+    "description": "Evaluatieonderzoek is een manier van onderzoek doen waarbij de onderzoeker probeert vast te stellen of een ingreep of een gebeurtenis tot veranderingen heeft geleid. Het beginsel van evaluatieonderzoek is altijd het vergelijking van de huidige situatie met de oude situatie.",
+    "imageURL": "/assets/img/questionaire/analyse_onderzoek.svg"
+  },
+  "Product & proces optimalisatie": {
+    "title": "Product & proces optimalisatie",
+    "description": "Procesoptimalisatie is het verbeteren van de efficiëntie van een organisatie door middel van procesverbetering. Eigenlijk wordt alles verstaan wat nodig is om processen efficiënter voor de organisatie te laten werken. Het wordt ingezet om organisatiedoelen te bereiken.",
+    "imageURL": "/assets/img/questionaire/proces_optimalisatie_onderzoek.svg"
+  },
+  "Organisatorisch advies": {
+    "title": "Organisatorisch advies",
+    "description": "Interne organisatie onderzoeken betreffende over de financiele huishouding binnen de organisatie, en het herinrichten en optimaliseren van interne bedrijfsactiviteiten.",
+    "imageURL": "/assets/img/questionaire/organisatorisch_vraagstuk.svg"
+  },
+  "Implementatie advies": {
+    "title": "Implementatie advies",
+    "description": "In dit vraagstuk werk je adviesrapporten uit en implementeer je dit binnen de organisatie. Je beschrijft in je implementatieplan is deze oplossing al gekozen en beschrijf je hoe de oplossing moet worden doorgevoerd",
+    "imageURL": "/assets/img/questionaire/implementatie_onderzoek.svg"
+  },
+  "Creatief denken": {
+    "title": "Creatief denken",
+    "description": "Jij bent iemand die makkelijk nieuwe oplossingen bedenkt voor bestaande ideeen. Hierbij denk je vaak buiten de bestaande kaders om. Jij ziet fouten niet als iets slechts maar juist als kansen die benut kunnen worden.",
+    "imageURL": "/assets/img/questionaire/creatief_denken.svg"
+  },
+  "Probleem oplossen": {
+    "title": "Probleem oplossen",
+    "description": "Jij bent iemand die die snel problemen herkend en jij kan hiervoor goed het proces in kaart brengen om dit probleem op te lossen. Zo kan jij het probleem analyseren, het interpreteren en het kunnen hanteren van strategieën voor de oplossing, het selecteren uit verschillende alternatieven en het beargumenteren van een oplossing.",
+    "imageURL": "/assets/img/questionaire/probleem_oplossen.svg"
+  },
+  "Computational thinking": {
+    "title": "Computational thinking",
+    "description": "Jij bent iemand die problemen kan oplossen aan de hand van data. Probleemformulering, gegevensanalyse en gegevenspresentatie zijn de denkprocessen die jij  gebruikt voor het oplossen van problemen.",
+    "imageURL": "/assets/img/questionaire/computationeel_thinking.svg"
+  },
+  "Informatie vaardigheden": {
+    "title": "Informatie vaardigheden",
+    "description": "Jij bent erg goed in het formuleren en interpreteren van bruikbare literatuur uit digitale bronnen. Zo ben jij goed in het systematisch zoeken, selecteren, verwerken en gebruiken van de relevante informatie die uit deze digitale bronnen zijn gehaald zodat deze informatie.",
+    "imageURL": "/assets/img/questionaire/informatie_vaardigheid.svg"
+  },
+  "Mediawijsheid": {
+    "title": "Mediawijsheid",
+    "description": "Jij bent iemand die steeds op de hoogte is van de laatste nieuwtjes. Jij weet precies wat er speelt in de maatschappij en hierdoor ben je in staat om een actieve kritische houding aan te nemen.",
+    "imageURL": "/assets/img/questionaire/mediawijsheid.svg"
+  },
+  "Communiceren": {
+    "title": "Communiceren",
+    "description": "Netwerken hoort echt bij jou. Jij bent iemand die makkelijk met mensen in contact komt en waarbij jij heel duidelijk je boodschap kan communiceren naar de andere partij.",
+    "imageURL": "/assets/img/questionaire/communiceren.svg"
+  },
+  "Samenwerken": {
+    "title": "Samenwerken",
+    "description": "Jij bent in staat om goed samen te werken met anderen. Jij weet hoe je meerwaarde creëert voor het team en bent in staat om elkaar te ondersteunen om zo de gezamenlijke doelen te behalen.",
+    "imageURL": "/assets/img/questionaire/samenwerken.svg"
+  },
+  "Sociale & culturele vaardigheden": {
+    "title": "Sociale & culturele vaardigheden",
+    "description": "Jij wordt gezien als iemand die heel multicultureel is. Jij vindt het niet lastig om met mensen te werken met verschillende achtergronden. Hierbij kan jij goed communiceren met een ander terwijl je respect hebt voor andermans uitingen, visies en gedragingen.",
+    "imageURL": "/assets/img/questionaire/sociale_culturele_vaardigheden.svg"
+  },
+  "Kritisch denken": {
+    "title": "Kritisch denken",
+    "description": "Jij bent iemand die constant informatie analyseert en zorgvuldig nadenkt voordat je conclusies stelt. Je probeert je eigen standpunten en van anderen in twijfel te trekken door te kijken naar de plus- en minpunten en aan de hand daarvan kom je tot bepaalde conclusies.",
+    "imageURL": "/assets/img/questionaire/kritisch_denken.svg"
+  },
+  "Strategisch": {
+    "title": "Strategisch",
+    "description": "Mensen met het thema Strategic sterk aanwezig zijn in staat om orde te scheppen in chaos en de beste weg voorwaarts te vinden. Dit is geen vaardigheid die aan te leren valt. Het is onderscheidende manier van denken.",
+    "imageURL": "/assets/img/questionaire/strategisch.svg"
+  },
+  "Relatievorming": {
+    "title": "Relatievorming",
+    "description": "Mensen met het thema Relator sterk aanwezig putten veel vreugde en kracht uit het samenzijn met hun beste vrienden. Zij verdiepen hun relaties en willen hun vrienden goed kennen.",
+    "imageURL": "/assets/img/questionaire/relatievorming.svg"
+  },
+  "Verantwoordelijkheidsbesef": {
+    "title": "Verantwoordelijkheidsbesef",
+    "description": "Mensen met het thema Responsibility sterk aanwezig hebben een groot verantwoordelijkheidsbesef en voelen zich psychologisch verantwoordelijk voor wat ze zeggen dat ze zullen doen.",
+    "imageURL": "/assets/img/questionaire/verantwoordelijkheidsbesef.svg"
+  },
+  "Zelfverzekerdheid": {
+    "title": "Zelfverzekerdheid",
+    "description": "Mensen met het thema Self-Assurance sterk aanwezig hebben niet alleen zelfvertrouwen maar zijn ook zelfverzekerd. Zij hebben vertrouwen niet alleen vertrouwen in wat ze kunnen maar ook vertrouwen in hun inzicht.",
+    "imageURL": "/assets/img/questionaire/zelfverzekerdheid.svg"
+  },
+  "Prestatiegerichtheid": {
+    "title": "Prestatiegerichtheid",
+    "description": "Mensen met het thema Achiever sterk aanwezig zijn prestatiegericht en hebben een constante behoefte om dingen te bereiken.",
+    "imageURL": "/assets/img/questionaire/prestatiegerichtheid.svg"
+  },
+  "Organisatievermogen": {
+    "title": "Organisatievermogen",
+    "description": "Mensen met het thema Arranger sterk aanwezig hebben een uitmuntend organisatievermogen. Zij houden ervan om uit te zoeken hoe alle factoren samen tot een optimale productiviteit kunnen leiden.",
+    "imageURL": "/assets/img/questionaire/organisatievermogen.svg"
+  },
+  "Ideeënvorming": {
+    "title": "Ideeënvorming",
+    "description": "Mensen met het thema Ideation sterk aanwezig zijn gefascineerd door ideeen. Zij kunnen opgetogen raken als ze onder de complexe oppervlakte een elegant eenvoudig concept ontdekken om uit te leggen waarom de dingen zijn zoals ze zijn. Een idee is een verband.",
+    "imageURL": "/assets/img/questionaire/ideeenvorming.svg"
+  },
+  "Analytisch": {
+    "title": "Analytisch",
+    "description": "Mensen met het thema Analytical sterk aanwezig zoeken naar redenen en oorzaken. Zij hebben de bekwaamheid om alle factoren te overdenken die effect hebben op de situatie.",
+    "imageURL": "/assets/img/questionaire/analytisch.svg"
+  },
+  "Sturingskracht": {
+    "title": "Sturingskracht",
+    "description": "Mensen met het thema Command sterk aanwezig hebben een sterke sturingskracht en zullen snel en makkelijk de leiding nemen. In tegenstelling tot sommige anderen hebben zij er geen moeite mee anderen hun opvattingen op te leggen.",
+    "imageURL": "/assets/img/questionaire/sturingskracht.svg"
+  },
+  "Consultancy": {
+    "title": "Consultancy",
+    "description": "Management consulting, ofwel business consulting of organisatieadvies, wordt gedefinieerd als “advies- en/of implementatie diensten aan het management van organisaties om de effectiviteit van hun bedrijfsstrategie, bedrijfsvoering en operationele processen te verbeteren.",
+    "imageURL": "/assets/img/questionaire/consultancy.svg"
+  },
+  "Financiële dienstverlening": {
+    "title": "Financiële dienstverlening",
+    "description": "De financiële dienstverlening het leveren van diensten die betrekking hebben op financiële producten door bedrijven en instellingen die daartoe bevoegd zijn.",
+    "imageURL": "/assets/img/questionaire/financiele_dienstverlening.svg"
+  },
+  "E-commerce handel & dienstverlening": {
+    "title": "E-commerce handel & dienstverlening",
+    "description": "Deze sector wordt gekenmerkt door de handel in en de verkoop van diensten of goederen om winst te kunnen maken. E-commerce of e-commerce staat voor electronic commerce ofwel elektronische bedrijfsvoering. Alle vormen van commercie die online plaatsvinden.",
+    "imageURL": "/assets/img/questionaire/handel_en_dienstverlening.svg"
+  },
+  "Technische dienstverlening": {
+    "title": "Technische dienstverlening",
+    "description": "Het gedeelte van de onderneming dat is belast met de ontwikkelings- en productiewerkzaamheden.",
+    "imageURL": "/assets/img/questionaire/technische_dienstverlening.svg"
+  },
+  "Overheid": {
+    "title": "Overheid",
+    "description": "De publieke sector is de verzamelnaam voor alle overheidsorganisaties en semioverheidsorganisaties.",
+    "imageURL": "/assets/img/questionaire/overheid.svg"
+  },
+  "ICT-consulting": {
+    "title": "ICT-consulting",
+    "description": "Technology consulting, ofwel IT / ICT consulting of technologieadvisering, is een adviessegment dat zich richt op het adviseren van bedrijven over hoe zij informatietechnologie (IT) het beste kunnen benutten voor het behalen van hun bedrijfsdoelstellingen.",
+    "imageURL": "/assets/img/questionaire/ict_consultancy.svg"
+  },
+  "Fast Moving Consumer Goods": {
+    "title": "Fast Moving Consumer Goods",
+    "description": "FMCG staat voor Fast Moving Consumer Goods. Kort gezegd zijn dit alle producten met een korte levensduur en een snelle omloop,",
+    "imageURL": "/assets/img/questionaire/fast_moving_consumer_goods.svg"
+  },
+  "Juridische dienstverlening": {
+    "title": "Juridische dienstverlening",
+    "description": "Kort gezegd is juridische dienstverlening de situatie waarin een rechtzoekende, iemand met een juridisch probleem, een juridisch adviseur inschakelt om dat probleem op te lossen.",
+    "imageURL": "/assets/img/questionaire/juridische_dienstverlening.svg"
+  },
+  "Financiële instelling": {
+    "title": "Financiële instelling",
+    "description": "De financiële sector bestaat uit instellingen die ervoor zorgen dat consumenten kunnen betalen, sparen, lenen en verzekeren.Verzamelnaam voor bedrijven die als hoofdactiviteit het opereren op de financiële markten hebben.",
+    "imageURL": "/assets/img/questionaire/financiele_instelling.svg"
+  },
+  "Familie cultuur": {
+    "title": "Familie cultuur",
+    "description": "vriendelijkheid is heel belangrijk binnen de organisatie is en waarbij de medewerkers elkaar onderling kennen. De organisatie geeft het gevoel alsof het bedrijf een grote familie is. -Medewerkers vertrouwen elkaar volledig en zorgen goed voor mekaar-Medewerkers zijn heel erg betrokken bij alles wat de organisatie doet",
+    "imageURL": "/assets/img/questionaire/famillie_cultuur.svg"
+  },
+  "Adhocratie cultuur": {
+    "title": "Adhocratie cultuur",
+    "description": "Creativiteit, individualiteit en innovatie staat centraal. De organisatie wil in de markt blijven door steeds nieuwe en betere producten aan te bieden waarbij de organisatie bereid is om veel risico te nemen-De medewerkers krijgen veel vrijheid in hun creativiteit, maar de organisatie wil dan wel zien dat de medewerkers er alles aan do en om ervoor te zorgen dat die creativiteit iets oplevert-Het ontwikkelen van nieuwe producten of diensten is heel belangrijk binnen deze organisatie",
+    "imageURL": "/assets/img/questionaire/adhocratie_cultuur.svg"
+  },
+  "Markt cultuur": {
+    "title": "Markt cultuur",
+    "description": "Resultaat is voor deze organisatie het allerbelangrijkste en binnen deze organisatie is iedereen enorm doelgericht en competitief-De organisatie stelt doelen die veeleisend zijn en behaald moeten worden door de medewerkers-Werknemers proberen beter te zijn dan de rest en de doelen zo snel mogelijk te behalen",
+    "imageURL": "/assets/img/questionaire/markt_cultuur.svg"
+  },
+  "Hiërarchische cultuur": {
+    "title": "Hiërarchische cultuur",
+    "description": "Hierbij is winst en productiviteit niet heel belangrijk, maar juist stabiliteit en continuiteit. Er zijn overal regels die moeten worden nagevolgd door de werknemers en werkgever. Deze cultuur wordt vooral toegepast door overheidsinstanties.-Alle werkprocessen zijn zo efficiënt mogelijk gemaakt, zodat de organisatie nog veel controle heeft en kan bijsturen wanneer het nodig is-Er zijn regels gemaakt waar de werknemers zich constant aan dient te  houden, om te zorgen dat de organisatie professionaliteit uitstraalt.",
+    "imageURL": "/assets/img/questionaire/hierarchische_cultuur.svg"
+  },
+  "Mentor": {
+    "title": "Mentor",
+    "description": "de mentor staat bekend als een behulpzame en zorgzame leider. Zo probeert hij ervoor te zorgen dat medewerkers zich blijven door ontwikkelen en is hij altijd bereid om het team te helpen.",
+    "imageURL": "/assets/img/questionaire/mentor.svg"
+  },
+  "Coördinator": {
+    "title": "Coördinator",
+    "description": "De coördinator is iemand die erg goed is in plannen. Hij is iemand die de juiste persoon op de juiste plek zet en stuurt werknemers om opdrachten volgens bepaalde regels uit te voeren.",
+    "imageURL": "/assets/img/questionaire/coordinator.svg"
+  },
+  "Producent": {
+    "title": "Producent",
+    "description": "Deze leider probeert het beste uit de medewerkers te halen. Hij stelt hoge doelstellingen en kijkt daarom voornamelijk naar de productiviteit van de werknemers en probeert manieren te bedenken om dit te verhogen.",
+    "imageURL": "/assets/img/questionaire/producent.svg"
+  },
+  "Stimulator": {
+    "title": "Stimulator",
+    "description": "De stimulator is de leider die veel waarde hecht aan een goede samenwerking tussen werknemers. Zo lost hij conflicten onderling snel op en is een vriendelijke werkomgeving voor hem het belangrijkste",
+    "imageURL": "/assets/img/questionaire/stimulator.svg"
+  },
+  "Controleur": {
+    "title": "Controleur",
+    "description": "De controleur is een leider die veel waarde hecht aan regels. Voor hem is het allerbelangrijkste dat de regels worden nageleefd.",
+    "imageURL": "/assets/img/questionaire/controleur.svg"
+  },
+  "Bestuurder": {
+    "title": "Bestuurder",
+    "description": "De bestuurder is een leider die doelstellingen stelt en hiervoor strakke planningen bedenkt die altijd voldaan moeten worden.",
+    "imageURL": "/assets/img/questionaire/bestuurder.svg"
+  },
+  "Bemiddelaar": {
+    "title": "Bemiddelaar",
+    "description": "De bemiddelaar is heel goed in het houden van een praatje met anderen. Zo probeert hij een zo goed mogelijk identiteit van het bedrijf over te brengen aan anderen onderhoudt hij makkelijk goede banden met andere partijen.",
+    "imageURL": "/assets/img/questionaire/bemiddelaar.svg"
+  },
+  "Innovator": {
+    "title": "Innovator",
+    "description": "De innovator staat bekend als een uitvinder. Hij is constant op zoek naar verbetering binnen het bedrijf en is niet bang om risico’s te nemen. Zo probeert hij ook zijn werknemers te stimuleren om zo creatief mogelijk te denken.",
+    "imageURL": "/assets/img/questionaire/innovator.svg"
+  }
+}
