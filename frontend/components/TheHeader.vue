@@ -11,12 +11,15 @@
 			<NuxtLink to="/student" class="navigation__link">Studenten</NuxtLink>
 			<NuxtLink to="/stagebedrijf" class="navigation__link">Stagebedrijven</NuxtLink>
 			<NuxtLink to="/werkgever" class="navigation__link">Werkgevers</NuxtLink>
-			<NuxtLink to="/signin" class="navigation__link">Log in</NuxtLink>
-			<n-space>
-				<NuxtLink to="/signup">
-					<n-button class="navigation__register-button" secondary round>Registreren</n-button>
-				</NuxtLink>
-			</n-space>
+			<div v-show="useCookie('user').value === undefined" class="navigation__logged-out">
+				<NuxtLink to="/signin" class="navigation__link">Log in</NuxtLink>
+				<n-space>
+					<NuxtLink to="/signup">
+						<n-button class="navigation__register-button" secondary round>Registreren</n-button>
+					</NuxtLink>
+				</n-space>
+			</div>
+			<div class="navigation__logged-in"></div>
 		</nav>
 		<div v-show="showMenu" class="mobile-menu-container">
 			<div class="mobile-menu">
@@ -46,7 +49,7 @@ import { NButton, NSpace } from 'naive-ui';
 export default defineComponent({
 	data() {
 		return {
-			showMenu: true,
+			showMenu: false,
 		};
 	},
 	components: {
@@ -134,6 +137,10 @@ export default defineComponent({
 	background-color: var(--color-primary);
 	color: var(--color-white);
 	border: none;
+}
+.navigation__logged-out {
+	display: flex;
+	gap: 20px;
 }
 
 @media screen and (min-width: 1024px) {
