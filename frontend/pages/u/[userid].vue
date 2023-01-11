@@ -11,8 +11,8 @@
 					</div>
 					<div class="banner__content-wrapper">
 						<div class="banner__content">
-							<h3 class="banner__content-name">Niels Berning</h3>
-							<h4 class="banner__content-subtitle">Open-ICT, Hogeschool Utrecht</h4>
+							<h3 class="banner__content-name">{{this.user?.firstName + ' ' + this.user?.lastName}}</h3>
+							<h4 class="banner__content-subtitle">{{this.userQuestionnaire?.study + ', ' + this.userQuestionnaire?.educationalInstitution}}</h4>
 						</div>
 						<n-dropdown trigger="click" :options="options" @select="handleSelect">
 							<ellipsis-vertical class="banner__options-icon"/>
@@ -20,70 +20,87 @@
 					</div>
 				</div>
 			</div>
-			<StudentProfileField class="page-grid__col-span-2" title="Opleiding">
-				<n-grid cols="1 m:2" responsive="screen" x-gap="10px" y-gap="20px" class="education">
-					<n-gi class="education-field">
-						<school-outline class="icon--size icon--padding icon--color" />
-						<div class="education-field__content-wrapper">
-							<p class="education-field__title">Naam opleiding</p>
-							<p class="education-field__subtitle">HBO Open-ICT</p>
-						</div>
-					</n-gi>
-					<n-gi class="education-field">
-						<school-outline class="icon--size icon--padding icon--color" />
-						<div class="education-field__content-wrapper">
-							<p class="education-field__title">Leerjaar</p>
-							<p class="education-field__subtitle">Leerjaar 3</p>
-						</div>
-					</n-gi>
-					<n-gi class="education-field">
-						<account-balance-outlined class="icon--size icon--padding icon--color" />
-						<div class="education-field__content-wrapper">
-							<p class="education-field__title">Onderwijsinstantie</p>
-							<p class="education-field__subtitle">Hogeschool Utrecht</p>
-						</div>
-					</n-gi>
-					<n-gi class="education-field">
-						<document-text-outline class="icon--size icon--padding icon--color" />
-						<div class="education-field__content-wrapper">
-							<p class="education-field__title">Propedeuse behaald</p>
-							<p class="education-field__subtitle">Ja</p>
-						</div>
-					</n-gi>
-				</n-grid>
-			</StudentProfileField>
-			
-			<StudentProfileField title="Externe links">
-					<li class="external-links__list-item">
-						<logo-linkedin class="icon--padding icon--size" color="#0072b1" />
-						<a href=""><u>Linkedin</u></a>
-					</li>
-			</StudentProfileField>
+      <div class="page-grid__main-content page-grid__col-span-2">
+        <StudentProfileField title="Opleiding">
+          <n-grid cols="1 m:2" responsive="screen" x-gap="10px" y-gap="20px" class="education">
+            <n-gi class="education-field">
+              <school-outline class="icon--size icon--padding icon--color" />
+              <div class="education-field__content-wrapper">
+                <p class="education-field__title">Naam opleiding</p>
+                <p class="education-field__subtitle">{{ this.userQuestionnaire?.study }}</p>
+              </div>
+            </n-gi>
+            <n-gi class="education-field">
+              <school-outline class="icon--size icon--padding icon--color" />
+              <div class="education-field__content-wrapper">
+                <p class="education-field__title">Woonplaats</p>
+                <p class="education-field__subtitle">{{ this.userQuestionnaire?.city }}</p>
+              </div>
+            </n-gi>
+            <n-gi class="education-field">
+              <account-balance-outlined class="icon--size icon--padding icon--color" />
+              <div class="education-field__content-wrapper">
+                <p class="education-field__title">Onderwijsinstantie</p>
+                <p class="education-field__subtitle">{{ this.userQuestionnaire?.educationalInstitution }}</p>
+              </div>
+            </n-gi>
+            <n-gi class="education-field">
+              <document-text-outline class="icon--size icon--padding icon--color" />
+              <div class="education-field__content-wrapper">
+                <p class="education-field__title">Studie niveau</p>
+                <p class="education-field__subtitle">{{ this.userQuestionnaire?.studyNiveau }}</p>
+              </div>
+            </n-gi>
+          </n-grid>
+        </StudentProfileField>
 
-			<StudentProfileField class="page-grid__cv" title="CV">
-				<div class="cv-container">
-					<div class="cv-wrapper">
-						<document-outline class="icon--size icon--padding" />
-						<p>CV_niels_berning</p>
-					</div>
-					<download-filled class="icon--size download-icon" />
-				</div>
 
-			</StudentProfileField>
+        <StudentProfilePreferenceHeader title="Dit wil ik graag leren tijdens mijn stage"/>
+        <StudentProfilePreferenceField size="large" :skill="questionnaire[this.userQuestionnaire?.problem]" />
+        <div class="preference-field__answers">
+            <StudentProfilePreferenceField v-for="skill in this.userQuestionnaire?.skillsToLearn" size="small" :key="skill" :skill="questionnaire[skill]" />
+        </div>
 
-			<StudentProfilePreferenceField class="page-grid__col-span-2 page-grid__preference-field" title="Stagevoorkeuren" />
-			<StudentProfilePreferenceField class="page-grid__col-span-2" title="Stagebedrijf voorkeuren" />
-			<StudentProfilePreferenceField class="page-grid__col-span-2" title="Persoonlijkheid" />
+        <StudentProfilePreferenceHeader title="Dit zijn mijn superkrachten"/>
+        <div class="preference-field__answers">
+          <StudentProfilePreferenceField v-for="skill in this.userQuestionnaire?.strongQualities" size="small" :key="skill" :skill="questionnaire[skill]" />
+        </div>
+        <div class="preference-field__answers">
+          <StudentProfilePreferenceField v-for="skill in this.userQuestionnaire?.strongSkills" size="small" :key="skill" :skill="questionnaire[skill]" />
+        </div>
 
-			<StudentProfileField class="page-grid__skills" title="Vaardigheden">
-				<div class="skills">
-					<n-tag class="skills__tag" :bordered="false">Business</n-tag>
-					<n-tag class="skills__tag" :bordered="false">Product owner</n-tag>
-					<n-tag class="skills__tag" :bordered="false">Organiseren</n-tag>
-					<n-tag class="skills__tag" :bordered="false">Interviewen</n-tag>
-					<n-tag class="skills__tag" :bordered="false">User story mapping</n-tag>
-				</div>
-			</StudentProfileField>
+        <StudentProfilePreferenceHeader title="Binnen deze sector wil ik stage lopen"/>
+        <div class="preference-field__answers">
+          <StudentProfilePreferenceField v-for="skill in this.userQuestionnaire?.sector" size="medium" :key="skill" :skill="questionnaire[skill]" />
+        </div>
+
+
+        <StudentProfilePreferenceHeader title="Zo wil ik graag mijn begeleiding hebben"/>
+        <StudentProfilePreferenceField size="large" :skill="questionnaire[this.userQuestionnaire?.teamwork]" />
+        <div class="preference-field__answers">
+          <StudentProfilePreferenceField v-for="skill in this.userQuestionnaire?.mentorship" size="medium" :key="skill" :skill="questionnaire[skill]" />
+        </div>
+      </div>
+      <div class="page-grid__side-bar">
+
+        <StudentProfileField title="Externe links">
+          <li class="external-links__list-item">
+            <logo-linkedin class="icon--padding icon--size" color="#0072b1" />
+            <a href=""><u>Linkedin</u></a>
+          </li>
+        </StudentProfileField>
+
+        <StudentProfileField class="page-grid__cv" title="CV">
+          <div class="cv-container">
+            <div class="cv-wrapper">
+              <document-outline class="icon--size icon--padding" />
+              <p>CV_niels_berning</p>
+            </div>
+            <download-filled class="icon--size download-icon" />
+          </div>
+
+        </StudentProfileField>
+      </div>
 		</div>
 	</Container>
 </template>
@@ -92,6 +109,9 @@
 import { EllipsisVertical, LogoLinkedin, DocumentOutline, SchoolOutline, DocumentTextOutline } from "@vicons/ionicons5";
 import { DownloadFilled, AccountBalanceOutlined } from "@vicons/material";
 import { useMessage, NDropdown, NGrid, NGi, NTag } from "naive-ui";
+import questionnaireData from '../../assets/json/questionaire.json'
+import axios from "axios"
+import {PropType} from "vue";
 
 definePageMeta({
 	middleware: "check-auth"
@@ -114,6 +134,35 @@ export default {
 	props: {
 		title: String,
 	},
+  data() {
+    return {
+      userQuestionnaire: {
+        type: Object as PropType<StudentQuestionnaire>
+      },
+      user: {
+        type: {}
+      }
+    }
+  },
+  created() {
+    axios.get('http://localhost:3001/Users/1/UserQuestionnaire').then(response => {
+      const obj = response.data
+      for (const key in obj) {
+        if (typeof obj[key] === 'string') {
+          obj[key] = obj[key].split(', ')
+        }
+        if (obj[key].length <= 1) {
+          obj[key] = obj[key].toString()
+        }
+      }
+      this.userQuestionnaire = obj
+    })
+    axios.get('http://localhost:3001/User/1/').then(response => {
+      console.log(response.data)
+      this.user = response.data
+    })
+
+  },
 	setup() {
 		const message = useMessage();
 		return {
@@ -125,7 +174,8 @@ export default {
 			],
 			handleSelect(key: string | number) {
 				message.info(String(key))
-			}
+			},
+      questionnaire: questionnaireData,
 		}
 	}
 }
@@ -137,8 +187,11 @@ export default {
 	display: grid;
 	gap: 20px;
 }
+.page-grid__col-span-2 {
+  grid-column: span 3;
+}
 .banner {
-	width: 100%;
+	grid-column: span 3;
 	background-color: var(--color-white);
 	border-radius: 0 0 3px 3px;
 	-webkit-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.05); 
@@ -196,6 +249,23 @@ export default {
 	padding-top: 10px;
 	margin-right: 25px;
 }
+.page-grid__main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.page-grid__side-bar {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  grid-column: span 3;
+}
+.preference-field__answers {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
 .external-links__list-item, .cv-wrapper {
 	align-items: center;
 	flex-direction: row;
@@ -228,18 +298,6 @@ export default {
 		grid-template-columns: 
 		repeat(3, 1fr);
 	}
-	.page-grid__col-span-2 {
-		grid-column: span 2;
-	}
-	.page-grid__cv {
-		grid-column-start: 3;
-	}
-	.page-grid__preference-field {
-		grid-row-start: 3;
-	}
-	.page-grid__skills {
-		grid-column-start: 1;
-	}
 	.banner {
 		grid-column: span 3;
 	}
@@ -262,5 +320,16 @@ export default {
 	.banner__content--positioning {
 		min-height: 130px;
 	}
+}
+@media (min-width: 1024px) {
+  .page-grid__col-span-2 {
+    grid-column: span 2;
+  }
+  .preference-field__answers {
+    flex-direction: row;
+  }
+  .page-grid__side-bar {
+    grid-column: span 1;
+  }
 }
 </style>
