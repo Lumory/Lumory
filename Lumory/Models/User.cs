@@ -19,6 +19,10 @@ public class User
     public string LastName { get; set; }
     
     [Required]
+    [StringLength(128)]
+    public string UserType { get; set; }
+    
+    [Required]
     [StringLength(256)]
     public string Email { get; set; }
     
