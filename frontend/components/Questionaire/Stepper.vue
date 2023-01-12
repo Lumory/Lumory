@@ -171,7 +171,7 @@ export default {
 
 @media (min-width: 640px) {
   .steps-container {
-    max-width: 550px;
+    max-width: 800px;
   }
 }
 

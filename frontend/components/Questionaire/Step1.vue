@@ -1,35 +1,9 @@
 <template>
   <n-space vertical align="center" item-style="width: 100%">
-    <h1>Persoonlijke informatie</h1>
-    <n-form ref="formRef" :model="formValue" size="large" :rules="rules">
-      <n-form-item path="Q2">
-        <n-radio-group class="radio-group" v-model:value="formValue.Q2" name="radiogroup">
-          <p class="radio-group__question">Hoe veel begeleiding wil je hebben?</p>
-          <n-space justify="space-between" class="radio-group__buttons">
-            <p class="radio-group__label">Weinig</p>
-            <n-radio
-                key="1"
-                value="test1"
-            />
-            <n-radio
-                key="2"
-                value="test2"
-            />
-            <n-radio
-                key="3"
-                value="test3"
-            />
-            <n-radio
-                key="4"
-                value="test4"
-            />
-            <n-radio
-                key="5"
-                value="test5"
-            />
-            <p class="radio-group__label">Veel</p>
-          </n-space>
-        </n-radio-group>
+    <h1>Aan welk type vraagstuk waar zou willen werken?</h1>
+    <n-form ref="formRef" :model="formValue" size="large" :rules="rules" class="questionnaire-grid">
+      <n-form-item class="questionnaire-card__container" v-for="problem in questionnaire.problem" path="Q1">
+        <QuestionnaireItemCard :skill="problem" size="small"/>
       </n-form-item>
     </n-form>
   </n-space>
@@ -38,6 +12,8 @@
 <script lang="ts">
 import {NSpace, NForm, NFormItem,  NRadioGroup, NRadio, NButton, FormInst, FormRules} from 'naive-ui'
 import {defineComponent, ref} from "vue";
+import questionnaireData from '../../assets/json/questionaire.json'
+import QuestionnaireItemCard from "~/components/QuestionnaireItemCard.vue";
 
 interface ModelType {
   Q1: string | null
@@ -46,6 +22,7 @@ interface ModelType {
 
 export default defineComponent({
   components: {
+    QuestionnaireItemCard,
     NSpace, NForm, NFormItem, NButton, NRadio, NRadioGroup
   },
   setup() {
@@ -81,7 +58,8 @@ export default defineComponent({
       formRef,
       formValue,
       rules,
-      handleValidateClick
+      handleValidateClick,
+      questionnaire: questionnaireData,
     }
 
   }
@@ -98,27 +76,17 @@ p {
   text-align: left;
   white-space: normal;
 }
-.radio-group {
-  width: 100%;
+.questionnaire-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+.questionnaire-card__container {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0;
-  gap: 25px;
 }
-.radio-group__question {
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-}
-.radio-group__buttons {
-  flex: none;
-  order: 0;
-  align-self: stretch;
-  flex-grow: 0;
-}
-.radio-group__label {
-  color: #999999;
+@media (min-width: 1024px) {
+  .questionnaire-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 </style>

@@ -1,11 +1,11 @@
 <template>
-	<div :class="`preference-field ${this.size}`">
-    <div class="preference-field__info">
-      <h3 class="preference-field__title">{{ skill?.title }}</h3>
-      <p>{{skill?.description}}</p>
+    <div :class="`questionnaire-item__card ${this.size}`">
+      <div class="questionnaire-item__card__info">
+        <h3 class="questionnaire-item__card__title">{{ skill?.title }}</h3>
+        <p>{{skill?.description}}</p>
+      </div>
+      <NImage :width="preferenceFieldImageSize" :height="preferenceFieldImageSize" :src="skill?.imageURL"/>
     </div>
-    <NImage :width="preferenceFieldImageSize" :height="preferenceFieldImageSize" :src="skill?.imageURL"/>
-	</div>
 </template>
 
 <script lang="ts">
@@ -43,54 +43,56 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.preference-field {
+.questionnaire-item__card {
+  --padding: 25px;
 	background-color: var(--color-white);
 	border-radius: 3px;
-	-webkit-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.05); 
+	-webkit-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.05);
 	box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.05);
-
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  padding: 25px;
+  padding: var(--padding);
   gap: 10px;
   flex-grow: 1;
   flex-basis: 0;
   font-size: 14px;
+  text-align: start;
+  height: calc(100% - 2 * var(--padding));
 }
-.preference-field.small {
+.questionnaire-item__card.small {
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
 }
-.preference-field__info {
+.questionnaire-item__card__info {
   display: flex;
   flex-direction: column;
   gap: 3px;
   flex-grow: 1;
   flex-basis: 0;
 }
-.preference-field__title {
+.questionnaire-item__card__title {
 	font-size: 1.2rem;
+  line-height: 1.5rem;
   word-break: break-word;
 }
 @media (min-width: 640px) {
-	.preference-field__title {
+	.questionnaire-item__card__title {
 		font-size: 1.25rem;
 	}
-  .preference-field {
-    max-width: calc(100% - 50px);
+  .questionnaire-item__card {
+    max-width: calc(100% - 2 * var(--padding));
   }
 }
 @media (min-width: 1024px) {
-  .preference-field.small {
-    max-width: calc(50% - 60px);
+  .questionnaire-item__card.small {
     flex-direction: column-reverse;
   }
 }
 @media (min-width: 1280px) {
-  .preference-field {
+  .questionnaire-item__card.small {
     max-width: unset;
   }
 }

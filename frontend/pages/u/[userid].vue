@@ -21,7 +21,7 @@
 				</div>
 			</div>
       <div class="page-grid__main-content page-grid__col-span-2">
-        <StudentProfileField title="Opleiding">
+        <StudentProfileField class="col-span-6" title="Opleiding">
           <n-grid cols="1 m:2" responsive="screen" x-gap="10px" y-gap="20px" class="education">
             <n-gi class="education-field">
               <school-outline class="icon--size icon--padding icon--color" />
@@ -55,31 +55,20 @@
         </StudentProfileField>
 
 
-        <StudentProfilePreferenceHeader title="Dit wil ik graag leren tijdens mijn stage"/>
-        <StudentProfilePreferenceField size="large" :skill="questionnaire[this.userQuestionnaire?.problem]" />
-        <div class="preference-field__answers">
-            <StudentProfilePreferenceField v-for="skill in this.userQuestionnaire?.skillsToLearn" size="small" :key="skill" :skill="questionnaire[skill]" />
-        </div>
+        <StudentProfilePreferenceHeader class="col-span-6" title="Dit wil ik graag leren tijdens mijn stage"/>
+        <QuestionnaireItemCard class="col-span-6" size="large" :skill="questionnaire.problem[this.userQuestionnaire?.problem]" />
+        <QuestionnaireItemCard class="col-span-2" v-for="skill in this.userQuestionnaire?.skillsToLearn" size="small" :key="skill" :skill="questionnaire.skills[skill]" />
 
-        <StudentProfilePreferenceHeader title="Dit zijn mijn superkrachten"/>
-        <div class="preference-field__answers">
-          <StudentProfilePreferenceField v-for="skill in this.userQuestionnaire?.strongQualities" size="small" :key="skill" :skill="questionnaire[skill]" />
-        </div>
-        <div class="preference-field__answers">
-          <StudentProfilePreferenceField v-for="skill in this.userQuestionnaire?.strongSkills" size="small" :key="skill" :skill="questionnaire[skill]" />
-        </div>
+        <StudentProfilePreferenceHeader class="col-span-6" title="Dit zijn mijn superkrachten"/>
+        <QuestionnaireItemCard class="col-span-2" v-for="skill in this.userQuestionnaire?.strongQualities" size="small" :key="skill" :skill="questionnaire.qualities[skill]" />
+        <QuestionnaireItemCard class="col-span-2" v-for="skill in this.userQuestionnaire?.strongSkills" size="small" :key="skill" :skill="questionnaire.skills[skill]" />
 
-        <StudentProfilePreferenceHeader title="Binnen deze sector wil ik stage lopen"/>
-        <div class="preference-field__answers">
-          <StudentProfilePreferenceField v-for="skill in this.userQuestionnaire?.sector" size="medium" :key="skill" :skill="questionnaire[skill]" />
-        </div>
+        <StudentProfilePreferenceHeader class="col-span-6" title="Binnen deze sector wil ik stage lopen"/>
+        <QuestionnaireItemCard class="col-span-3" v-for="skill in this.userQuestionnaire?.sector" size="medium" :key="skill" :skill="questionnaire.sector[skill]" />
 
-
-        <StudentProfilePreferenceHeader title="Zo wil ik graag mijn begeleiding hebben"/>
-        <StudentProfilePreferenceField size="large" :skill="questionnaire[this.userQuestionnaire?.teamwork]" />
-        <div class="preference-field__answers">
-          <StudentProfilePreferenceField v-for="skill in this.userQuestionnaire?.mentorship" size="medium" :key="skill" :skill="questionnaire[skill]" />
-        </div>
+        <StudentProfilePreferenceHeader class="col-span-6" title="Zo wil ik graag mijn begeleiding hebben"/>
+        <QuestionnaireItemCard class="col-span-6" size="large" :skill="questionnaire.culture[this.userQuestionnaire?.teamwork]" />
+        <QuestionnaireItemCard class="col-span-3" v-for="skill in this.userQuestionnaire?.mentorship" size="medium" :key="skill" :skill="questionnaire.mentorship[skill]" />
       </div>
       <div class="page-grid__side-bar">
 
@@ -185,10 +174,20 @@ export default {
 .page-grid {
 	width: 100%;
 	display: grid;
+  grid-template-columns: repeat(3, 1fr);
 	gap: 20px;
 }
 .page-grid__col-span-2 {
   grid-column: span 3;
+}
+.col-span-2 {
+  grid-column: span 6;
+}
+.col-span-3 {
+  grid-column: span 6;
+}
+.col-span-6 {
+  grid-column: span 6;
 }
 .banner {
 	grid-column: span 3;
@@ -250,7 +249,8 @@ export default {
 	margin-right: 25px;
 }
 .page-grid__main-content {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   flex-direction: column;
   gap: 20px;
 }
@@ -325,11 +325,31 @@ export default {
   .page-grid__col-span-2 {
     grid-column: span 2;
   }
+  .col-span-2 {
+     grid-column: span 3;
+   }
+  .col-span-3 {
+    grid-column: span 6;
+  }
+  .col-span-6 {
+    grid-column: span 6;
+  }
   .preference-field__answers {
     flex-direction: row;
   }
   .page-grid__side-bar {
     grid-column: span 1;
+  }
+}
+@media (min-width: 1280px) {
+  .col-span-2 {
+    grid-column: span 2;
+  }
+  .col-span-3 {
+    grid-column: span 3;
+  }
+  .col-span-6 {
+    grid-column: span 6;
   }
 }
 </style>
