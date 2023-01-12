@@ -1,5 +1,8 @@
+<!-- child component showing clicked intern card with more detail -->
+
 <template>
   <n-space vertical>
+    <!-- Titel of matched interns in Lumory Container -->
     <n-card>
       <template #header>
         <n-space class="cardTitle">

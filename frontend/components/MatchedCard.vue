@@ -1,3 +1,5 @@
+<!-- child component for all matched interns for a user (intern) -->
+
 <template>
   <n-space vertical>
     <n-card :bordered="false" class="matched-container" hoverable
@@ -47,16 +49,14 @@ export default {
     NSpace,
   },
   name: "MatchedCard",
+
+  // object
   props: {
     internship: ''
   },
   data() {
     return {
-      currentHighlightedInternship: "",
-      items: [
-        {message: 'Leuke stage'},
-        {message: 'Veel leermogelijkheden'}
-      ],
+      currentHighlightedInternship: ""
     }
   },
 }
