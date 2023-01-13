@@ -2,7 +2,7 @@
     <div :class="`questionnaire-item__card ${this.size}`">
       <div class="questionnaire-item__card__info">
         <h3 class="questionnaire-item__card__title">{{ skill?.title }}</h3>
-        <p>{{skill?.description}}</p>
+        <p class="questionnaire-item__card__description">{{skill?.description}}</p>
       </div>
       <NImage :width="preferenceFieldImageSize" :height="preferenceFieldImageSize" :src="skill?.imageURL"/>
     </div>
@@ -77,6 +77,10 @@ export default defineComponent({
 	font-size: 1.2rem;
   line-height: 1.5rem;
   word-break: break-word;
+  font-weight: 700;
+}
+.questionnaire-item__card__description {
+  line-height: 1.25rem;
 }
 @media (min-width: 640px) {
 	.questionnaire-item__card__title {
