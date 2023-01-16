@@ -25,26 +25,20 @@ namespace Lumory.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("varchar(128)");
-
                     b.Property<DateTime?>("CreatedAt")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(2048)
-                        .HasColumnType("varchar(2048)");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
+
+                    b.Property<int>("Kvk")
+                        .HasMaxLength(10)
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -56,20 +50,10 @@ namespace Lumory.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
-                    b.Property<string>("StreetAddress")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Website")
-                        .IsRequired()
-                        .HasMaxLength(2048)
-                        .HasColumnType("varchar(2048)");
 
                     b.HasKey("Id");
 
@@ -87,8 +71,28 @@ namespace Lumory.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("varchar(128)");
 
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
+
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ContactPersonEmail")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("ContactPersonFirstName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
+
+                    b.Property<string>("ContactPersonLastName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
 
                     b.Property<DateTime?>("CreatedAt")
                         .IsConcurrencyToken()
@@ -121,8 +125,7 @@ namespace Lumory.Migrations
 
                     b.Property<string>("MentorshipDescription")
                         .IsRequired()
-                        .HasMaxLength(2056)
-                        .HasColumnType("varchar(2056)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Money")
                         .IsRequired()
@@ -136,8 +139,7 @@ namespace Lumory.Migrations
 
                     b.Property<string>("ProblemDescription")
                         .IsRequired()
-                        .HasMaxLength(2056)
-                        .HasColumnType("varchar(2056)");
+                        .HasColumnType("text");
 
                     b.Property<string>("QualitiesIntern")
                         .IsRequired()
@@ -146,8 +148,7 @@ namespace Lumory.Migrations
 
                     b.Property<string>("QualitiesInternDescription")
                         .IsRequired()
-                        .HasMaxLength(2056)
-                        .HasColumnType("varchar(2056)");
+                        .HasColumnType("text");
 
                     b.Property<string>("RemoteWork")
                         .IsRequired()
@@ -166,8 +167,7 @@ namespace Lumory.Migrations
 
                     b.Property<string>("SectorDescription")
                         .IsRequired()
-                        .HasMaxLength(2056)
-                        .HasColumnType("varchar(2056)");
+                        .HasColumnType("text");
 
                     b.Property<string>("SkillsIntern")
                         .IsRequired()
@@ -176,13 +176,17 @@ namespace Lumory.Migrations
 
                     b.Property<string>("SkillsInternDescription")
                         .IsRequired()
-                        .HasMaxLength(2056)
-                        .HasColumnType("varchar(2056)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Staff")
                         .IsRequired()
                         .HasMaxLength(128)
                         .HasColumnType("varchar(128)");
+
+                    b.Property<string>("StreetAddress")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("Teamwork")
                         .IsRequired()
@@ -191,13 +195,16 @@ namespace Lumory.Migrations
 
                     b.Property<string>("TeamworkDescription")
                         .IsRequired()
-                        .HasMaxLength(2056)
-                        .HasColumnType("varchar(2056)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Website")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("WorkExperience")
                         .IsRequired()
