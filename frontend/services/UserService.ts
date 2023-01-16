@@ -1,13 +1,25 @@
 import axios from "axios";
 
-export async function postNewUser(data) {
-
-const response = await axios.post('http://localhost:3001/user', data);
-return response.data;
+async function postNewUser(data) {
+  const response = await axios.post('http://localhost:3001/user', data);
+  return response.data;
 }
 
-export async function getAllUsers() {
-
+async function getAllUsers() {
   const response = await axios.get('http://localhost:3001/user');
   return response.data;
 }
+
+async function getUser(id) {
+  const response = await axios.get(`http://localhost:3001/user/${id}`);
+  console.log("Hello", response)
+  return response.data
+}
+
+const userService = {
+  postNewUser,
+  getAllUsers,
+  getUser
+}
+
+export default userService

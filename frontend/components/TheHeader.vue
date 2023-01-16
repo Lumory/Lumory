@@ -1,41 +1,45 @@
 <template>
 	<Container class="container">
-		<NuxtLink to="/"><img class="long-logo--size logo" src="~/assets/img/Logo-horizontal.svg" alt="Lumory logo"></NuxtLink>
-		<svg class="burger-menu icon--size" @click="showMenu = !showMenu" tabindex="0" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512">
-			<title>Mobile menu</title>
-			<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="48" d="M88 152h336"></path>
-			<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="48" d="M88 256h336"></path>
-			<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="48" d="M88 360h336"></path>
-		</svg>
-		<nav class="navigation">
-			<NuxtLink to="/student" class="navigation__link">Studenten</NuxtLink>
-			<NuxtLink to="/stagebedrijf" class="navigation__link">Stagebedrijven</NuxtLink>
-			<NuxtLink to="/werkgever" class="navigation__link">Werkgevers</NuxtLink>
-			<div v-show="useCookie('user').value === undefined" class="navigation__logged-out">
-				<NuxtLink to="/signin" class="navigation__link">Log in</NuxtLink>
-				<n-space>
-					<NuxtLink to="/signup">
-						<n-button class="navigation__register-button" secondary round>Registreren</n-button>
-					</NuxtLink>
-				</n-space>
-			</div>
-			<div class="navigation__logged-in"></div>
+		<nuxt-link to="/"><img class="long-logo--size logo" src="~/assets/img/Logo-horizontal.svg" alt="Lumory logo"></nuxt-link>
+		<Menu class="burger-menu icon--size" @click="showMenu = !showMenu" tabindex="0" v-on:keyup.enter="showMenu = !showMenu" />
+		<!-- v-if vs v-show -->
+		<nav v-if="loggedIn === undefined" class="navigation">
+			<nuxt-link to="/student" class="navigation__link">Studenten</nuxt-link>
+			<nuxt-link to="/stagebedrijf" class="navigation__link">Stagebedrijven</nuxt-link>
+			<nuxt-link to="/werkgever" class="navigation__link">Werkgevers</nuxt-link>
+			<nuxt-link to="/signin" class="navigation__link">Log in</nuxt-link>
+			<nuxt-link to="/signup">
+				<n-button class="navigation__register-button" secondary round>Registreren</n-button>
+			</nuxt-link>
 		</nav>
-		<div v-show="showMenu" class="mobile-menu-container">
+		<nav v-if="loggedIn === 'Student'" class="navigation">
+			<nuxt-link to="/matched" class="navigation__link">Gematchte stages</nuxt-link>
+			<n-dropdown tabindex="0" keyboard trigger="click" :options="options" @select="handleSelect" :show-arrow="true">
+				<n-button circle tertriary>
+					{{ initials }}
+				</n-button>
+			</n-dropdown>
+		</nav>
+
+		<!-- mobile menu -->
+		<div v-if="showMenu" class="mobile-menu-container">
 			<div class="mobile-menu">
 				<div class="mobile-menu__header">
 					<div />
-					<NuxtLink @click="showMenu = !showMenu" to="/"><img class="logo--size logo" src="~/assets/img/logo.svg" alt="Lumory logo"></NuxtLink>
-					<svg class="close-menu icon--size" @click="showMenu = !showMenu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24">
-						<path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z" fill="currentColor"></path>
-					</svg>
+					<nuxt-link @click="showMenu = !showMenu" to="/"><img class="logo--size logo" src="~/assets/img/logo.svg" alt="Lumory logo"></nuxt-link>
+					<Close class="close-menu icon--size" @click="showMenu = !showMenu" tabindex="0" v-on:keyup.enter="showMenu = !showMenu" />
 				</div>
-				<nav class="mobile-navigation">
-					<NuxtLink @click="showMenu = !showMenu" to="/student" class="navigation__link --white">Studenten</NuxtLink>
-					<NuxtLink @click="showMenu = !showMenu" to="/stagebedrijf" class="navigation__link --white">Stagebedrijven</NuxtLink>
-					<NuxtLink @click="showMenu = !showMenu" to="/werkgever" class="navigation__link --white">Werkgevers</NuxtLink>
-					<NuxtLink @click="showMenu = !showMenu" to="/signin" class="navigation__link --white">Log in</NuxtLink>
-					<NuxtLink @click="showMenu = !showMenu" to="/signup" class="navigation__link --white">Registreren</NuxtLink>
+				<nav v-if="loggedIn === undefined" class="mobile-navigation">
+					<nuxt-link @click="showMenu = !showMenu" to="/student" class="navigation__link --white">Studenten</nuxt-link>
+					<nuxt-link @click="showMenu = !showMenu" to="/stagebedrijf" class="navigation__link --white">Stagebedrijven</nuxt-link>
+					<nuxt-link @click="showMenu = !showMenu" to="/werkgever" class="navigation__link --white">Werkgevers</nuxt-link>
+					<nuxt-link @click="showMenu = !showMenu" to="/signin" class="navigation__link --white">Log in</nuxt-link>
+					<nuxt-link @click="showMenu = !showMenu" to="/signup" class="navigation__link --white">Registreren</nuxt-link>
+				</nav>
+				<nav v-if="loggedIn === 'Student'" class="mobile-navigation">
+					<nuxt-link @click="showMenu = !showMenu" to="/matched" class="navigation__link --white">Gematchte stages</nuxt-link>
+					<nuxt-link @click="showMenu = !showMenu" :to="`/u/${UUID}`" class="navigation__link --white">Mijn profiel</nuxt-link>
+					<nuxt-link @click="showMenu = !showMenu; setLoggedOut()" class="navigation__link --white" to="/signin">Uitloggen</nuxt-link>
 				</nav>
 			</div>
 		</div>
@@ -44,17 +48,55 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { NButton, NSpace } from 'naive-ui';
+import { Menu, Close } from '@vicons/ionicons5';
+import { NButton, NDropdown } from 'naive-ui';
 
 export default defineComponent({
 	data() {
 		return {
 			showMenu: false,
+			loggedIn: getCookieValue('JWT').userType,
+			UUID: getCookieValue('JWT').id,
+			initials: getProfileInitials('user')
 		};
 	},
+	setup() {
+		return {
+			options: [
+				{
+					label: "Mijn profiel",
+					key: "Profiel",
+					keyboard: true
+				},
+				{
+					label: "Uitloggen",
+					key: "Uitloggen"
+				}
+			],
+			handleSelect(key: string | number) {
+				switch (key) {
+					case "Uitloggen":
+						setLoggedOut()
+						navigateTo('/signin')
+						break
+					case "Profiel":
+						navigateTo(`/u/${getCookieValue('JWT').id}`)
+				}
+				if (key === "Uitloggen") {
+					setLoggedOut()
+					navigateTo(`/signin`)
+				} 
+			}
+		}
+	},
+	mounted() {
+		this.initials = getProfileInitials('user')
+	},
 	components: {
+		Close,
+		Menu,
 		NButton,
-		NSpace,
+		NDropdown,
 	},
 });
 
@@ -73,7 +115,7 @@ export default defineComponent({
 	cursor: pointer;
 }
 .long-logo--size {
-	width: 200px;
+	width: 150px;
 }
 .logo--size {
 	height: 60px;
@@ -88,16 +130,17 @@ export default defineComponent({
 	position: absolute;
 	height: 100vh;
 	width: 100vw;
-	bottom: 0;
 	left: 0;
+	bottom: 0;
 	background-color: rgba(13, 0, 255, 0.171);
-	z-index: 1;
+	z-index: 99;
 }
 .mobile-menu {
 	position: fixed;
 	height: 100%;
 	width: 100%;
-	right: 0;
+	left: 0;
+	bottom: 0;
 	background-color: var(--color-background-two);
 }
 .mobile-menu__header {
@@ -138,9 +181,24 @@ export default defineComponent({
 	color: var(--color-white);
 	border: none;
 }
-.navigation__logged-out {
-	display: flex;
+.navigation--logged-out, .navigation--logged-in {
 	gap: 20px;
+}
+.navigation__user-profile {
+	border: black 1px solid;
+	border-radius: 50%;
+}
+.navigation__user-profile {
+	width: 30px;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 600;
+	font-size: 0.8em;
+}
+.navigation__user-profile:hover {
+	cursor: pointer;
 }
 
 @media screen and (min-width: 1024px) {
@@ -150,5 +208,6 @@ export default defineComponent({
 	.navigation {
 		display: flex;
 	}
+
 }
 </style>

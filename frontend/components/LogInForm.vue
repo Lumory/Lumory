@@ -63,6 +63,7 @@ import {
 } from 'naive-ui';
 import axios from 'axios';
 import authService from '../services/AuthService.js';
+import userService from '../services/UserService'
 
 export default defineComponent({
 	setup() {
@@ -87,7 +88,6 @@ export default defineComponent({
 								value
 							)
 						) {
-							console.log('ongeldige email');
 							return new Error('Age should be an integer');
 						}
 					},
@@ -109,14 +109,21 @@ export default defineComponent({
 							"password": values.password
 						}
 						authService.logIn(config).then(response => {
-							console.log(response)
-							const user = useCookie<{ name: string, options: object }>('JWT', {
+							const jwt = useCookie<{ name: string, options: object }>('JWT', {
 								maxAge: 300,
 								sameSite: 'strict'
 							})
-							user.value = response
-							// Doe nieuwe fetch om de user in een aparte cookie te zetten.
-							navigateTo(`/u/${user.value['id']}`)
+							jwt.value = response
+							userService.getUser(jwt.value['id']).then(() => {
+								const user = useCookie<{name: string, options: object}>('user', {
+									maxAge: 300,
+									sameSite: 'strict'
+								})
+								user.value = response.data
+							}).catch(error => {
+								console.log(error)
+							})
+							navigateTo(`/u/${jwt.value['id']}`)
 						})
 						.catch(error => {
 							if (error.response.status === 401) {
@@ -124,10 +131,9 @@ export default defineComponent({
 							} else if (error.response.status === 404) {
 								message.error('Invalid email address')
 							} else {
-								message.error('Please message our customer service')
+								message.error('User does not exist')
 							}
 						})
-						
 					} else {
 						message.error('Ongeldig wachtwoord en/of e-mail adres');
 					}

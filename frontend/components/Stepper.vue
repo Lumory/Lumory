@@ -41,7 +41,7 @@ import Step2 from "./SignUpStep2";
 import Step3 from "./SignUpStep2Internship";
 import Step4 from "./SignUpInternshipCompanyContactPerson";
 import {NButton, NSpace, useMessage} from "naive-ui"
-import {postNewUser} from "../services/UserService";
+import userService from "../services/UserService";
 import {ref} from "vue";
 
 const studentSteps = [
@@ -146,7 +146,7 @@ export default {
           .then((formValues) => {
             this.assignFormValues(formValues)
             console.log(studentData)
-            postNewUser(studentData).then(() => {
+            userService.postNewUser(studentData).then(() => {
               console.log('New user created')
               this.message.success('New user created')
             })
