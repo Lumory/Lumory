@@ -25,6 +25,12 @@ public class InternshipDto
     public string WorkExperience { get; set; }
     public string Staff { get; set; }
     public string International { get; set; }
+    public string Website { get; set; }
+    public string StreetAddress { get; set; }
+    public string City { get; set; }
+    public string ContactPersonFirstName { get; set; }
+    public string ContactPersonLastName { get; set; }
+    public string ContactPersonEmail { get; set; }
     public string DateStart { get; set; }
     public int Hours { get; set; }
     public string ApplyBefore { get; set; }
@@ -54,6 +60,12 @@ public class InternshipDto
         WorkExperience = internship.WorkExperience;
         Staff = internship.Staff;
         International = internship.International;
+        Website = internship.Website;
+        StreetAddress = internship.StreetAddress;
+        City = internship.City;
+        ContactPersonFirstName = internship.ContactPersonFirstName;
+        ContactPersonLastName = internship.ContactPersonLastName;
+        ContactPersonEmail = internship.ContactPersonEmail;
         DateStart = internship.DateStart;
         Hours = internship.Hours;
         ApplyBefore = internship.ApplyBefore;

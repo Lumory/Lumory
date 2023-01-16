@@ -6,10 +6,7 @@ public class CompanyDto
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public string Website { get; set; }
-    public string StreetAddress { get; set; }
-    public string City { get; set; }
-    public string Description { get; set; }
+    public int Kvk { get; set; }
     public DateTime? CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 
@@ -17,10 +14,7 @@ public class CompanyDto
     {
         Id = company.Id;
         Name = company.Name;
-        Website = company.Website;
-        StreetAddress = company.StreetAddress;
-        City = company.City;
-        Description = company.Description;
+        Kvk = company.Kvk;
         CreatedAt = company.CreatedAt;
         UpdatedAt = company.UpdatedAt;
     }
