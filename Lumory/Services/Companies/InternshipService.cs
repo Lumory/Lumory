@@ -54,6 +54,12 @@ public class InternshipService
         oldInternship.WorkExperience = newInternship.WorkExperience;
         oldInternship.Staff = newInternship.Staff;
         oldInternship.International = newInternship.International;
+        oldInternship.Website = newInternship.Website;
+        oldInternship.StreetAddress = newInternship.StreetAddress;
+        oldInternship.City = newInternship.City;
+        oldInternship.ContactPersonFirstName = newInternship.ContactPersonFirstName;
+        oldInternship.ContactPersonLastName = newInternship.ContactPersonLastName;
+        oldInternship.ContactPersonEmail = newInternship.ContactPersonEmail;
         oldInternship.DateStart = newInternship.DateStart;
         oldInternship.Hours = newInternship.Hours;
         oldInternship.ApplyBefore = newInternship.ApplyBefore;
