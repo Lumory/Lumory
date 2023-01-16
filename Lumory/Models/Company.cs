@@ -22,7 +22,6 @@ public class Company
     public string Name { get; set; }
     
     [Required]
-    [StringLength(10)]
     public int Kvk { get; set; }
 
     [Timestamp]
