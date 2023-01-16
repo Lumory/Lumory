@@ -85,10 +85,10 @@ let studentData = {
 }
 
 let internshipCompanyData = {
-  companyName: '',
-  KVK: '',
   email: '',
   password: '',
+  name: '',
+  kvk: ''
 }
 
 export default {
