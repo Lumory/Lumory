@@ -167,6 +167,13 @@ export default {
                 console.log('New company created')
                 this.message.success('New company created')
               })
+                  .catch(error => {
+                    console.log(error)
+                    this.message.error(error.message)
+                  })
+            })
+            .catch((val) => {
+              console.log(val)
             })
         isSubmitting.value = false
       }
