@@ -22,21 +22,21 @@
 		</nav>
 
 		<!-- mobile menu -->
-		<div v-if="showMenu" class="mobile-menu-container">
+		<div v-show="showMenu" class="mobile-menu-container">
 			<div class="mobile-menu">
 				<div class="mobile-menu__header">
 					<div />
 					<nuxt-link @click="showMenu = !showMenu" to="/"><img class="logo--size logo" src="~/assets/img/logo.svg" alt="Lumory logo"></nuxt-link>
 					<Close class="close-menu icon--size" @click="showMenu = !showMenu" tabindex="0" v-on:keyup.enter="showMenu = !showMenu" />
 				</div>
-				<nav v-if="loggedIn === undefined" class="mobile-navigation">
+				<nav v-show="loggedIn === undefined" class="mobile-navigation">
 					<nuxt-link @click="showMenu = !showMenu" to="/student" class="navigation__link --white">Studenten</nuxt-link>
 					<nuxt-link @click="showMenu = !showMenu" to="/stagebedrijf" class="navigation__link --white">Stagebedrijven</nuxt-link>
 					<nuxt-link @click="showMenu = !showMenu" to="/werkgever" class="navigation__link --white">Werkgevers</nuxt-link>
 					<nuxt-link @click="showMenu = !showMenu" to="/signin" class="navigation__link --white">Log in</nuxt-link>
 					<nuxt-link @click="showMenu = !showMenu" to="/signup" class="navigation__link --white">Registreren</nuxt-link>
 				</nav>
-				<nav v-if="loggedIn === 'Student'" class="mobile-navigation">
+				<nav v-show="loggedIn === 'Student'" class="mobile-navigation">
 					<nuxt-link @click="showMenu = !showMenu" to="/matched" class="navigation__link --white">Gematchte stages</nuxt-link>
 					<nuxt-link @click="showMenu = !showMenu" :to="`/u/${UUID}`" class="navigation__link --white">Mijn profiel</nuxt-link>
 					<nuxt-link @click="showMenu = !showMenu; setLoggedOut()" class="navigation__link --white" to="/signin">Uitloggen</nuxt-link>
