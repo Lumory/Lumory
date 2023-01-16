@@ -121,7 +121,7 @@ export default defineComponent({
 								})
 								user.value = response.data
 							}).catch(error => {
-								console.log(error)
+								message.error('There seems to be an error, contact us')
 							})
 							navigateTo(`/u/${jwt.value['id']}`)
 						})
