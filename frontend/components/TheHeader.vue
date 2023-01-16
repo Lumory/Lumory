@@ -16,7 +16,7 @@
 			<nuxt-link to="/matched" class="navigation__link">Gematchte stages</nuxt-link>
 			<n-dropdown tabindex="0" keyboard trigger="click" :options="options" @select="handleSelect" :show-arrow="true">
 				<n-button circle tertriary>
-					{{ initials }}
+					<n-icon><Person /></n-icon>
 				</n-button>
 			</n-dropdown>
 		</nav>
@@ -48,8 +48,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { Menu, Close } from '@vicons/ionicons5';
-import { NButton, NDropdown } from 'naive-ui';
+import { Menu, Close, Person } from '@vicons/ionicons5';
+import { NButton, NDropdown, NIcon } from 'naive-ui';
 
 export default defineComponent({
 	data() {
@@ -57,7 +57,6 @@ export default defineComponent({
 			showMenu: false,
 			loggedIn: getCookieValue('JWT').userType,
 			UUID: getCookieValue('JWT').id,
-			initials: getProfileInitials('user')
 		};
 	},
 	setup() {
@@ -73,7 +72,7 @@ export default defineComponent({
 					key: "Uitloggen"
 				}
 			],
-			handleSelect(key: string | number) {
+			handleSelect(key: string) {
 				switch (key) {
 					case "Uitloggen":
 						setLoggedOut()
@@ -89,14 +88,17 @@ export default defineComponent({
 			}
 		}
 	},
-	mounted() {
-		this.initials = getProfileInitials('user')
-	},
+	// mounted() {
+	// 	console.log(getCookieValue('user'))
+	// 	this.initials = getProfileInitials('user')
+	// },
 	components: {
 		Close,
 		Menu,
 		NButton,
 		NDropdown,
+		NIcon,
+		Person,
 	},
 });
 

@@ -63,7 +63,6 @@ import {
 } from 'naive-ui';
 import axios from 'axios';
 import authService from '../services/AuthService.js';
-import userService from '../services/UserService'
 
 export default defineComponent({
 	setup() {
@@ -114,15 +113,6 @@ export default defineComponent({
 								sameSite: 'strict'
 							})
 							jwt.value = response
-							userService.getUser(jwt.value['id']).then(() => {
-								const user = useCookie<{name: string, options: object}>('user', {
-									maxAge: 300,
-									sameSite: 'strict'
-								})
-								user.value = response.data
-							}).catch(error => {
-								message.error('There seems to be an error, contact us')
-							})
 							navigateTo(`/u/${jwt.value['id']}`)
 						})
 						.catch(error => {
