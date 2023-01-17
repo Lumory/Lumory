@@ -1,16 +1,16 @@
 <template>
-    <div :class="`questionnaire-item__card ${this.size}`">
+    <div class="questionnaire-item__card" :class="this.size, {selected: selected}">
       <div class="questionnaire-item__card__info">
         <h3 class="questionnaire-item__card__title">{{ skill?.title }}</h3>
         <p class="questionnaire-item__card__description">{{skill?.description}}</p>
       </div>
-      <NImage :width="preferenceFieldImageSize" :height="preferenceFieldImageSize" :src="skill?.imageURL"/>
+      <NImage :width="preferenceFieldImageSize" :height="preferenceFieldImageSize" :src="skill?.imageURL" preview-disabled/>
     </div>
 </template>
 
 <script lang="ts">
 
-import {defineComponent, PropType} from "vue";
+import {defineComponent, PropType, ref} from "vue";
 import {NImage} from "naive-ui";
 
 type Size = 'small' | 'medium' | 'large'
@@ -27,6 +27,10 @@ export default defineComponent({
       type: String as PropType<Size>,
       default: 'large'
     },
+    selectable: {
+      type: Boolean,
+      default: false
+    },
 	},
   computed: {
     preferenceFieldImageSize() {
@@ -37,6 +41,17 @@ export default defineComponent({
         return 150
       }
       else return 100
+    }
+  },
+  setup() {
+    const selected = ref(false)
+    const toggleSelected = () => {
+      selected.value = !selected.value
+    }
+
+    return {
+      toggleSelected,
+      selected
     }
   }
 })
@@ -65,6 +80,13 @@ export default defineComponent({
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+}
+.questionnaire-item__card.selected {
+  outline: 2px solid #666666;
+}
+.questionnaire-item__card:hover {
+  background: #FADB7D;
+  cursor: pointer
 }
 .questionnaire-item__card__info {
   display: flex;

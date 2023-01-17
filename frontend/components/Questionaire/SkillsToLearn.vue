@@ -1,9 +1,10 @@
 <template>
   <n-space vertical align="center" item-style="width: 100%">
-    <h1>Aan welk type vraagstuk waar zou willen werken?</h1>
+    <h1>Welke vaardigheden wil jij leren tijdens je stage?</h1>
+    <p class="questionnaire-heading__subtitle">(Max. {{maxSelectedItems}} keuzes)</p>
     <n-form ref="formRef" :model="formValue" size="large" :rules="rules" class="questionnaire-grid">
-      <n-form-item class="questionnaire-card__container" v-for="problem in questionnaire.problem" path="Q1">
-        <QuestionnaireItemCard :skill="problem" size="small"/>
+      <n-form-item class="questionnaire-card__container" v-for="(skill, key, index) in questionnaire.skills" :key="key">
+        <QuestionnaireItemCard :skill="skill" size="small" ref="itemRefs" @click="onQuestionnaireItemCardClick(key, index)"/>
       </n-form-item>
     </n-form>
   </n-space>
@@ -16,8 +17,7 @@ import questionnaireData from '../../assets/json/questionaire.json'
 import QuestionnaireItemCard from "~/components/QuestionnaireItemCard.vue";
 
 interface ModelType {
-  Q1: string | null
-  Q2: string | null
+  skillsToLearn: String[]
 }
 
 export default defineComponent({
@@ -27,24 +27,35 @@ export default defineComponent({
   },
   setup() {
     const formRef = ref<FormInst | null>(null)
+    const itemRefs = ref([])
+    let selectedItems : String[] = []
+    const maxSelectedItems = 3
 
     let formValue = ref(<ModelType>{
-      Q1: '',
-      Q2: '',
+      skillsToLearn: [],
     });
 
+    const onQuestionnaireItemCardClick = (key, index) => {
+      if (itemRefs.value[index].selected === true) {
+        selectedItems = selectedItems.filter(item => item !== key)
+        itemRefs.value[index].toggleSelected()
+        formValue.value.skillsToLearn = selectedItems
+        return
+      }
+      if(selectedItems.length >= maxSelectedItems) {
+        console.log('max items selected')
+        return;
+      }
+      selectedItems.push(key)
+      itemRefs.value[index].toggleSelected()
+      formValue.value.skillsToLearn = selectedItems
+    }
+
     const rules: FormRules = {
-      Q1: [
+      skillsToLearn: [
         {
           required: true,
-          message: 'Q1 is verplicht.',
-          trigger: ['blur']
-        },
-      ],
-      Q2: [
-        {
-          required: true,
-          message: 'Q2 is verplicht.',
+          message: 'Vraagstuk is verplicht.',
           trigger: ['blur']
         },
       ],
@@ -52,14 +63,19 @@ export default defineComponent({
 
     const handleValidateClick = () => {
       return formRef.value?.validate()
+          .then(() => Promise.resolve(formValue.value))
+          .catch((errors) => Promise.reject(errors))
     }
 
     return {
       formRef,
       formValue,
+      itemRefs,
       rules,
       handleValidateClick,
+      onQuestionnaireItemCardClick,
       questionnaire: questionnaireData,
+      maxSelectedItems
     }
 
   }
@@ -83,6 +99,10 @@ p {
 }
 .questionnaire-card__container {
   display: flex;
+}
+.questionnaire-heading__subtitle {
+  text-align: center;
+  color: #999999;
 }
 @media (min-width: 1024px) {
   .questionnaire-grid {
