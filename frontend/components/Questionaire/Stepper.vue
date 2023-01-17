@@ -123,7 +123,6 @@ export default {
       this.validateCurrentStep()
         .then((formValues) => {
           this.assignFormValues(formValues)
-          console.log(questionnaireData)
           if (this.currentStep < this.steps.length - 1) {
             this.currentStep++
           }
@@ -137,7 +136,6 @@ export default {
       this.validateCurrentStep()
         .then((formValues) => {
           this.assignFormValues(formValues)
-          console.log(questionnaireData)
           questionnaireService.postQuestionnaire(1, questionnaireData)
           .then(() => {
             this.message.success('Questionnaire sent!')
