@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import {NSpace, NForm, NFormItem,  NRadioGroup, NRadio, NButton, FormInst, FormRules} from 'naive-ui'
+import {NSpace, NForm, NFormItem,  NRadioGroup, NRadio, NButton, FormInst, FormRules, useMessage} from 'naive-ui'
 import {defineComponent, ref} from "vue";
 import questionnaireData from '../../assets/json/questionaire.json'
 import QuestionnaireItemCard from "~/components/QuestionnaireItemCard.vue";
@@ -35,7 +35,7 @@ export default defineComponent({
       mentorship: [],
     });
 
-    const onQuestionnaireItemCardClick = (key, index) => {
+    function onQuestionnaireItemCardClick (key, index) {
       if (itemRefs.value[index].selected === true) {
         selectedItems = selectedItems.filter(item => item !== key)
         itemRefs.value[index].toggleSelected()
@@ -43,7 +43,7 @@ export default defineComponent({
         return
       }
       if(selectedItems.length >= maxSelectedItems) {
-        console.log('max items selected')
+        this.message.warning('max items selected')
         return;
       }
       selectedItems.push(key)
@@ -75,7 +75,8 @@ export default defineComponent({
       handleValidateClick,
       onQuestionnaireItemCardClick,
       questionnaire: questionnaireData,
-      maxSelectedItems
+      maxSelectedItems,
+      message: useMessage()
     }
 
   }
