@@ -18,7 +18,7 @@ public class Internship
     public string Problem { get; set; }
     
     [Required]
-    [StringLength(2056)]
+    [Column(TypeName = "text")]
     public string ProblemDescription { get; set; }
     
     [Required]
@@ -26,7 +26,7 @@ public class Internship
     public string SkillsIntern { get; set; }
     
     [Required]
-    [StringLength(2056)]
+    [Column(TypeName = "text")]
     public string SkillsInternDescription { get; set; }
     
     [Required]
@@ -34,7 +34,7 @@ public class Internship
     public string QualitiesIntern { get; set; }
     
     [Required]
-    [StringLength(2056)]
+    [Column(TypeName = "text")]
     public string QualitiesInternDescription { get; set; }
 
     [Required]
@@ -42,7 +42,7 @@ public class Internship
     public string Sector { get; set; }
     
     [Required]
-    [StringLength(2056)]
+    [Column(TypeName = "text")]
     public string SectorDescription { get; set; }
     
     [Required]
@@ -50,7 +50,7 @@ public class Internship
     public string Teamwork { get; set; }
     
     [Required]
-    [StringLength(2056)]
+    [Column(TypeName = "text")]
     public string TeamworkDescription { get; set; }
     
     [Required]
@@ -58,7 +58,7 @@ public class Internship
     public string Mentorship { get; set; }
     
     [Required]
-    [StringLength(2056)]
+    [Column(TypeName = "text")]
     public string MentorshipDescription { get; set; }
     
     [Required]
@@ -84,6 +84,30 @@ public class Internship
     [Required]
     [StringLength(128)]
     public string Staff { get; set; }
+    
+    [Required]
+    [Column(TypeName = "text")]
+    public string Website { get; set; }
+    
+    [Required]
+    [StringLength(256)]
+    public string StreetAddress { get; set; }
+    
+    [Required]
+    [StringLength(128)]
+    public string City { get; set; }
+    
+    [Required]
+    [StringLength(128)]
+    public string ContactPersonFirstName { get; set; }
+    
+    [Required]
+    [StringLength(128)]
+    public string ContactPersonLastName { get; set; }
+    
+    [Required]
+    [StringLength(256)]
+    public string ContactPersonEmail { get; set; }
     
     [Required]
     [StringLength(128)]

@@ -37,12 +37,10 @@ public class CompanyService
 
     public Company UpdateCompany(Company oldCompany, Company newCompany)
     {
-        oldCompany.City = newCompany.City;
         oldCompany.Email = newCompany.Email;
         oldCompany.Name = newCompany.Name;
-        oldCompany.Website = newCompany.Website;
-        oldCompany.StreetAddress = newCompany.StreetAddress;
-        oldCompany.Description = newCompany.Description;
+        oldCompany.Kvk = newCompany.Kvk;
+
 
         return _repository.UpdateCompany(oldCompany);
     }
