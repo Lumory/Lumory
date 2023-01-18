@@ -120,7 +120,6 @@ export default {
           }
         });
       }
-
     },
     onPreviousButtonClick() {
       if (this.currentStep > 0) {

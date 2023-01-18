@@ -3,10 +3,10 @@
     <div class="wrapper">
       <ol class="c-stepper">
         <template v-for="(step, index) in this.steps">
-          <li class="c-stepper__item" >
+          <li class="c-stepper__item">
               <a @click="currentStep=index">
-                <h3 class="c-stepper__title">{{ step.title }}</h3>
-                <p class="c-stepper__desc">{{ step.description }}</p>
+                <h3 class="c-stepper__title" v-if="step.title">{{ step.title }}</h3>
+                <p class="c-stepper__desc" v-if="step.description">{{ step.description }}</p>
               </a>
           </li>
         </template>
@@ -32,68 +32,130 @@
 </template>
 
 <script>
-import Step1 from "./Step1";
-import { NButton, NSpace } from "naive-ui"
+import Problem from "./Problem";
+import SkillsToLearn from "./SkillsToLearn";
+import StrongQualities from "./StrongQualities";
+import StrongSkills from "./StrongSkills";
+import Sector from "./Sector";
+import Teamwork from "./Teamwork";
+import Mentorship from "./Mentorship"
+import StudentQuestionnaireForm from "./StudentQuestionnaireForm";
+import { NButton, NSpace, useMessage } from "naive-ui"
+import questionnaireService from "../../services/QuestionnaireService";
+import {ref} from "vue";
 
 const steps = [
   {
-    title: "Stap 1",
-    description: "Voorkeuren stage",
-    component: "Step1",
+    component: "Problem",
     required: true,
   },
   {
-    title: "Stap 2",
-    description: "Voorkeuren Stagebedrijf",
-    component: "Step1",
+    component: "SkillsToLearn",
     required: true,
   },
   {
-    title: "Stap 3",
-    description: "Persoonlijkheid",
-    component: "Step1",
+    component: "StrongQualities",
+    required: true,
+  },
+  {
+    component: "StrongSkills",
+    required: true,
+  },
+  {
+    component: "Sector",
+    required: true,
+  },
+  {
+    component: "Teamwork",
+    required: true,
+  },
+  {
+    component: "Mentorship",
+    required: true,
+  },
+  {
+    component: "StudentQuestionnaireForm",
     required: true,
   }
 ];
 
+let questionnaireData = {
+  problem: '',
+  skillsToLearn: '',
+  strongQualities: '',
+  strongSkills: '',
+  sector: '',
+  teamwork: '',
+  mentorship: '',
+  city: '',
+  educationalInstitution: '',
+  study: '',
+  studyDirection: '',
+  studyNiveau: '',
+  averageGrade: 0,
+  internshipType: '',
+  dateStart: '',
+  hours: 0,
+  days: ''
+}
+
+const isSubmitting = ref(false)
+
 export default {
-  components: {Step1, NButton, NSpace},
+  components: {Problem, SkillsToLearn, StrongQualities, StrongSkills, Sector, Teamwork, Mentorship, StudentQuestionnaireForm, NButton, NSpace},
   methods: {
-    validateCurrentStep () {
+    validateCurrentStep() {
       return this.$refs.stepRef.handleValidateClick()
-          .then(() => {
-            return true
-          })
-          .catch(() => {
-            return false
-          })
+    },
+    assignFormValues(formValues) {
+      Object.keys(formValues).forEach(function(key) {
+        if (key in questionnaireData) {
+          questionnaireData[key] = formValues[key].toString();
+        }
+      });
     },
     onPreviousButtonClick () {
       if(this.currentStep > 0) {
         this.currentStep--
       }
     },
-    onNextButtonClick () {
+    onNextButtonClick() {
       this.validateCurrentStep()
-          .then(isValid => {
-            if(!isValid) {
-              return
-            }
-            if(this.currentStep < this.steps.length -1) {
-              this.currentStep++
-            }
-            return isValid
-          })
+        .then((formValues) => {
+          this.assignFormValues(formValues)
+          if (this.currentStep < this.steps.length - 1) {
+            this.currentStep++
+          }
+        })
+        .catch((val) => {
+          console.log(val)
+        })
     },
-    onCompleteButtonClick () {
-      console.log("Verstuurd!")
+    async onCompleteButtonClick() {
+      isSubmitting.value = true
+      this.validateCurrentStep()
+        .then((formValues) => {
+          this.assignFormValues(formValues)
+          questionnaireService.postQuestionnaire(1, questionnaireData)
+          .then(() => {
+            this.message.success('Questionnaire sent!')
+          })
+          .catch(error => {
+            this.message.error(error.message)
+          })
+        })
+        .catch((val) => {
+          console.log(val)
+        })
+      isSubmitting.value = false
     }
   },
   data() {
     return {
+      message: useMessage(),
       currentStep: 0,
       steps,
-      userType: "student",
+      isSubmitting,
     }
   }
 }
@@ -103,6 +165,7 @@ export default {
 .c-stepper {
   --circle-size: clamp(1.5rem, 5vw, 3rem);
   --spacing: clamp(0.25rem, 2vw, 0.5rem);
+  counter-reset: stepper-item;
 }
 
 .c-stepper {
@@ -123,14 +186,18 @@ export default {
 }
 
 .c-stepper__item:before {
-   --size: 3rem;
-   content: "";
-   display: block;
-   width: var(--circle-size);
-   height: var(--circle-size);
-   border-radius: 50%;
-   background-color: var(--color-primary);
-   margin: 0 auto 1rem;
+  --size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--circle-size);
+  height: var(--circle-size);
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  margin: 0 auto 1rem;
+  counter-increment: stepper-item;
+  font-weight: 700;
+  content: counter(stepper-item);
 }
 .c-stepper__item:not(:last-child):after {
   content: "";
@@ -171,7 +238,7 @@ export default {
 
 @media (min-width: 640px) {
   .steps-container {
-    max-width: 550px;
+    max-width: 800px;
   }
 }
 
