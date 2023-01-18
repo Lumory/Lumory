@@ -34,6 +34,7 @@
 import axios from 'axios';
 import {NScrollbar, NCard, NSpace, useMessage} from "naive-ui";
 import {defineComponent, ref} from 'vue';
+import getService from "../services/InternshipService";
 
 export default defineComponent({
   data() {
@@ -51,28 +52,14 @@ export default defineComponent({
   name: 'Matched',
   // intercepts axios request. Upon error, shows error message on index
   mounted: function () {
+    getService.getInternships().then(response => {
+      this.matchedresults = response.data
+    })
     axios.interceptors.response.use(undefined, (error => {
       if (error.message === 'Network Error' && !error.response) {
         alert('Er is een fout opgetreden. Herlaad deze pagina.')
       }
-    })),
-        // axios GET request. Error handling provided upon specific error.
-        // Error handling is work in progress, but a working first iteration is implemented.
-        axios.get('http://localhost:3001/Internships', {})
-            .then(response =>
-                this.matchedresults = response.data)
-            .catch(error => {
-              if (error.response) {
-                // The request was made but no response was received
-                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                // http.ClientRequest in node.js
-                console.log(error.request);
-              } else {
-                // Something happened in setting up the request that triggered an Error
-                console.log('Error', error.message);
-              }
-              console.log(error.config);
-            });
+    }))
   },
   methods: {
     cardClick(index) {
