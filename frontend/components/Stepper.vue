@@ -41,7 +41,7 @@ import Step2 from "./SignUpStep2";
 import Step3 from "./SignUpStep2Internship";
 import Step4 from "./SignUpInternshipCompanyContactPerson";
 import {NButton, NSpace, useMessage} from "naive-ui"
-import {postNewUser} from "../services/UserService";
+import {postNewCompany, postNewUser} from "../services/UserService";
 import {ref} from "vue";
 
 const studentSteps = [
@@ -85,10 +85,10 @@ let studentData = {
 }
 
 let internshipCompanyData = {
-  companyName: '',
-  KVK: '',
   email: '',
   password: '',
+  name: '',
+  kvk: ''
 }
 
 export default {
@@ -106,15 +106,15 @@ export default {
       return this.$refs.stepRef.handleValidateClick()
     },
     assignFormValues(formValues) {
-      if(this.userType==='student') {
-        Object.keys(formValues).forEach(function(key) {
+      if (this.userType === 'student') {
+        Object.keys(formValues).forEach(function (key) {
           if (key in studentData) {
             studentData[key] = formValues[key];
           }
         });
       }
-      if(this.userType==='internshipCompany') {
-        Object.keys(formValues).forEach(function(key) {
+      if (this.userType === 'internshipCompany') {
+        Object.keys(formValues).forEach(function (key) {
           if (key in internshipCompanyData) {
             internshipCompanyData[key] = formValues[key];
           }
@@ -140,27 +140,46 @@ export default {
     },
     async onCompleteButtonClick() {
       isSubmitting.value = true
-
-      this.validateCurrentStep()
-          .then((formValues) => {
-            this.assignFormValues(formValues)
-            console.log(studentData)
-            postNewUser(studentData).then(() => {
-              console.log('New user created')
-              this.message.success('New user created')
+      if (this.userType === 'student') {
+        this.validateCurrentStep()
+            .then((formValues) => {
+              this.assignFormValues(formValues)
+              console.log(studentData)
+              postNewUser(studentData).then(() => {
+                console.log('New user created')
+                this.message.success('New user created')
+              })
+                  .catch(error => {
+                    console.log(error)
+                    this.message.error(error.message)
+                  })
             })
-                .catch(error => {
-                  console.log(error)
-                  this.message.error(error.message)
-                })
-          })
-          .catch((val) => {
-            console.log(val)
-          })
-
-      isSubmitting.value = false
-    }
+            .catch((val) => {
+              console.log(val)
+            })
+      }
+      if(this.userType === 'internshipCompany') {
+        this.validateCurrentStep()
+            .then((formValues) => {
+              this.assignFormValues(formValues)
+              console.log(internshipCompanyData)
+              postNewCompany(internshipCompanyData).then(() => {
+                console.log('New company created')
+                this.message.success('New company created')
+              })
+                  .catch(error => {
+                    console.log(error)
+                    this.message.error(error.message)
+                  })
+            })
+            .catch((val) => {
+              console.log(val)
+            })
+        isSubmitting.value = false
+      }
+    },
   },
+
   data() {
     return {
       message: useMessage(),
