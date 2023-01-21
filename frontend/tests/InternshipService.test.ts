@@ -1,6 +1,5 @@
 import axios from "axios"
 import InternshipService from '../services/InternshipService'
-// import {Internship} from "../types.ts"
 
 jest.mock("axios")
 describe('GET request', () => {
