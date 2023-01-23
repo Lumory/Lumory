@@ -33,8 +33,7 @@
 import axios from 'axios';
 import {NScrollbar, NCard, NSpace, useMessage} from "naive-ui";
 import {defineComponent, ref} from 'vue';
-import getService from "../services/InternshipService";
-
+import getService from "../services/InternshipService"
 export default defineComponent({
   data() {
     return {
@@ -53,13 +52,8 @@ export default defineComponent({
   // intercepts axios request. Upon error, shows error message on index
   mounted: function () {
     getService.getInternships().then(response => {
-      this.matchedresults = response.data
+      this.matchedresults = response
     })
-    axios.interceptors.response.use(undefined, (error => {
-      if (error.message === 'Network Error' && !error.response) {
-        alert('Er is een fout opgetreden. Herlaad deze pagina.')
-      }
-    }))
   },
   methods: {
     cardClick(index) {

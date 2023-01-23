@@ -13,9 +13,14 @@
 
         </n-grid>
         <n-space class="scroll" trigger="none">
-          <!-- V-for looping through card component, then shows it in an array on the left-hand side on index -->
-              <MatchedCardForCompany v-for="(matchedintern, index) in matchedinternresults" style="border-radius: 3px; margin-bottom: 15px"
-                                     @click="cardClick(index)" :intern="matchedintern"/>
+            <!-- V-for looping through card component, then shows it in an array on the left-hand side on index -->
+          <a :href="`/s/${matchedintern.id}`"
+             v-for="(matchedintern) in matchedinternresults"
+          >
+            <MatchedCardForCompany
+                style="border-radius: 3px; margin-bottom: 15px"
+                :intern="matchedintern"></MatchedCardForCompany>
+          </a>
         </n-space>
       </n-scrollbar>
     </Container>
@@ -32,6 +37,7 @@
 import axios from 'axios';
 import {NScrollbar, NCard, NSpace, useMessage, NGrid} from "naive-ui";
 import {defineComponent, ref} from 'vue';
+
 import MatchedCardForCompany from "../components/MatchedCardforCompany"
 export default defineComponent({
   data() {
@@ -49,7 +55,7 @@ export default defineComponent({
     NSpace,
     NGrid
   },
-  name: 'Matched',
+  name: 'Stages',
   // intercepts axios request. Upon error, shows error message on index
   mounted: function () {
     // axios GET request. Error handling provided upon specific error.
