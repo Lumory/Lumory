@@ -4,10 +4,10 @@
     <n-form ref="formRef" :model="formValue" size="large" :rules="rules">
       <n-grid cols="12" :x-gap="24" item-responsive responsive="screen">
         <n-form-item-gi class="form-item--left-align" span="12" path="companyName" label="Bedrijfsnaam">
-          <n-input v-model:value="formValue.companyName" placeholder="Bedrijf" @keydown.enter.prevent/>
+          <n-input v-model:value="formValue.name" placeholder="Bedrijf" @keydown.enter.prevent/>
         </n-form-item-gi>
         <n-form-item-gi class="form-item--left-align" span="12" path="KVK" label="KVK-nummer">
-          <n-input v-model:value="formValue.KVK" placeholder="1234 5678 9012" @keydown.enter.prevent/>
+          <n-input v-model:value="formValue.kvk" placeholder="1234 5678 9012" @keydown.enter.prevent/>
         </n-form-item-gi>
         <n-form-item-gi class="form-item--left-align" :span="12" path="email" label="E-mail">
           <n-input v-model:value="formValue.email" placeholder="hr@bedrijf.nl" @keydown.enter.prevent/>
@@ -43,8 +43,8 @@ import {
 import {defineComponent, ref} from 'vue'
 
 interface ModelType {
-  companyName: string | null
-  KVK: string | null
+  name: string | null
+  kvk: string | null
   email: string | null
   password: string | null
   repeatPassword: string | null
@@ -57,21 +57,21 @@ export default defineComponent({
   setup() {
     const formRef = ref<FormInst | null>(null)
     let formValue = ref(<ModelType>{
-      companyName: '',
-      KVK: '',
+      name: '',
+      kvk: '',
       email: '',
       password: '',
       repeatPassword: '',
     });
     const rules: FormRules = {
-      companyName: [
+      name: [
         {
           required: true,
           message: 'Bedrijfsnaam is verplicht.',
           trigger: ['blur']
         },
       ],
-      KVK: [
+      kvk: [
         {
           required: true,
           message: 'KVK-nummer is verplicht.',
