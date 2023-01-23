@@ -1,5 +1,4 @@
 <!-- child component for all matched interns for a company (internship company) -->
-
 <template>
   <n-space>
     <n-card :bordered="false" class="matched-container" hoverable
@@ -7,7 +6,7 @@
       <template #header>
         <ellipsis-vertical size="20" class="field-header__person-icon"/>
         <n-space class="internshipText">
-          {{ this.intern.firstName }}
+          {{ this.intern.problemDescription }}
         </n-space>
         <n-space class="cityText">
           {{ this.intern.lastName }}
