@@ -1,6 +1,6 @@
 <template>
 	<div class="default-layout">
-		<TheNavbar />
+		<TheHeader />
 		<slot />
     <TheFooter/>
 	</div>

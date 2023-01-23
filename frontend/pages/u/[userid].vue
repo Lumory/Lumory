@@ -147,8 +147,12 @@ export default {
       this.userQuestionnaire = obj
     })
     axios.get('http://localhost:3001/User/1/').then(response => {
-      console.log(response.data)
       this.user = response.data
+			const user = useCookie<{name: string, options: object}>('user', {
+				maxAge: 300,
+				sameSite: 'strict'
+			})
+			user.value = response.data
     })
 
   },
