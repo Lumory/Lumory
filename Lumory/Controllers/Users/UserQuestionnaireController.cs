@@ -10,10 +10,12 @@ namespace Lumory.Controllers.Users;
 public class UserQuestionnaireController : ControllerBase
 {
     private UserQuestionnaireService _service;
+    private UserService _service2;
 
-    public UserQuestionnaireController(UserQuestionnaireService service)
+    public UserQuestionnaireController(UserQuestionnaireService service, UserService service2)
     {
         _service = service;
+        _service2 = service2;
     }
 
     [HttpGet]
@@ -34,9 +36,14 @@ public class UserQuestionnaireController : ControllerBase
     [Route("Users/{UserId}/UserQuestionnaire")]
     public IActionResult Create( int UserId, [FromBody] UserQuestionnaire userQuestionnaire)
     {
-        var excistingQuestionnaire = _service.FindUserQuestionnaireByUserId(UserId);
+        var user = _service2.FindUser(UserId);
+        if (user == null)
+        {
+            return NotFound();
+        }    
+        var existingQuestionnaire = _service.FindUserQuestionnaireByUserId(UserId);
 
-        if (excistingQuestionnaire != null)
+        if (existingQuestionnaire != null)
         {
             return StatusCode(409, "Existing User Questionnaire");
         }
