@@ -12,7 +12,6 @@ public class UserQuestionnaire
     [Required]
     [ForeignKey("Users")]
     public int UserId { get; set; }
-    public User? Users { get; set; }
 
     [Required]
     [StringLength(128)]

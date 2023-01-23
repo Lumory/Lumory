@@ -14,146 +14,173 @@ public class CompanyControllerTest
     public class Tests
     {
         [Test]
+            //Test endpoint Post create a company 
             public void AddCompanyTest()
             {
-                var user = new Company()
+                //Arrange
+                var company = new Company()
                 {
                     Id = 99999,
-                    Name = 
-                    FirstName = "Jan",
-                    LastName = "Jansen",
+                    Name = "Company",
+                    Kvk = 12345678,
                     Email = "Company@Company.nl",
                     Password = "TestPassword"
                 };
 
-                var returnUser = new User()
+                var returnCompany = new Company()
                 {
                     Id = 99999,
-                    FirstName = "Jan",
-                    LastName = "Jansen",
-                    Email = "Jan@Jansen",
-                    UserType = "Student",
+                    Name = "Company",
+                    Kvk = 12345678,
+                    Email = "Company@Company.nl",
+                    Password = "TestPassword",
                     CreatedAt = DateTime.Now
                 };
                 
-                var mock = new Mock<UserService>();
-                mock.Setup(c => c.CreateUser(user)).Returns(returnUser);
-                UserController userController = new UserController(mock.Object);
-                var result = userController.Create(user);
+                var mock = new Mock<CompanyService>();
+                mock.Setup(c => c.CreateCompany(company)).Returns(returnCompany);
+                
+                //Act
+                CompanyController companyController = new CompanyController(mock.Object);
+                var result = companyController.Create(company);
                 var okResult = result as OkObjectResult;
 
-                // assert
+                //Assert
                 Assert.IsNotNull(okResult);
                 Assert.AreEqual(200, okResult.StatusCode);
             }
 
         [Test]
-            public void GetUserByIdTest()
+        // Test endpoint Get by ID get company by ID
+            public void GetCompanyByIdTest()
             {
-                var returnUser = new User()
+                //Arrange
+                var returnCompany = new Company()
                 {
                     Id = 99999,
-                    FirstName = "Jan",
-                    LastName = "Jansen",
-                    Email = "Jan@Jansen",
-                    UserType = "Student",
+                    Name = "Company",
+                    Kvk = 12345678,
+                    Email = "Company@Company.nl",
+                    Password = "TestPassword",
                     CreatedAt = DateTime.Now
-                };  
+                };
                 
-                var mock = new Mock<UserService>();
-                mock.Setup(c => c.FindUser(99999)).Returns(returnUser);
-                UserController userController = new UserController(mock.Object);
-                var result = userController.Find(99999);
+                var mock = new Mock<CompanyService>();
+                mock.Setup(c => c.FindCompany(99999)).Returns(returnCompany);
+                
+                //Act
+                CompanyController companyController = new CompanyController(mock.Object);
+                var result = companyController.Find(99999);
                 var okResult = result as OkObjectResult;
+                
+                //Assert
                 Assert.IsNotNull(okResult);
                 Assert.AreEqual(200, okResult.StatusCode);
             }
 
         [Test]
-            public void GetAllUserTest()
+            //Test endpoint Get all get all companies in DB
+            public void GetAllCompaniesTest()
             {
-                var returnUser = new List<User>()
+                //Arrange
+                var returnCompany = new List<Company>()
                 {
-                    new User
+                    new Company
                     {
                         Id = 99999,
-                        FirstName = "Jan",
-                        LastName = "Jansen",
-                        Email = "Jan@Jansen",
-                        UserType = "Student",
+                        Name = "Company",
+                        Kvk = 12345678,
+                        Email = "Company@Company.nl",
+                        Password = "TestPassword",
                         CreatedAt = DateTime.Now
                     },
-                    new User
+                    new Company
                     {
                         Id = 99998,
-                        FirstName = "Peter",
-                        LastName = "Peterson",
-                        Email = "Peter@Peterson",
-                        UserType = "Student",
+                        Name = "Company2",
+                        Kvk = 87654321,
+                        Email = "Company2@Company.nl",
+                        Password = "TestPassword2",
                         CreatedAt = DateTime.Now
                     }
                 };
                 
-                var mock = new Mock<UserService>();
-                mock.Setup(c => c.ListUsers()).Returns(returnUser);
-                UserController userController = new UserController(mock.Object);
-                var result = userController.Get();
+                var mock = new Mock<CompanyService>();
+                mock.Setup(c => c.ListCompanies()).Returns(returnCompany);
+                
+                //Act
+                CompanyController companyController = new CompanyController(mock.Object);
+                var result = companyController.Get();
                 var okResult = result as OkObjectResult;
+                
+                //Assert
                 Assert.IsNotNull(okResult);
                 Assert.AreEqual(200, okResult.StatusCode);
             }
 
         [Test]
-            public void UpdateUserTest()
+            // Test endpoint Put update a company using ID
+            public void UpdateCompanyTest()
             {
-                var oldUser = new User()
+                //Arrange
+                var oldCompany = new Company()
                     {
-                    Id = 99999,
-                    FirstName = "Jan",
-                    LastName = "Jansen",
-                    Email = "Jan@Jansen",
-                    UserType = "Student",
-                    CreatedAt = DateTime.Now
+                        Id = 99999,
+                        Name = "Company",
+                        Kvk = 12345678,
+                        Email = "Company@Company.nl",
+                        Password = "TestPassword",
+                        CreatedAt = DateTime.Now
                 };
-                var newUser = new User()
+                var newCompany = new Company
                 {
                     Id = 99999,
-                    FirstName = "Peter",
-                    LastName = "Peterson",
-                    Email = "Peter@Peterson",
-                    UserType = "Student",
+                    Name = "Company2",
+                    Kvk = 87654321,
+                    Email = "Company2@Company.nl",
+                    Password = "TestPassword2",
                     CreatedAt = DateTime.Now
                 };
 
-                var mock = new Mock<UserService>();
-                mock.Setup(c => c.FindUser(99999)).Returns(oldUser);
-                mock.Setup(c => c.UpdateUser(oldUser, newUser)).Returns(newUser);
-                UserController userController = new UserController(mock.Object);
-                var result = userController.Update(99999, newUser);
+                var mock = new Mock<CompanyService>();
+                mock.Setup(c => c.FindCompany(99999)).Returns(oldCompany);
+                mock.Setup(c => c.UpdateCompany(oldCompany, newCompany)).Returns(newCompany);
+                
+                //Act
+                CompanyController companyController = new CompanyController(mock.Object);
+                var result = companyController.Update(99999, newCompany);
                 var okResult = result as OkObjectResult;
+                
+                //Assert
                 Assert.IsNotNull(okResult);
                 Assert.AreEqual(200, okResult.StatusCode);
             }
 
         [Test]
-            public void DeleteUserTest()
+            // Test endpoint Delete delete a company using ID
+            public void DeleteCompanyTest()
             {
-                var user = new User()
+                //Arrange
+                var company = new Company
                 {
                     Id = 99999,
-                    FirstName = "Jan",
-                    LastName = "Jansen",
-                    Email = "Jan@Jansen",
-                    UserType = "Student",
+                    Name = "Company2",
+                    Kvk = 87654321,
+                    Email = "Company2@Company.nl",
+                    Password = "TestPassword2",
                     CreatedAt = DateTime.Now
                 };
                 
-                var mock = new Mock<UserService>();
-                mock.Setup(c => c.FindUser(99999)).Returns(user);
-                mock.Setup(c => c.DeleteUser(user));
-                UserController userController = new UserController(mock.Object);
-                var result = userController.Delete(99999);
+                var mock = new Mock<CompanyService>();
+                mock.Setup(c => c.FindCompany(99999)).Returns(company);
+                mock.Setup(c => c.DeleteCompany(company));
+                
+                //Act
+                CompanyController companyController = new CompanyController(mock.Object);
+                var result = companyController.Delete(99999);
                 var okResult = result as OkObjectResult;
+                
+                //Assert
                 Assert.IsNotNull(okResult);
                 Assert.AreEqual(StatusCodes.Status200OK, okResult.StatusCode);
             }

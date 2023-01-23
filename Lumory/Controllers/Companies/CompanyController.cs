@@ -56,7 +56,7 @@ public class CompanyController : ControllerBase
 
         _service.DeleteCompany(company);
 
-        return NoContent();
+        return Ok("Company Deleted");
     }
     
     [HttpPost]
