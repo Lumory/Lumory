@@ -34,6 +34,12 @@ public class UserQuestionnaireController : ControllerBase
     [Route("Users/{UserId}/UserQuestionnaire")]
     public IActionResult Create( int UserId, [FromBody] UserQuestionnaire userQuestionnaire)
     {
+        var excistingQuestionnaire = _service.FindUserQuestionnaireByUserId(UserId);
+
+        if (excistingQuestionnaire != null)
+        {
+            return StatusCode(409, "Existing User Questionnaire");
+        }
         userQuestionnaire = _service.CreateUserQuestionnaire(userQuestionnaire, UserId);
         
         return Ok(new UserQuestionnaireDto(userQuestionnaire));
