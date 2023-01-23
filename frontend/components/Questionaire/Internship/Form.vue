@@ -113,7 +113,118 @@ export default defineComponent({
       applyBefore: ''
     });
     const rules: FormRules = {
-
+      money: [
+        {
+          required: true,
+          message: 'Veld is verplicht',
+          trigger: ['blur']
+        },
+      ],
+      remoteWork: [
+        {
+          required: true,
+          message: 'Veld is verplicht',
+          trigger: ['blur']
+        },
+      ],
+      function: [
+        {
+          required: true,
+          message: 'Veld is verplicht',
+          trigger: ['blur']
+        },
+      ],
+      responsability: [
+        {
+          required: true,
+          message: 'Veld is verplicht',
+          trigger: ['blur']
+        },
+      ],
+      workExperience: [
+        {
+          required: true,
+          message: 'Veld is verplicht',
+          trigger: ['blur']
+        },
+      ],
+      staff: [
+        {
+          required: true,
+          message: 'Veld is verplicht',
+          trigger: ['blur']
+        },
+      ],
+      website: [
+        {
+          required: true,
+          message: 'Veld is verplicht',
+          trigger: ['blur']
+        },
+      ],
+      streetAddress: [
+        {
+          required: true,
+          message: 'Veld is verplicht',
+          trigger: ['blur']
+        },
+      ],
+      city: [
+        {
+          required: true,
+          message: 'Veld is verplicht',
+          trigger: ['blur']
+        },
+      ],
+      contactPersonFirstName: [
+        {
+          required: true,
+          message: 'Veld is verplicht',
+          trigger: ['blur']
+        },
+      ],
+      contactPersonLastName: [
+        {
+          required: true,
+          message: 'Veld is verplicht',
+          trigger: ['blur']
+        },
+      ],
+      contactPersonEmail: [
+        {
+          required: true,
+          message: 'Veld is verplicht',
+          trigger: ['blur']
+        },
+      ],
+      international: [
+        {
+          required: true,
+          message: 'Veld is verplicht',
+          trigger: ['blur']
+        },
+      ],
+      dateStart: [
+        {
+          required: true,
+          message: 'Veld is verplicht',
+          trigger: ['blur']
+        },
+      ],
+      hours: [
+        {
+          required: true,
+          message: 'Veld is verplicht',
+          trigger: ['blur']
+        },
+      ],
+      applyBefore:[
+        {
+          required: true,
+          message: 'Veld is verplicht',
+          trigger: ['blur']
+        },
+      ],
     }
 
     const handleValidateClick = () => {
