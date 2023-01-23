@@ -107,27 +107,6 @@ export default defineComponent({
           trigger: ['blur']
         }
       ],
-      password: [
-        {
-          required: true,
-          message: 'Wachtwoord is verplicht.',
-          trigger: ['blur']
-        },
-      ],
-      repeatPassword: [
-        {
-          validator (rule: FormItemRule, value: string) {
-            return value == formValue.value.password;
-          },
-          message: 'Wachtwoord komt niet overeen.',
-          trigger: ['blur']
-        },
-        {
-          required: true,
-          message: 'Herhaal wachtwoord is verplicht.',
-          trigger: ['blur']
-        },
-      ],
     }
 
     const handleValidateClick = () => {

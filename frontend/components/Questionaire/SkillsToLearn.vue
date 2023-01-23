@@ -61,10 +61,12 @@ export default defineComponent({
       ],
     }
 
-    const handleValidateClick = () => {
-      return formRef.value?.validate()
-          .then(() => Promise.resolve(formValue.value))
-          .catch((errors) => Promise.reject(errors))
+    function handleValidateClick() {
+      if(formValue.value.skillsToLearn.length < 1){
+        this.message.error('Minimaal 1 antwoord is verplicht')
+        throw new TypeError("skillsToLearn is required")
+      }
+      return Promise.resolve(formValue.value)
     }
 
     return {
