@@ -21,11 +21,17 @@ async function postNewCompany(data) {
   return response.data;
 }
 
+async function deleteUser(id) {
+  const response = await axios.delete(`http://localhost:3001/User/${id}`)
+  return response
+}
+
 const userService = {
   postNewUser,
   getAllUsers,
   getUser,
-  postNewCompany
+  postNewCompany,
+  deleteUser
 }
 
 export default userService

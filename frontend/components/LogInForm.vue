@@ -108,7 +108,7 @@ export default defineComponent({
 							"password": values.password
 						}
 						authService.logIn(config).then(response => {
-							const user = useCookie<{ name: string, options: object }>('user', {
+							const jwt = useCookie<{ name: string, options: object }>('JWT', {
 								maxAge: 30000,
 								sameSite: 'strict'
 							})

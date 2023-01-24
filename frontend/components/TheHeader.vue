@@ -20,6 +20,21 @@
 				</n-button>
 			</n-dropdown>
 		</nav>
+		
+		<!-- Confirmation Modal -->
+		<n-modal 
+			v-model:show="showModal"
+			:mask-closable="false"
+			:show-icon="false"
+			type="error"
+			preset="dialog"
+			title="Weet u het zeker?"
+			content="Als u op verwijderen klikt verwijderd u uw account permanent"
+			positive-text="Verwijderen"
+    	negative-text="Cancel"
+			@positive-click="verwijderAccount"
+			@negative-click="closeModal"
+		/>
 
 		<!-- mobile menu -->
 		<div v-show="showMenu" class="mobile-menu-container">
@@ -49,7 +64,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { Menu, Close, Person } from '@vicons/ionicons5';
-import { NButton, NDropdown, NIcon } from 'naive-ui';
+import { NButton, NDropdown, NIcon, NModal } from 'naive-ui';
+import deleteUserProfile from '~~/composables/setUserDeletion'
+
+const showModalRef = ref(false)
 
 export default defineComponent({
 	data() {
@@ -61,11 +79,27 @@ export default defineComponent({
 	},
 	setup() {
 		return {
+			showModal: showModalRef,
+			verwijderAccount () {
+				deleteUserProfile(getCookieValue('JWT').userType)
+				setLoggedOut()
+				showModalRef.value = false
+			},
+			closeModal () {
+				showModalRef.value = false
+			},
 			options: [
 				{
 					label: "Mijn profiel",
 					key: "Profiel",
 					keyboard: true
+				},
+				{
+					type: "divider"
+				},
+				{
+					label: "Verwijder account",
+					key: "VerwijderAccount",
 				},
 				{
 					label: "Uitloggen",
@@ -78,6 +112,9 @@ export default defineComponent({
 						setLoggedOut()
 						navigateTo('/signin')
 						break
+					case "VerwijderAccount":
+						showModalRef.value = true
+						break
 					case "Profiel":
 						navigateTo(`/u/${getCookieValue('JWT').id}`)
 				}
@@ -88,10 +125,6 @@ export default defineComponent({
 			}
 		}
 	},
-	// mounted() {
-	// 	console.log(getCookieValue('user'))
-	// 	this.initials = getProfileInitials('user')
-	// },
 	components: {
 		Close,
 		Menu,
@@ -99,6 +132,7 @@ export default defineComponent({
 		NDropdown,
 		NIcon,
 		Person,
+		NModal,
 	},
 });
 

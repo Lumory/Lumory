@@ -146,7 +146,7 @@ export default {
       }
       this.userQuestionnaire = obj
     })
-    axios.get('http://localhost:3001/User/1/').then(response => {
+    axios.get(`http://localhost:3001/User/${getCookieValue('JWT').id}`).then(response => {
       this.user = response.data
 			const user = useCookie<{name: string, options: object}>('user', {
 				maxAge: 300,
