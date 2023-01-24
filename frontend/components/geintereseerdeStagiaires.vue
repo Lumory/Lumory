@@ -1,14 +1,19 @@
 <template>
+  <n-card>
+    <n-space style="font-weight: bolder; font-size: 24px">
+      Geïnteresseerden
+    </n-space>
   <n-data-table
       :columns="columns"
       :data="stagiaires"
       :row-key="rowKey"
       @update:checked-row-keys="handleCheck"
   />
+  </n-card>
 </template>
 
 <script>
-import {NDataTable, NButton} from "naive-ui";
+import {NDataTable, NButton, NSpace,NCard} from "naive-ui";
 import userService from "../services/UserService";
 const createColumns = ({ play }) => {
   return [
@@ -67,6 +72,8 @@ export default {
   name: "geintereseerdeStagiaires",
   components: {
     NDataTable,
+    NSpace,
+    NCard
   },
   mounted: function () {
     userService.getAllUsers().then(response => {

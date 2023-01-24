@@ -1,6 +1,6 @@
 <template>
   <Container>
-      <n-tabs default-value="Stage details" type="line" pane-style="color:blue;">
+      <n-tabs default-value="Stage details" type="line">
         <n-tab-pane name="Stage details" tab="Stage details">
           <n-scrollbar class="scroll" style="max-height: 700px; padding-right:15px" trigger="none">
           <n-grid :x-gap="12" cols="4" item-responsive>

@@ -7,17 +7,17 @@
     </n-card>
     <n-card>
       <n-space class="cardTitle">
-        {{stages.city}}
+        {{stages.problem}}
       </n-space>
     </n-card>
 
     <n-card>
       <template #header>
         <n-space class="cardTitle">
-          {{ stages.problem }}
+          {{ stages.function }}
         </n-space>
         <n-space class="cardCity">
-          {{ stages.city }}
+          {{ stages.city }}, {{stages.streetAddress}}
         </n-space>
       </template>
       <n-space>

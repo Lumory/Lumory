@@ -6,10 +6,10 @@
       <template #header>
         <ellipsis-vertical size="20" class="field-header__person-icon"/>
         <n-space class="internshipText">
-          {{ this.intern.problemDescription }}
+          {{ this.intern.function }}
         </n-space>
         <n-space class="cityText">
-          {{ this.intern.lastName }}
+          {{ this.intern.city }}, {{this.intern.streetAddress}}
         </n-space>
       </template>
       <n-space>
