@@ -24,6 +24,7 @@
           </n-radio-button>
         </n-space>
       </n-radio-group>
+      <p class="errorMessage" v-if="errorMessage">{{ errorMessage }}</p>
     </n-space>
   </n-space>
 </template>
@@ -46,7 +47,8 @@ export default defineComponent({
   },
   data() {
     return {
-      value: ref(null)
+      value: ref(null),
+      errorMessage: ref('')
     }
   },
   setup(props, context) {
@@ -55,8 +57,10 @@ export default defineComponent({
       userTypeSetRef.value = true
       context.emit('userTypeSelected', val)
     }
-    const handleValidateClick = () => {
+    function handleValidateClick() {
       if(!userTypeSetRef.value) {
+        this.errorMessage = 'Selecteer een account type.'
+        console.log(this.errorMessage)
         throw new TypeError("Please select your user type")
       }
       return Promise.resolve(userTypeSetRef.value)
@@ -114,6 +118,9 @@ p {
   text-align: left;
   white-space: normal;
   font-family: "Roboto";
+}
+.errorMessage {
+  color: red;
 }
 .steps-container .n-steps .n-step-content .n-step-content-header {
   display: none !important;

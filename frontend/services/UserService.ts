@@ -1,22 +1,32 @@
 import axios from "axios";
 import getService from "~/services/InternshipService";
 
-export async function postNewUser(data) {
+async function postNewUser(data) {
 
-const response = await axios.post('http://localhost:3001/user', data);
-return response.data;
+  const response = await axios.post('http://localhost:3001/user', data);
+  return response.data;
 }
 
-export async function getAllUsers() {
+async function getAllUsers() {
   const response = await axios.get('http://localhost:3001/user');
   return response.data;
 }
-export async function getUser(id) {
-  const response = await axios.get(`http://localhost:3001/user/${id}`);
+
+async function getUser(id) {
+  const response = await axios.get(`http://localhost:3001/User/${id}`);
+  return response.data
+}
+
+async function postNewCompany(data) {
+  const response = await axios.post('http://localhost:3001/Company', data)
   return response.data;
 }
+
 const userService = {
+  postNewUser,
   getAllUsers,
-  getUser
+  getUser,
+  postNewCompany
 }
+
 export default userService

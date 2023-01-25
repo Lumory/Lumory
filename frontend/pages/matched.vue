@@ -32,8 +32,13 @@
 <script lang="ts">
 import axios from 'axios';
 import {NScrollbar, NCard, NSpace, useMessage} from "naive-ui";
-import {defineComponent, ref} from 'vue';
-import getService from "../services/InternshipService"
+import { defineComponent, ref } from 'vue';
+const message = useMessage();
+
+definePageMeta({
+	middleware: "check-auth"
+})
+
 export default defineComponent({
   data() {
     return {
