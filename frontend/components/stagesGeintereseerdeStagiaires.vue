@@ -69,7 +69,7 @@ export default {
       pagination: false,
     };
   },
-  name: "geintereseerdeStagiaires",
+  name: "stagesGeintereseerdeStagiaires",
   components: {
     NDataTable,
     NSpace,

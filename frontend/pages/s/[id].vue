@@ -21,7 +21,7 @@
           </n-scrollbar>
         </n-tab-pane>
         <n-tab-pane name="Stagiaires" tab="Stagiaires">
-          <GeintereseerdeStagiaires/>
+          <stagesGeintereseerdeStagiaires/>
         </n-tab-pane>
       </n-tabs>
   </Container>

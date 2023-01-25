@@ -9,17 +9,16 @@
     <!-- This Lumory Container contains and shows all matched interns -->
     <Container class="card-container" v-if="stages.length">
       <n-scrollbar>
-        <n-grid>
-
-        </n-grid>
         <n-space class="scroll" trigger="none">
             <!-- V-for looping through card component, then shows it in an array on the left-hand side on index -->
           <a :href="`/s/${matchedintern.id}`"
              v-for="(matchedintern) in stages"
           >
             <MatchedCardForCompany
-                style="border-radius: 3px; margin-bottom: 15px"
-                :intern="matchedintern"></MatchedCardForCompany>
+                style="border-radius: 3px;
+                margin-bottom: 15px"
+                :intern="matchedintern"
+            />
           </a>
         </n-space>
       </n-scrollbar>
@@ -34,7 +33,6 @@
   </n-message-provider>
 </template>
 <script lang="ts">
-import axios from 'axios';
 import {NScrollbar, NCard, NSpace, useMessage, NGrid} from "naive-ui";
 import {defineComponent, ref} from 'vue';
 import getService from "../services/InternshipService"
@@ -58,8 +56,15 @@ export default defineComponent({
   name: 'Stages',
   // intercepts axios request. Upon error, shows error message on index
   mounted: function () {
+    const message = useMessage()
     getService.getInternships().then(response => {
       this.stages = response
+    }).catch(error => {
+      if (error.response.status === 404) {
+        message.error('Geen internetverbinding')
+      } else {
+        message.error('Neem contact op met Lumory')
+      }
     })
   },
   methods: {
