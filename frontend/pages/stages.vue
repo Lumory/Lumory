@@ -11,7 +11,7 @@
       <n-scrollbar>
         <n-space class="scroll" trigger="none">
             <!-- V-for looping through card component, then shows it in an array on the left-hand side on index -->
-          <a :href="`/s/${matchedintern.id}`"
+          <nuxt-link :to="`/s/${matchedintern.id}`"
              v-for="(matchedintern) in stages"
           >
             <MatchedCardForCompany
@@ -19,7 +19,7 @@
                 margin-bottom: 15px"
                 :intern="matchedintern"
             />
-          </a>
+          </nuxt-link>
         </n-space>
       </n-scrollbar>
     </Container>
