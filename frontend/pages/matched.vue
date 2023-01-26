@@ -32,7 +32,9 @@
 <script lang="ts">
 import axios from 'axios';
 import {NScrollbar, NCard, NSpace, useMessage} from "naive-ui";
+import getService from "../services/InternshipService";
 import { defineComponent, ref } from 'vue';
+import internshipService from "../services/InternshipService";
 const message = useMessage();
 
 definePageMeta({
@@ -56,8 +58,15 @@ export default defineComponent({
   name: 'Matched',
   // intercepts axios request. Upon error, shows error message on index
   mounted: function () {
-    getService.getInternships().then(response => {
+    const message = useMessage()
+    internshipService.getInternships().then(response => {
       this.matchedresults = response
+    }).catch(error => {
+      if (error.response.status === 404) {
+        message.error('Geen internetverbinding')
+      } else {
+        message.error('Neem contact op met Lumory')
+      }
     })
   },
   methods: {

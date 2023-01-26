@@ -29,10 +29,12 @@
 
 <script>
 import getService from "../../services/InternshipService";
-import {NCard, NTabs,NTabPane,NScrollbar,NGrid,NGridItem, NSpace} from "naive-ui"
+import {NCard, NTabs, NTabPane, NScrollbar, NGrid, NGridItem, NSpace, useMessage} from "naive-ui"
+import internshipService from "../../services/InternshipService";
 export default {
   data() {
     return {
+      message: useMessage(),
       stages: ''
     }
   },
@@ -46,9 +48,16 @@ export default {
     NSpace
   },
   mounted: async function () {
+    const message = useMessage()
     const route = useRoute()
-    await getService.getInternship(route.params.id).then(response => {
+    await internshipService.getInternship(route.params.id).then(response => {
       this.stages = response
+    }).catch(error => {
+      if (error.response.status === 404) {
+        message.error('Geen internetverbinding')
+      } else {
+        message.error('Neem contact op met Lumory')
+      }
     })
   },
   name: "s"

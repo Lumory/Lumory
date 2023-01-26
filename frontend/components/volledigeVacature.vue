@@ -3,20 +3,20 @@
 <template>
   <n-space vertical>
     <n-card>
-    <n-space class="cardTitle">Dit ga je leren tijdens je stage</n-space>
+    <n-space class="card-title">Dit ga je leren tijdens je stage</n-space>
     </n-card>
     <n-card>
-      <n-space class="cardTitle">
+      <n-space class="card-title">
         {{stages.problem}}
       </n-space>
     </n-card>
 
     <n-card>
       <template #header>
-        <n-space class="cardTitle">
+        <n-space class="card-title">
           {{ stages.function }}
         </n-space>
-        <n-space class="cardCity">
+        <n-space class="card-city">
           {{ stages.city }}, {{stages.streetAddress}}
         </n-space>
       </template>
@@ -33,7 +33,7 @@
       <n-space style="font-weight: bolder">
         Volledige Vacaturetekst
       </n-space>
-      <n-space class="descriptionText">
+      <n-space class="description-text">
         {{stages.problemDescription }}
       </n-space>
     </n-card>
@@ -42,11 +42,13 @@
 
 <script>
 import {PersonSharp} from "@vicons/ionicons5";
-import {NCard, NTag, NSpace} from "naive-ui";
+import {NCard, NTag, NSpace, useMessage} from "naive-ui";
 import getService from "../services/InternshipService";
+import internshipService from "../services/InternshipService";
 export default {
   data() {
     return {
+      message: useMessage(),
       stages: ''
     }
   },
@@ -57,9 +59,16 @@ export default {
     NSpace
   },
   mounted: async function () {
+    const message = useMessage()
     const route = useRoute()
-    await getService.getInternship(route.params.id).then(response => {
+    await internshipService.getInternship(route.params.id).then(response => {
       this.stages = response
+    }).catch(error => {
+      if (error.response.status === 404) {
+        message.error('Geen internetverbinding')
+      } else {
+        message.error('Neem contact op met Lumory')
+      }
     })
   },
 
@@ -76,17 +85,17 @@ export default {
   height: 20px;
 }
 
-.cardTitle {
+.card-title {
   font-weight: 800;
   font-size: 32px;
   line-height: 1;
 }
 
-.descriptionText {
+.description-text {
   font-size: 14px;
 }
 
-.cardCity {
+.card-city {
   color: grey;
   font-size: 14px;
 }

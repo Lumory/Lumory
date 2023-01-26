@@ -6,10 +6,10 @@
     >
       <template #header>
         <ellipsis-vertical size="20" class="field-header__person-icon"/>
-        <n-space class="internshipText">
+        <n-space class="internship-text">
           {{ this.internship.problem }}
         </n-space>
-        <n-space class="cityText">
+        <n-space class="city-text">
           {{ this.internship.city }}
         </n-space>
       </template>
@@ -28,7 +28,7 @@
           -
           {{ this.internship?.sectorDescription }}
         </n-space>
-        <n-space class="lastPostedText">
+        <n-space class="last-posted-text">
           15 dagen geleden geplaatst
         </n-space>
       </n-space>
@@ -48,7 +48,7 @@ export default {
     NCard,
     NSpace,
   },
-  name: "MatchedCard",
+  name: "matchedCard",
 
   // object
   props: {
@@ -62,7 +62,7 @@ export default {
 }
 </script>
 <style scoped>
-.internshipText {
+.internship-text {
   font-size: 32px;
   font-weight: bolder;
   padding: 0;
@@ -70,11 +70,11 @@ export default {
   line-height: 1;
 }
 
-.lastPostedText {
+.last-posted-text {
   color: grey;
 }
 
-.cityText {
+.city-text {
   color: grey;
   font-size: 14px;
   padding: 0;

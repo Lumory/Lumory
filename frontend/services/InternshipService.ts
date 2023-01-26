@@ -9,9 +9,9 @@ async function getInternship(id) {
     return response.data
 }
 
-const getService = {
+const internshipService  = {
     getInternships,
     getInternship
 }
 
-export default getService
+export default internshipService

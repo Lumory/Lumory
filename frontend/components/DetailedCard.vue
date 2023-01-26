@@ -5,10 +5,10 @@
     <!-- Titel of matched interns in Lumory Container -->
     <n-card>
       <template #header>
-        <n-space class="cardTitle">
+        <n-space class="card-title">
           {{ internship?.problem }}
         </n-space>
-        <n-space class="cardCity">
+        <n-space class="card-city">
           {{ internship?.city }}
         </n-space>
       </template>
@@ -25,7 +25,7 @@
       <n-space style="font-weight: bolder">
         Volledige Vacaturetekst
       </n-space>
-      <n-space class="descriptionText">
+      <n-space class="description-text">
         {{ this.internship?.problemDescription }}
       </n-space>
     </n-card>
@@ -57,17 +57,17 @@ export default {
   height: 20px;
 }
 
-.cardTitle {
+.card-title {
   font-weight: 800;
   font-size: 32px;
   line-height: 1;
 }
 
-.descriptionText {
+.description-text {
   font-size: 14px;
 }
 
-.cardCity {
+.card-city {
   color: grey;
   font-size: 14px;
 }

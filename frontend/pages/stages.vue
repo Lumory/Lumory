@@ -37,6 +37,7 @@ import {NScrollbar, NCard, NSpace, useMessage, NGrid} from "naive-ui";
 import {defineComponent, ref} from 'vue';
 import getService from "../services/InternshipService"
 import MatchedCardForCompany from "../components/MatchedCardforCompany"
+import internshipService from "../services/InternshipService";
 export default defineComponent({
   data() {
     return {
@@ -57,7 +58,7 @@ export default defineComponent({
   // intercepts axios request. Upon error, shows error message on index
   mounted: function () {
     const message = useMessage()
-    getService.getInternships().then(response => {
+    internshipService.getInternships().then(response => {
       this.stages = response
     }).catch(error => {
       if (error.response.status === 404) {
