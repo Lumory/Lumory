@@ -1,6 +1,5 @@
 <!-- main index for matched interns -->
 <template>
-  <n-message-provider>
     <!-- Titel of matched students in Lumory Container -->
     <Container class="input-container">
       <h1 class="title">Mijn stages</h1>
@@ -30,7 +29,6 @@
         </n-space>
       </template>
     </n-card>
-  </n-message-provider>
 </template>
 <script lang="ts">
 import {NScrollbar, NCard, NSpace, useMessage, NGrid} from "naive-ui";
