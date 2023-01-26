@@ -43,7 +43,6 @@
 <script>
 import {PersonSharp} from "@vicons/ionicons5";
 import {NCard, NTag, NSpace, useMessage} from "naive-ui";
-import getService from "../services/InternshipService";
 import internshipService from "../services/InternshipService";
 export default {
   data() {

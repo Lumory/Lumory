@@ -1,5 +1,4 @@
 import axios from "axios";
-import getService from "~/services/InternshipService";
 
 async function postNewUser(data) {
 

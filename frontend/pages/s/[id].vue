@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import getService from "../../services/InternshipService";
 import {NCard, NTabs, NTabPane, NScrollbar, NGrid, NGridItem, NSpace, useMessage} from "naive-ui"
 import internshipService from "../../services/InternshipService";
 export default {

@@ -1,10 +1,8 @@
 <!-- child component for all matched interns for a user (intern) -->
-
-<template>
+<template #header>
   <n-space vertical>
     <n-card :bordered="false" class="matched-container" hoverable
     >
-      <template #header>
         <ellipsis-vertical size="20" class="field-header__person-icon"/>
         <n-space class="internship-text">
           {{ this.internship.problem }}
@@ -12,17 +10,14 @@
         <n-space class="city-text">
           {{ this.internship.city }}
         </n-space>
-      </template>
       <n-space>
         <n-tag class="tag">Marketing</n-tag>
         <n-tag class="tag">Advertising</n-tag>
       </n-space>
-      <template class="tutoring-container">
-        <n-space>
+        <n-space class="tutoring-container">
           <person-sharp size="20" class="field-header__person-icon"/>
           <n-space>Gemiddelde begeleiding</n-space>
         </n-space>
-      </template>
       <n-space vertical>
         <n-space>
           -

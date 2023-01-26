@@ -35,7 +35,6 @@
 <script lang="ts">
 import {NScrollbar, NCard, NSpace, useMessage, NGrid} from "naive-ui";
 import {defineComponent, ref} from 'vue';
-import getService from "../services/InternshipService"
 import MatchedCardForCompany from "../components/MatchedCardforCompany"
 import internshipService from "../services/InternshipService";
 export default defineComponent({
