@@ -37,7 +37,6 @@ namespace Lumory.Migrations
                         .HasColumnType("varchar(256)");
 
                     b.Property<int>("Kvk")
-                        .HasMaxLength(10)
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -178,6 +177,15 @@ namespace Lumory.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("SkillsToLearnIntern")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("SkillsToLearnInternDescription")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Staff")
                         .IsRequired()
                         .HasMaxLength(128)
@@ -253,7 +261,6 @@ namespace Lumory.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("UserType")
-                        .IsRequired()
                         .HasMaxLength(128)
                         .HasColumnType("varchar(128)");
 

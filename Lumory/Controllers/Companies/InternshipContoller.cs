@@ -10,10 +10,12 @@ namespace Lumory.Controllers.Companies;
 public class InternshipController : ControllerBase
 {
     private InternshipService _service;
+    private CompanyService _service2;
 
-    public InternshipController(InternshipService service)
+    public InternshipController(InternshipService service, CompanyService service2)
     {
         _service = service;
+        _service2 = service2;
     }
     
     [HttpGet]
@@ -53,6 +55,12 @@ public class InternshipController : ControllerBase
     [HttpPost("Companies/{CompanyId}/Internship")]
     public IActionResult Create( int CompanyId, [FromBody] Internship internship)
     {
+        var company = _service2.FindCompany(CompanyId);
+
+        if (company == null)
+        {
+            return NotFound();
+        }    
         internship = _service.CreateInternship(internship, CompanyId);
         
         return Ok(new InternshipDto(internship));

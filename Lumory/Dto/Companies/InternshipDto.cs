@@ -10,6 +10,8 @@ public class InternshipDto
     public string ProblemDescription { get; set; }
     public string SkillsIntern { get; set; }
     public string SkillsInternDescription { get; set; }
+    public string SkillsToLearnIntern { get; set; }
+    public string SkillsToLearnInternDescription { get; set; }
     public string QualitiesIntern { get; set; }
     public string QualitiesInternDescription { get; set; }
     public string Sector { get; set; }
@@ -45,6 +47,8 @@ public class InternshipDto
         ProblemDescription = internship.ProblemDescription;
         SkillsIntern = internship.SkillsIntern;
         SkillsInternDescription = internship.SkillsInternDescription;
+        SkillsToLearnIntern = internship.SkillsToLearnIntern;
+        SkillsToLearnInternDescription = internship.SkillsToLearnInternDescription;
         QualitiesIntern = internship.QualitiesIntern;
         QualitiesInternDescription = internship.QualitiesInternDescription;
         Sector = internship.Sector;

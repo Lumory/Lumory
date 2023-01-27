@@ -39,6 +39,8 @@ public class InternshipService
         oldInternship.ProblemDescription = newInternship.ProblemDescription;
         oldInternship.SkillsIntern = newInternship.SkillsIntern;
         oldInternship.SkillsInternDescription = newInternship.SkillsInternDescription;
+        oldInternship.SkillsToLearnIntern = newInternship.SkillsToLearnIntern;
+        oldInternship.SkillsToLearnInternDescription = newInternship.SkillsToLearnInternDescription;
         oldInternship.QualitiesIntern = newInternship.QualitiesIntern;
         oldInternship.QualitiesInternDescription = newInternship.QualitiesInternDescription;
         oldInternship.Sector = newInternship.Sector;
