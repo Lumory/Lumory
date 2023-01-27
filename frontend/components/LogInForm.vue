@@ -10,7 +10,7 @@
 				ref="formRef"
 			>
 				<n-form-item label="E-mail" path="email">
-					<n-input v-model:value="formValue.email" placeholder="E-mail" />
+					<n-input v-model:value="formValue.email" placeholder="Bijv. gebruiker@email.com" />
 				</n-form-item>
 				<n-form-item label="Wachtwoord" path="password">
 					<n-input
@@ -80,7 +80,7 @@ export default defineComponent({
 				email: {
 					required: true,
 					message: 'Incorrecte e-mail',
-					trigger: ['input', 'blur'],
+					trigger: ['blur'],
 					validator(rule: FormItemRule, value: string) {
 						if (
 							!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
