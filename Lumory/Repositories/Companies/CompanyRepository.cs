@@ -6,30 +6,36 @@ namespace Lumory.Repositories.Companies;
 public class CompanyRepository
 {
     private ApplicationDbContext _ctx;
+    
+    //Just here for user testing
+    public CompanyRepository()
+    {}
+
 
     public CompanyRepository(ApplicationDbContext ctx)
     {
         _ctx = ctx;
     }
 
-    public List<Company> GetCompanies()
+    public virtual List<Company> GetCompanies()
     {
         return _ctx.Companies.ToList();
     }
 
-    public Company? FindCompanyById(int id)
+    public virtual Company? FindCompanyById(int id)
     {
         return _ctx.Companies.Where((Company c) => c.Id == id).SingleOrDefault();
     }
 
-    public void RemoveCompany(Company company)
+    public virtual void RemoveCompany(Company company)
     {
         _ctx.Companies.Remove(company);
 
         _ctx.SaveChanges();
+        
     }
 
-    public Company CreateCompany(Company company)
+    public virtual Company CreateCompany(Company company)
     {
         _ctx.Companies.Add(company);
 
@@ -38,7 +44,7 @@ public class CompanyRepository
         return company;
     }
     
-    public Company UpdateCompany(Company company)
+    public virtual Company UpdateCompany(Company company)
     {
         _ctx.Companies.Update(company);
 

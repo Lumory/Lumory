@@ -61,7 +61,7 @@ public class UserController : ControllerBase
 
         _service.DeleteUser(user);
 
-        return NoContent();
+        return Ok("User Deleted");
     }
 
     [HttpPut]
