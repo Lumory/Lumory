@@ -117,6 +117,34 @@ public class UserServiceTest
         }
 
     [Test]
+        // Test FindUserByEmail, get user by email
+        public void GetUserByEmailTest()
+        {
+            //Arrange
+            var user = new User()
+            {
+                Id = 99999,
+                FirstName = "Jan",
+                LastName = "Jansen",
+                Email = "Jan@Jansen",
+                UserType = "Student",
+                Password = "TestPassword",
+                CreatedAt = DateTime.Now
+            };
+            
+            var mock = new Mock<UserRepository>();
+            mock.Setup(c => c.FindUserByEmail(user.Email)).Returns(user);
+                
+            //Act
+            UserService userService = new UserService(mock.Object);
+            var result = userService.FindUserByEmail(user.Email); 
+                
+            //Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(user, result);
+        }
+
+    [Test]
         // Test UpdateUser, update user by model
         public void UpdateUserTest()
         {
