@@ -6,13 +6,17 @@ namespace Lumory.Services.Users;
 public class UserService
 {
     private UserRepository _repository;
+    
+    //Just here for testing
+    public UserService()
+    {}
 
     public UserService(UserRepository repository)
     {
         _repository = repository;
     }
 
-    public User CreateUser(User user)
+    public virtual User CreateUser(User user)
     {
         user.UserType = "Student";
         user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
@@ -21,12 +25,12 @@ public class UserService
         return _repository.CreateUser(user);
     }
     
-    public List<User> ListUsers()
+    public virtual List<User> ListUsers()
     {
         return _repository.GetUsers();
     }
 
-    public User? FindUser(int id)
+    public virtual User? FindUser(int id)
     {
         return _repository.FindUserById(id);
     }
@@ -36,12 +40,12 @@ public class UserService
         return _repository.FindUserByEmail(email);
     }
 
-    public void DeleteUser(User user)
+    public virtual void DeleteUser(User user)
     {
         _repository.RemoveUser(user);
     }
 
-    public User UpdateUser(User oldUser, User newUser)
+    public virtual User UpdateUser(User oldUser, User newUser)
     {
         oldUser.FirstName = newUser.FirstName;
         oldUser.LastName = newUser.LastName;

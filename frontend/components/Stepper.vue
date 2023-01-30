@@ -41,7 +41,7 @@ import Step2 from "./SignUpStep2";
 import Step3 from "./SignUpStep2Internship";
 import Step4 from "./SignUpInternshipCompanyContactPerson";
 import {NButton, NSpace, useMessage} from "naive-ui"
-import {postNewCompany, postNewUser} from "../services/UserService";
+import userService from "../services/UserService";
 import {ref} from "vue";
 
 const studentSteps = [
@@ -153,6 +153,7 @@ export default {
                     console.log(error)
                     this.message.error(error.message)
                   })
+
             })
             .catch((val) => {
               console.log(val)
@@ -163,7 +164,7 @@ export default {
             .then((formValues) => {
               this.assignFormValues(formValues)
               console.log(internshipCompanyData)
-              postNewCompany(internshipCompanyData).then(() => {
+              userService.postNewCompany(internshipCompanyData).then(() => {
                 console.log('New company created')
                 this.message.success('New company created')
               })

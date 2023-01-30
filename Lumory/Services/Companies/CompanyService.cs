@@ -7,35 +7,39 @@ namespace Lumory.Services.Companies;
 public class CompanyService
 {
     private CompanyRepository _repository;
+    
+    //Just here for user testing
+    public CompanyService()
+    {}
 
     public CompanyService(CompanyRepository repository)
     {
         _repository = repository;
     }
 
-    public List<Company> ListCompanies()
+    public virtual List<Company> ListCompanies()
     {
         return _repository.GetCompanies();
     }
 
-    public Company? FindCompany(int id)
+    public virtual Company? FindCompany(int id)
     {
         return _repository.FindCompanyById(id);
     }
 
-    public void DeleteCompany(Company company)
+    public virtual void DeleteCompany(Company company)
     {
         _repository.RemoveCompany(company);
     }
 
-    public Company CreateCompany(Company company)
+    public virtual Company CreateCompany(Company company)
     {
         company.Password = BCrypt.Net.BCrypt.HashPassword(company.Password);
         
         return _repository.CreateCompany(company);
     }
 
-    public Company UpdateCompany(Company oldCompany, Company newCompany)
+    public virtual Company UpdateCompany(Company oldCompany, Company newCompany)
     {
         oldCompany.Email = newCompany.Email;
         oldCompany.Name = newCompany.Name;

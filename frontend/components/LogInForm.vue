@@ -87,7 +87,6 @@ export default defineComponent({
 								value
 							)
 						) {
-							console.log('ongeldige email');
 							return new Error('Age should be an integer');
 						}
 					},
@@ -113,8 +112,8 @@ export default defineComponent({
 								maxAge: 30000,
 								sameSite: 'strict'
 							})
-							user.value = response
-							navigateTo(`/u/${user.value['id']}`)
+							jwt.value = response
+							navigateTo(`/u/${jwt.value['id']}`)
 						})
 						.catch(error => {
 							if (error.response.status === 401) {
@@ -122,10 +121,9 @@ export default defineComponent({
 							} else if (error.response.status === 404) {
 								message.error('Invalid email address')
 							} else {
-								message.error('Please message our customer service')
+								message.error('User does not exist')
 							}
 						})
-						
 					} else {
 						message.error('Ongeldig wachtwoord en/of e-mail adres');
 					}

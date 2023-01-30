@@ -1,17 +1,22 @@
+<!-- main index for matched interns -->
 <template>
   <n-message-provider>
+    <!-- Titel of matched interns in Lumory Container -->
     <Container class="input-container">
       <h1 class="title">Gematchte stages</h1>
     </Container>
     <div class="underline"/>
+    <!-- This Lumory Container contains and shows all matched intern cards -->
     <Container class="card-container" v-if="matchedresults.length">
       <n-scrollbar class="scroll" style="max-height: 700px; padding-right:15px" trigger="none">
         <n-space vertical>
+          <!-- V-for looping through card component, then shows it in an array on the left-hand side on index -->
           <MatchedCard v-for="(matchedresult, index) in matchedresults" style="border-radius: 3px; margin-bottom: 15px"
                        @click="cardClick(index)" :internship="matchedresult"/>
         </n-space>
       </n-scrollbar>
       <n-scrollbar style="max-height: 700px; padding-right:15px" trigger="none">
+        <!-- On-click result; shows more detail about selected/clicked internship -->
         <DetailedCard :internship="matchedresults[this.currentHighlightedInternship]"/>
       </n-scrollbar>
     </Container>
@@ -27,13 +32,21 @@
 <script lang="ts">
 import axios from 'axios';
 import {NScrollbar, NCard, NSpace, useMessage} from "naive-ui";
+import getService from "../services/InternshipService";
 import { defineComponent, ref } from 'vue';
+import internshipService from "../services/InternshipService";
 const message = useMessage();
+
+definePageMeta({
+	middleware: "check-auth"
+})
+
 export default defineComponent({
   data() {
     return {
+      message: useMessage(),
       clicked: false,
-      matchedresults: [],
+      matchedresults: '',
       currentHighlightedInternship: 0,
     }
   },
@@ -43,27 +56,18 @@ export default defineComponent({
     NSpace,
   },
   name: 'Matched',
+  // intercepts axios request. Upon error, shows error message on index
   mounted: function () {
-    axios.interceptors.response.use(undefined, (error => {
-      if (error.message === 'Network Error' && !error.response) {
-        alert('Er is een fout opgetreden. Herlaad deze pagina.')
+    const message = useMessage()
+    internshipService.getInternships().then(response => {
+      this.matchedresults = response
+    }).catch(error => {
+      if (error.response.status === 404) {
+        message.error('Geen internetverbinding')
+      } else {
+        message.error('Neem contact op met Lumory')
       }
-    }))
-    axios.get('http://localhost:3001/Company', {})
-        .then(response =>
-            this.matchedresults = response.data)
-        .catch(error => {
-          if (error.response) {
-            // The request was made but no response was received
-            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-            // http.ClientRequest in node.js
-            console.log(error.request);
-          } else {
-            // Something happened in setting up the request that triggered an Error
-            console.log('Error', error.message);
-          }
-          console.log(error.config);
-        });
+    })
   },
   methods: {
     cardClick(index) {

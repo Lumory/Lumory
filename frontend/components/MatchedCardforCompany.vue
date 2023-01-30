@@ -1,27 +1,31 @@
-<!-- child component for all matched interns for a user (intern) -->
-<template #header>
-  <n-space vertical>
+<!-- child component for all matched interns for a company (internship company) -->
+<template>
+  <n-space>
     <n-card :bordered="false" class="matched-container" hoverable
     >
+      <template #header>
         <ellipsis-vertical size="20" class="field-header__person-icon"/>
         <n-space class="internship-text">
-          {{ this.internship.problem }}
+          {{ this.intern.function }}
         </n-space>
         <n-space class="city-text">
-          {{ this.internship.city }}
+          {{ this.intern.city }}, {{this.intern.streetAddress}}
         </n-space>
+      </template>
       <n-space>
         <n-tag class="tag">Marketing</n-tag>
         <n-tag class="tag">Advertising</n-tag>
       </n-space>
-        <n-space class="tutoring-container">
+      <template class="tutoring-container">
+        <n-space>
           <person-sharp size="20" class="field-header__person-icon"/>
           <n-space>Gemiddelde begeleiding</n-space>
         </n-space>
+      </template>
       <n-space vertical>
         <n-space>
           -
-          {{ this.internship?.sectorDescription }}
+          {{ this.intern?.sectorDescription }}
         </n-space>
         <n-space class="last-posted-text">
           15 dagen geleden geplaatst
@@ -33,7 +37,7 @@
 
 <script>
 import {PersonSharp, EllipsisVertical} from "@vicons/ionicons5";
-import {NTag, NCard, NSpace} from "naive-ui";
+import {NTag, NCard, NSpace, NGrid} from "naive-ui";
 
 export default {
   components: {
@@ -42,16 +46,17 @@ export default {
     NTag,
     NCard,
     NSpace,
+    NGrid
   },
-  name: "matchedCard",
+  name: "MatchedCardForCompany",
 
   // object
   props: {
-    internship: ''
+    intern: ''
   },
   data() {
     return {
-      currentHighlightedInternship: ""
+      currentHighlightedIntern: ""
     }
   },
 }
@@ -80,14 +85,13 @@ export default {
   color: grey;
 }
 
-.tutoring-container {
-  display: flex;
-  flex-direction: row;
-}
-
 .field-header__person-icon {
   height: 20px;
   float: right
+}
+
+.matched-container {
+  width: 380px;
 }
 
 .matched-container:hover {

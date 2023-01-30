@@ -31,6 +31,14 @@ public class Internship
     
     [Required]
     [StringLength(256)]
+    public string SkillsToLearnIntern { get; set; }
+    
+    [Required]
+    [Column(TypeName = "text")]
+    public string SkillsToLearnInternDescription { get; set; }
+    
+    [Required]
+    [StringLength(256)]
     public string QualitiesIntern { get; set; }
     
     [Required]

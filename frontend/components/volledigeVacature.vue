@@ -2,14 +2,22 @@
 
 <template>
   <n-space vertical>
-    <!-- Titel of matched interns in Lumory Container -->
+    <n-card>
+    <n-space class="card-title">Dit ga je leren tijdens je stage</n-space>
+    </n-card>
+    <n-card>
+      <n-space class="card-title">
+        {{stages.problem}}
+      </n-space>
+    </n-card>
+
     <n-card>
       <template #header>
         <n-space class="card-title">
-          {{ internship?.problem }}
+          {{ stages.function }}
         </n-space>
         <n-space class="card-city">
-          {{ internship?.city }}
+          {{ stages.city }}, {{stages.streetAddress}}
         </n-space>
       </template>
       <n-space>
@@ -26,7 +34,7 @@
         Volledige Vacaturetekst
       </n-space>
       <n-space class="description-text">
-        {{ this.internship?.problemDescription }}
+        {{stages.problemDescription }}
       </n-space>
     </n-card>
   </n-space>
@@ -34,25 +42,44 @@
 
 <script>
 import {PersonSharp} from "@vicons/ionicons5";
-import {NCard, NTag, NSpace} from "naive-ui";
-
+import {NCard, NTag, NSpace, useMessage} from "naive-ui";
+import internshipService from "../services/InternshipService";
 export default {
+  data() {
+    return {
+      message: useMessage(),
+      stages: ''
+    }
+  },
   components: {
     PersonSharp,
     NCard,
     NTag,
     NSpace
   },
-  name: "DetailedCard",
+  mounted: async function () {
+    const message = useMessage()
+    const route = useRoute()
+    await internshipService.getInternship(route.params.id).then(response => {
+      this.stages = response
+    }).catch(error => {
+      if (error.response.status === 404) {
+        message.error('Geen internetverbinding')
+      } else {
+        message.error('Neem contact op met Lumory')
+      }
+    })
+  },
+
+  name: "VolledigeVacature",
   matchedresults: [],
   props: {
     internship: {}
   },
+
 }
 </script>
 <style scoped>
-
-
 .field-header__person-icon {
   height: 20px;
 }
