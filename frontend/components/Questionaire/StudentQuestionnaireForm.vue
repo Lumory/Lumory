@@ -80,51 +80,73 @@ export default defineComponent({
       days: ''
     });
     const rules: FormRules = {
-      firstName: [
+      city: [
         {
           required: true,
-          message: 'Voornaam is verplicht.',
+          message: 'Stad is verplicht.',
           trigger: ['blur']
         },
       ],
-      lastName: [
+      educationalInstitution: [
         {
           required: true,
-          message: 'Achternaam is verplicht.',
+          message: 'Onderwijsinstantie is verplicht.',
           trigger: ['blur']
         },
       ],
-      email: [
+      study: [
         {
           required: true,
-          validator (rule: FormItemRule, value: string) {
-            if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)) {
-              console.log('ongeldige email')
-              return new Error('Invalid email format')
-            }
-          },
-          message: 'Vul een geldig email adres in.',
-          trigger: ['blur']
-        }
-      ],
-      password: [
-        {
-          required: true,
-          message: 'Wachtwoord is verplicht.',
+          message: 'Opleiding is verplicht.',
           trigger: ['blur']
         },
       ],
-      repeatPassword: [
-        {
-          validator (rule: FormItemRule, value: string) {
-            return value == formValue.value.password;
-          },
-          message: 'Wachtwoord komt niet overeen.',
-          trigger: ['blur']
-        },
+      studyDirection: [
         {
           required: true,
-          message: 'Herhaal wachtwoord is verplicht.',
+          message: 'Studierichting is verplicht.',
+          trigger: ['blur']
+        },
+      ],
+      studyNiveau: [
+        {
+          required: true,
+          message: 'Opleiding niveau is verplicht.',
+          trigger: ['blur']
+        },
+      ],
+      averageGrade: [
+        {
+          required: true,
+          message: 'Gemiddeld cijfer is verplicht.',
+          trigger: ['blur']
+        },
+      ],
+      internshipType: [
+        {
+          required: true,
+          message: 'Stage type is verplicht.',
+          trigger: ['blur']
+        },
+      ],
+      dateStart: [
+        {
+          required: true,
+          message: 'Startdatum is verplicht.',
+          trigger: ['blur']
+        },
+      ],
+      hours: [
+        {
+          required: true,
+          message: 'Uren is verplicht.',
+          trigger: ['blur']
+        },
+      ],
+      days: [
+        {
+          required: true,
+          message: 'Dagen is verplicht.',
           trigger: ['blur']
         },
       ],

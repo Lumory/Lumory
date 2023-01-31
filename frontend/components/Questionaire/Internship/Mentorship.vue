@@ -1,45 +1,57 @@
 <template>
   <n-space vertical align="center" item-style="width: 100%">
-    <h1>Aan welk type vraagstuk zou je willen werken?</h1>
+    <h1>Hoe ziet de begeleiding van de stagiaire eruit?</h1>
     <p class="questionnaire-heading__subtitle">(Max. {{maxSelectedItems}} keuzes)</p>
     <n-form ref="formRef" :model="formValue" size="large" :rules="rules" class="questionnaire-grid">
-      <n-form-item class="questionnaire-card__container" path="problem" v-for="(problem, key, index) in questionnaire.problem" :key="key">
-        <QuestionnaireItemCard :skill="problem" size="small" ref="itemRefs" @click="onQuestionnaireItemCardClick(key, index)"/>
+      <n-form-item class="questionnaire-card__container" v-for="(skill, key, index) in questionnaire.mentorship" :key="key">
+        <QuestionnaireItemCard :skill="skill" size="small" ref="itemRefs" @click="onQuestionnaireItemCardClick(key, index)"/>
       </n-form-item>
+      <div class="questionnaire-description">
+        <h3 class="questionnaire-description__header">Beschrijf de begeleiding</h3>
+        <n-form-item class="questionnaire-description__field" path="mentorshipDescription">
+          <n-input
+              v-model:value="formValue.mentorshipDescription"
+              placeholder="Geef een omschrijving."
+              type="textarea"
+          />
+        </n-form-item>
+      </div>
     </n-form>
   </n-space>
 </template>
 
 <script lang="ts">
-import {NSpace, NForm, NFormItem,  NRadioGroup, NRadio, NButton, FormInst, FormRules, useMessage} from 'naive-ui'
+import {NSpace, NForm, NFormItem, NInput, NRadioGroup, NRadio, NButton, FormInst, FormRules, useMessage} from 'naive-ui'
 import {defineComponent, ref} from "vue";
-import questionnaireData from '../../assets/json/questionaire.json'
+import questionnaireData from '../../../assets/json/questionaire.json'
 import QuestionnaireItemCard from "~/components/QuestionnaireItemCard.vue";
 
 interface ModelType {
-  problem: String[]
+  mentorship: String[]
+  mentorshipDescription: String
 }
 
 export default defineComponent({
   components: {
     QuestionnaireItemCard,
-    NSpace, NForm, NFormItem, NButton, NRadio, NRadioGroup
+    NSpace, NForm, NFormItem, NButton, NRadio, NRadioGroup, NInput
   },
   setup() {
     const formRef = ref<FormInst | null>(null)
     const itemRefs = ref([])
     let selectedItems : String[] = []
-    const maxSelectedItems = 1
+    const maxSelectedItems = 2
 
     let formValue = ref(<ModelType>{
-      problem: [],
+      mentorship: [],
+      mentorshipDescription: ''
     });
 
-    function onQuestionnaireItemCardClick(key, index) {
+    function onQuestionnaireItemCardClick (key, index) {
       if (itemRefs.value[index].selected === true) {
         selectedItems = selectedItems.filter(item => item !== key)
         itemRefs.value[index].toggleSelected()
-        formValue.value.problem = selectedItems
+        formValue.value.mentorship = selectedItems
         return
       }
       if(selectedItems.length >= maxSelectedItems) {
@@ -48,32 +60,27 @@ export default defineComponent({
       }
       selectedItems.push(key)
       itemRefs.value[index].toggleSelected()
-      formValue.value.problem = selectedItems
+      formValue.value.mentorship = selectedItems
     }
 
     const rules: FormRules = {
-      problem: [
+      mentorshipDescription: [
         {
           required: true,
-          message: 'Vraagstuk is verplicht.',
-          validator (rule, value: []) {
-            if (value.length < 1) {
-              console.log(value)
-              return new Error('Problem is required')
-            }
-            return true
-          },
+          message: 'Beschrijving is verplicht.',
           trigger: ['blur']
         },
-      ]
+      ],
     }
 
     function handleValidateClick() {
-      if(formValue.value.problem.length < 1){
+      if(formValue.value.mentorship.length < 1){
         this.message.error('Minimaal 1 antwoord is verplicht')
-        throw new TypeError("Problem is required")
+        throw new TypeError("Mentorship is required")
       }
-      return Promise.resolve(formValue.value)
+      return formRef.value?.validate()
+          .then(() => Promise.resolve(formValue.value))
+          .catch((errors) => Promise.reject(errors))
     }
 
     return {
@@ -90,6 +97,7 @@ export default defineComponent({
 
   }
 })
+
 
 </script>
 
@@ -112,6 +120,12 @@ p {
 .questionnaire-heading__subtitle {
   text-align: center;
   color: #999999;
+}
+.questionnaire-description {
+  grid-column: span 3;
+}
+.questionnaire-description__field {
+  text-align: left;
 }
 @media (min-width: 1024px) {
   .questionnaire-grid {
