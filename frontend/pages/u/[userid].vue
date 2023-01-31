@@ -134,7 +134,7 @@ export default {
     }
   },
   created() {
-    axios.get('http://localhost:3001/Users/1/UserQuestionnaire').then(response => {
+    axios.get(`http://localhost:3001/Users/${this.userId}/UserQuestionnaire`).then(response => {
       const obj = response.data
       for (const key in obj) {
         if (typeof obj[key] === 'string') {
@@ -146,18 +146,18 @@ export default {
       }
       this.userQuestionnaire = obj
     })
-    axios.get('http://localhost:3001/User/1/').then(response => {
+    axios.get(`http://localhost:3001/User/${this.userId}/`).then(response => {
       this.user = response.data
 			const user = useCookie<{name: string, options: object}>('user', {
-				maxAge: 300,
+				maxAge: 300000,
 				sameSite: 'strict'
 			})
 			user.value = response.data
     })
-
   },
 	setup() {
 		const message = useMessage();
+    const route = useRoute()
 		return {
 			options: [
 				{
@@ -165,6 +165,7 @@ export default {
 					key: 'edit',
 				}
 			],
+      userId: route.params.userid,
 			handleSelect(key: string | number) {
 				message.info(String(key))
 			},

@@ -112,8 +112,8 @@ export default defineComponent({
 								maxAge: 30000,
 								sameSite: 'strict'
 							})
-							jwt.value = response
-							navigateTo(`/u/${jwt.value['id']}`)
+							user.value = response
+							navigateTo(`/u/${user.value['id']}`)
 						})
 						.catch(error => {
 							if (error.response.status === 401) {

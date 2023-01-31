@@ -1,3 +1,7 @@
 <template>
-  <h1>Welcome to the homepage</h1>
+  <container>
+    <student-landing-page-header/>
+    <student-landing-page-services/>
+    <student-landing-page-partners/>
+  </container>
 </template>

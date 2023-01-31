@@ -1,5 +1,5 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-	const userCookie = useCookie('JWT').value
+	const userCookie = useCookie('user').value
 	if (userCookie === undefined) {
 		setLoggedOut()
 		return navigateTo('/signin')
