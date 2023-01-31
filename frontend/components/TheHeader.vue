@@ -55,8 +55,8 @@ export default defineComponent({
 	data() {
 		return {
 			showMenu: false,
-			loggedIn: getCookieValue('JWT').userType,
-			UUID: getCookieValue('JWT').id,
+			loggedIn: getCookieValue('user').userType,
+			UUID: getCookieValue('user').id,
 		};
 	},
 	setup() {
@@ -79,7 +79,7 @@ export default defineComponent({
 						navigateTo('/signin')
 						break
 					case "Profiel":
-						navigateTo(`/u/${getCookieValue('JWT').id}`)
+						navigateTo(`/u/${getCookieValue('user').id}`)
 				}
 				if (key === "Uitloggen") {
 					setLoggedOut()
