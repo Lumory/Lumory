@@ -155,7 +155,7 @@ export default {
                   id: user.id,
                   userType: user.userType
                 }
-                navigateTo(`/u/${user.id}`)
+                navigateTo(`/vragenlijst`)
               })
                   .catch(error => {
                     console.log(error)

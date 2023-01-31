@@ -136,9 +136,9 @@ export default {
       this.validateCurrentStep()
         .then((formValues) => {
           this.assignFormValues(formValues)
-          questionnaireService.postQuestionnaire(1, questionnaireData)
+          questionnaireService.postQuestionnaire(getCookieValue('user').id, questionnaireData)
           .then(() => {
-            this.message.success('Questionnaire sent!')
+            navigateTo(`/u/${getCookieValue('user').id}`)
           })
           .catch(error => {
             this.message.error(error.message)
