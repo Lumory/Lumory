@@ -43,6 +43,7 @@ import Step4 from "./SignUpInternshipCompanyContactPerson";
 import {NButton, NSpace, useMessage} from "naive-ui"
 import userService from "../services/UserService";
 import {ref} from "vue";
+import UserService from "../services/UserService";
 
 const studentSteps = [
   {
@@ -144,10 +145,17 @@ export default {
         this.validateCurrentStep()
             .then((formValues) => {
               this.assignFormValues(formValues)
-              console.log(studentData)
-              postNewUser(studentData).then(() => {
-                console.log('New user created')
-                this.message.success('New user created')
+              UserService.postNewUser(studentData).then((user) => {
+                const userCookie = useCookie('user', {
+                  maxAge: 30000,
+                  sameSite: 'strict'
+                })
+                userCookie.value = {
+                  generatedToken: user.generatedToken,
+                  id: user.id,
+                  userType: user.userType
+                }
+                navigateTo(`/u/${user.id}`)
               })
                   .catch(error => {
                     console.log(error)
