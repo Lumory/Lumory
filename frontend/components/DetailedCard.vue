@@ -1,65 +1,89 @@
 <!-- child component showing clicked intern card with more detail -->
 
 <template>
-  <n-space vertical>
-    <!-- Titel of matched interns in Lumory Container -->
-    <n-card>
-      <template #header>
-        <n-space class="card-title">
-          {{ internship?.problem }}
-        </n-space>
-        <n-space class="card-city">
-          {{ internship?.city }}
-        </n-space>
-      </template>
-      <n-space>
-        <n-tag class="tag">Marketing</n-tag>
-        <n-tag class="tag">Advertising</n-tag>
+  <!-- Titel of matched interns in Lumory Container -->
+  <n-card content-style="display: flex; flex-direction: column; gap: 15px">
+    <div>
+      <n-space justify="space-between" align="center" style="flex-wrap: nowrap">
+        <h3 class="card-title">{{ internship.function }}</h3>
+        <n-button class="contact-info__button" secondary round>Contact info</n-button>
       </n-space>
-      <template class="tutoring-container">
-        <n-space>
-          <person-sharp size="20" class="field-header__person-icon"/>
-          <n-space class="tutoring">Gemiddelde begeleiding</n-space>
-        </n-space>
-      </template>
-      <n-space style="font-weight: bolder">
-        Volledige Vacaturetekst
-      </n-space>
-      <n-space class="description-text">
-        {{ this.internship?.problemDescription }}
-      </n-space>
-    </n-card>
-  </n-space>
+      <p class="city-text">{{internship.streetAddress}}, {{ internship.city }}</p>
+    </div>
+    <n-space>
+      <n-tag class="tag" v-for="skill in internship.skillsToLearnIntern.split(',')">{{ skill }}</n-tag>
+    </n-space>
+    <div class="card-content">
+      <p class="internship__section-title">{{ internship.problem }}</p>
+      <p>{{ questionnaire.problem[internship.problem].description}}</p>
+      <br />
+      <p> {{internship.problemDescription}}</p>
+      <br />
+      <div v-for="skill in internship.skillsIntern.split(',')">
+        <p class="internship__section-title">{{ skill }}</p>
+        <p> {{ questionnaire.skills[skill].description}}</p>
+        <br />
+      </div>
+      <p> {{internship.skillsInternDescription}}</p>
+      <br />
+      <div v-for="sector in internship.sector.split(',')">
+        <p class="internship__section-title">{{sector}}</p>
+        <p> {{ questionnaire.sector[sector].description}}</p>
+        <br />
+      </div>
+      <p> {{internship.sectorDescription}}</p>
+      <br />
+      <p class="internship__section-title">Vergoeding</p>
+      <p> {{internship.money}}</p>
+      <br />
+      <p class="internship__section-title">Verantwoordelijkheden</p>
+      <p> {{internship.responsability}}</p>
+      <br />
+      <p class="internship__section-title">Aantal uur per week</p>
+      <p>{{internship.hours}}</p>
+      <br />
+    </div>
+  </n-card>
 </template>
 
 <script>
 import {PersonSharp} from "@vicons/ionicons5";
-import {NCard, NTag, NSpace} from "naive-ui";
+import {NCard, NTag, NSpace, NButton} from "naive-ui";
+import questionnaireData from '../assets/json/questionaire.json'
 
 export default {
   components: {
     PersonSharp,
     NCard,
     NTag,
-    NSpace
+    NSpace,
+    NButton
   },
   name: "DetailedCard",
-  matchedresults: [],
   props: {
     internship: {}
   },
+  setup: () => {
+    return{
+      questionnaire: questionnaireData
+    }
+}
 }
 </script>
 <style scoped>
-
+.contact-info__button {
+  background-color: var(--color-primary);
+}
 
 .field-header__person-icon {
   height: 20px;
 }
 
 .card-title {
-  font-weight: 800;
   font-size: 32px;
+  font-weight: bolder;
+  padding: 0;
+  margin: 0;
   line-height: 1;
 }
 
@@ -67,19 +91,18 @@ export default {
   font-size: 14px;
 }
 
-.card-city {
+.city-text {
   color: grey;
   font-size: 14px;
+  padding: 0;
+  margin: 0;
 }
 
 .tag {
   color: grey;
 }
-
-.tutoring-container {
-  display: flex;
-  flex-direction: row;
-  margin-top: 15px;
-  margin-bottom: 15px;
+.internship__section-title {
+  font-weight: bold;
 }
+
 </style>

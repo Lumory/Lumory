@@ -2,22 +2,22 @@
 <template>
   <n-card :bordered="false" class="matched-container" hoverable content-style="display: flex; flex-direction: column; gap: 15px">
     <div>
-      <n-space justify="space-between" item-style="max-width: 50%" style="flex-wrap: nowrap">
-        <h3 class="card-title">{{ this.intern.function }}</h3>
+      <n-space justify="space-between" style="flex-wrap: nowrap">
+        <h3 class="card-title">{{ intern.function }}</h3>
         <ellipsis-vertical size="20" class="card-options-icon"/>
       </n-space>
-      <p class="city-text">{{this.intern.streetAddress}}, {{ this.intern.city }}</p>
+      <p class="city-text">{{intern.streetAddress}}, {{ intern.city }}</p>
     </div>
     <n-space>
-      <n-tag class="tag" v-for="skill in this.intern.skillsToLearnIntern.split(',')">{{ skill }}</n-tag>
+      <n-tag class="tag" v-for="skill in intern.skillsToLearnIntern.split(',')">{{ skill }}</n-tag>
     </n-space>
     <div class="card-content">
-      <p><span style="font-weight: bold">Probleem:</span> {{ this.intern?.problem }}</p>
-      <p><span style="font-weight: bold">Sector:</span> {{ this.intern?.sector }}</p>
-      <p><span style="font-weight: bold">Begeleiding:</span> {{ this.intern?.mentorship }}</p>
-      <p><span style="font-weight: bold">Vergoeding:</span> {{ this.intern?.money }}</p>
+      <p><span style="font-weight: bold">Probleem:</span> {{ intern?.problem }}</p>
+      <p><span style="font-weight: bold">Sector:</span> {{ intern?.sector }}</p>
+      <p><span style="font-weight: bold">Begeleiding:</span> {{ intern?.mentorship }}</p>
+      <p><span style="font-weight: bold">Vergoeding:</span> {{ intern?.money }}</p>
     </div>
-    <p class="last-posted-text">Geplaatst op {{ new Date(this.intern?.createdAt).toLocaleDateString() }}</p>
+    <p class="last-posted-text">Geplaatst op {{ new Date(intern?.createdAt).toLocaleDateString() }}</p>
   </n-card>
 </template>
 
