@@ -1,37 +1,30 @@
 <!-- main index for matched interns -->
 <template>
     <!-- Titel of matched students in Lumory Container -->
-    <Container class="input-container">
+  <Container>
+    <n-space justify="space-between" align="end">
       <h1 class="title">Mijn stages</h1>
-    </Container>
-    <div class="underline"/>
+      <nuxt-link to="/stage-aanmaken">
+        <n-button class="create-internship__button" secondary round>Stage aanmaken</n-button>
+      </nuxt-link>
+    </n-space>
+    <n-divider />
     <!-- This Lumory Container contains and shows all matched interns -->
-    <Container class="card-container" v-if="stages.length">
-      <n-scrollbar>
-        <n-space class="scroll" trigger="none">
-            <!-- V-for looping through card component, then shows it in an array on the left-hand side on index -->
-          <nuxt-link :to="`/s/${matchedintern.id}`"
-             v-for="(matchedintern) in stages"
-          >
-            <MatchedCardForCompany
-                style="border-radius: 3px;
-                margin-bottom: 15px"
-                :intern="matchedintern"
-            />
-          </nuxt-link>
-        </n-space>
-      </n-scrollbar>
-    </Container>
+    <n-grid class="card-container" v-if="stages.length" :cols="3" x-gap="20" y-gap="20">
+      <n-grid-item v-for="(matchedintern) in stages">
+        <nuxt-link :to="`/s/${matchedintern.id}`">
+          <MatchedCardForCompany style="border-radius: 3px; margin-bottom: 15px" :intern="matchedintern" />
+        </nuxt-link>
+      </n-grid-item>
+    </n-grid>
     <n-card class="card-container" v-else>
-      <template #header>
-        <n-space vertical>
-          Bezig met laden...
-        </n-space>
-      </template>
+      Bezig met laden...
     </n-card>
+  </Container>
 </template>
+
 <script lang="ts">
-import {NScrollbar, NCard, NSpace, useMessage, NGrid} from "naive-ui";
+import {NScrollbar, NCard, NSpace, useMessage, NGrid, NGridItem, NDivider, NButton} from "naive-ui";
 import {defineComponent, ref} from 'vue';
 import MatchedCardForCompany from "../components/MatchedCardforCompany"
 import internshipService from "../services/InternshipService";
@@ -49,7 +42,10 @@ export default defineComponent({
     NScrollbar,
     NCard,
     NSpace,
-    NGrid
+    NGrid,
+    NGridItem,
+    NDivider,
+    NButton
   },
   name: 'Stages',
   // intercepts axios request. Upon error, shows error message on index
@@ -72,14 +68,15 @@ export default defineComponent({
   },
 });
 </script>
+
 <style scoped>
 .title {
-  font-size: 32px;
-  font-weight: lighter;
+  font-weight: normal;
+  padding-bottom: 0;
 }
-
-.underline {
-  border-bottom: 1px solid #EFEFEF;
+.create-internship__button{
+  background-color: var(--color-primary);
+  border: none;
 }
 
 </style>

@@ -1,38 +1,24 @@
 <!-- child component for all matched interns for a company (internship company) -->
 <template>
-  <n-space>
-    <n-card :bordered="false" class="matched-container" hoverable
-    >
-      <template #header>
-        <ellipsis-vertical size="20" class="field-header__person-icon"/>
-        <n-space class="internship-text">
-          {{ this.intern.function }}
-        </n-space>
-        <n-space class="city-text">
-          {{ this.intern.city }}, {{this.intern.streetAddress}}
-        </n-space>
-      </template>
-      <n-space>
-        <n-tag class="tag">Marketing</n-tag>
-        <n-tag class="tag">Advertising</n-tag>
+  <n-card :bordered="false" class="matched-container" hoverable content-style="display: flex; flex-direction: column; gap: 15px">
+    <div>
+      <n-space justify="space-between" item-style="max-width: 50%" style="flex-wrap: nowrap">
+        <h3 class="card-title">{{ this.intern.function }}</h3>
+        <ellipsis-vertical size="20" class="card-options-icon"/>
       </n-space>
-      <template class="tutoring-container">
-        <n-space>
-          <person-sharp size="20" class="field-header__person-icon"/>
-          <n-space>Gemiddelde begeleiding</n-space>
-        </n-space>
-      </template>
-      <n-space vertical>
-        <n-space>
-          -
-          {{ this.intern?.sectorDescription }}
-        </n-space>
-        <n-space class="last-posted-text">
-          15 dagen geleden geplaatst
-        </n-space>
-      </n-space>
-    </n-card>
-  </n-space>
+      <p class="city-text">{{this.intern.streetAddress}}, {{ this.intern.city }}</p>
+    </div>
+    <n-space>
+      <n-tag class="tag" v-for="skill in this.intern.skillsToLearnIntern.split(',')">{{ skill }}</n-tag>
+    </n-space>
+    <div class="card-content">
+      <p><span style="font-weight: bold">Probleem:</span> {{ this.intern?.problem }}</p>
+      <p><span style="font-weight: bold">Sector:</span> {{ this.intern?.sector }}</p>
+      <p><span style="font-weight: bold">Begeleiding:</span> {{ this.intern?.mentorship }}</p>
+      <p><span style="font-weight: bold">Vergoeding:</span> {{ this.intern?.money }}</p>
+    </div>
+    <p class="last-posted-text">Geplaatst op {{ new Date(this.intern?.createdAt).toLocaleDateString() }}</p>
+  </n-card>
 </template>
 
 <script>
@@ -54,15 +40,10 @@ export default {
   props: {
     intern: ''
   },
-  data() {
-    return {
-      currentHighlightedIntern: ""
-    }
-  },
 }
 </script>
 <style scoped>
-.internship-text {
+.card-title {
   font-size: 32px;
   font-weight: bolder;
   padding: 0;
@@ -85,17 +66,17 @@ export default {
   color: grey;
 }
 
-.field-header__person-icon {
+.card-options-icon {
   height: 20px;
-  float: right
 }
 
 .matched-container {
-  width: 380px;
+  height: 100%;
 }
 
 .matched-container:hover {
-  border: 1.5px solid black;
+  outline: 1px solid black;
+  outline-offset: -1px;
 }
 
 .tutoring-container {
