@@ -6,7 +6,7 @@
     <div>
       <n-space justify="space-between" align="center" style="flex-wrap: nowrap">
         <h3 class="card-title">{{ internship.function }}</h3>
-        <n-button class="contact-info__button" secondary round>Contact info</n-button>
+        <n-button class="contact-info__button" secondary round @click="showModal = true">Contact info</n-button>
       </n-space>
       <p class="city-text">{{internship.streetAddress}}, {{ internship.city }}</p>
     </div>
@@ -44,16 +44,34 @@
       <br />
     </div>
   </n-card>
+  <n-modal
+    :show="showModal"
+    :on-esc="() => {this.showModal = false}"
+    :on-mask-click="() => {this.showModal = false}"
+    preset="card"
+    style="width: 600px"
+    title="Contact gegevens"
+    :bordered="false"
+    size="huge"
+    role="dialog"
+    aria-modal="true"
+    :on-close="() => {this.showModal = false}"
+  >
+    <p>{{internship.contactPersonFirstName + ' ' + internship.contactPersonLastName}}</p>
+    <p>{{internship.contactPersonEmail}}</p>
+  </n-modal>
 </template>
 
 <script>
 import {PersonSharp} from "@vicons/ionicons5";
-import {NCard, NTag, NSpace, NButton} from "naive-ui";
+import { ref } from 'vue'
+import {NModal, NCard, NTag, NSpace, NButton} from "naive-ui";
 import questionnaireData from '../assets/json/questionaire.json'
 
 export default {
   components: {
     PersonSharp,
+    NModal,
     NCard,
     NTag,
     NSpace,
@@ -65,7 +83,8 @@ export default {
   },
   setup: () => {
     return{
-      questionnaire: questionnaireData
+      questionnaire: questionnaireData,
+      showModal: ref(false)
     }
 }
 }
