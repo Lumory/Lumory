@@ -91,7 +91,8 @@ export default {
 }
 
 .matched-container:hover {
-  border: 1.5px solid black;
+  outline: 1.5px solid black;
+  outline-offset: -1.5px;
 }
 
 .tutoring-container {

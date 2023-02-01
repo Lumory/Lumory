@@ -7,7 +7,7 @@
 				</div>
 				<div class="banner__content--positioning">
 					<div class="banner__profile-picture">
-						<img src="@/assets/img/test2.jpg" alt="Profile picture" class="banner__profile-picture-image">
+						<img :src="`https://api.dicebear.com/5.x/shapes/svg?seed=${this.user?.firstName}`" alt="Profile picture" class="banner__profile-picture-image">
 					</div>
 					<div class="banner__content-wrapper">
 						<div class="banner__content">
@@ -133,18 +133,20 @@ export default {
       }
     }
   },
-  created() {
+  mounted() {
     axios.get(`http://localhost:3001/Users/${this.userId}/UserQuestionnaire`).then(response => {
       const obj = response.data
+      console.log(obj)
       for (const key in obj) {
         if (typeof obj[key] === 'string') {
-          obj[key] = obj[key].split(', ')
+          obj[key] = obj[key].split(',')
         }
         if (obj[key].length <= 1) {
           obj[key] = obj[key].toString()
         }
       }
       this.userQuestionnaire = obj
+      console.log(obj)
     })
     axios.get(`http://localhost:3001/User/${this.userId}/`).then(response => {
       this.user = response.data
