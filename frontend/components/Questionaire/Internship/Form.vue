@@ -6,24 +6,36 @@
         <n-grid-item>
           <h3>Basis</h3>
         </n-grid-item>
+        <n-form-item-gi class="form-item--left-align" span="12" path="dateStart" label="Startdatum">
+          <n-input v-model:value="formValue.dateStart" placeholder="01-02-2023" @keydown.enter.prevent/>
+        </n-form-item-gi>
+        <n-form-item-gi class="form-item--left-align" span="12" path="hours" label="Aantal uren">
+          <n-input v-model:value="formValue.hours" placeholder="36" @keydown.enter.prevent/>
+        </n-form-item-gi>
+        <n-form-item-gi class="form-item--left-align" span="12" path="applyBefore" label="Sluitdatum">
+          <n-input v-model:value="formValue.applyBefore" placeholder="01-02-2023" @keydown.enter.prevent/>
+        </n-form-item-gi>
         <n-form-item-gi class="form-item--left-align" span="12" path="money" label="Vergoeding per maand">
           <n-input v-model:value="formValue.money" placeholder="Geen vergoeding" @keydown.enter.prevent />
         </n-form-item-gi>
         <n-form-item-gi class="form-item--left-align" span="12" path="remoteWork" label="Remote werken">
           <n-input v-model:value="formValue.remoteWork" placeholder="Gedeeltelijk" @keydown.enter.prevent />
         </n-form-item-gi>
+        <n-grid-item>
+          <h3>Rol</h3>
+        </n-grid-item>
         <n-form-item-gi class="form-item--left-align" span="12" path="function" label="Functie">
           <n-input v-model:value="formValue.function" placeholder="Koffie haler" @keydown.enter.prevent />
         </n-form-item-gi>
         <n-form-item-gi class="form-item--left-align" span="12" path="responsability" label="Verantwoordelijkheid">
           <n-input v-model:value="formValue.responsability" placeholder="Lekkere koffie halen" @keydown.enter.prevent/>
         </n-form-item-gi>
-        <n-grid-item>
-          <h3>Rol</h3>
-        </n-grid-item>
         <n-form-item-gi class="form-item--left-align" span="12" path="workExperience" label="Werkervaring">
           <n-input v-model:value="formValue.workExperience" placeholder="1 jaar" @keydown.enter.prevent/>
         </n-form-item-gi>
+        <n-grid-item>
+          <h3>Bedrijf</h3>
+        </n-grid-item>
         <n-form-item-gi class="form-item--left-align" span="12" path="staff" label="Aantal medewerkers">
           <n-input v-model:value="formValue.staff" placeholder="12 werknemers" @keydown.enter.prevent/>
         </n-form-item-gi>
@@ -33,32 +45,23 @@
         <n-form-item-gi class="form-item--left-align" span="12" path="streetAddress" label="Straat">
           <n-input v-model:value="formValue.streetAddress" placeholder="Straatweg 123" @keydown.enter.prevent/>
         </n-form-item-gi>
-        <n-grid-item>
-          <h3>Bedrijf</h3>
-        </n-grid-item>
         <n-form-item-gi class="form-item--left-align" span="12" path="city" label="Plaats">
           <n-input v-model:value="formValue.city" placeholder="Utrecht" @keydown.enter.prevent/>
         </n-form-item-gi>
-        <n-form-item-gi class="form-item--left-align" span="12" path="contactPersonFirstName" label="contactPersonFirstName">
-          <n-input v-model:value="formValue.contactPersonFirstName" placeholder="contactPersonFirstName" @keydown.enter.prevent/>
-        </n-form-item-gi>
-        <n-form-item-gi class="form-item--left-align" span="12" path="contactPersonLastName" label="contactPersonLastName">
-          <n-input v-model:value="formValue.contactPersonLastName" placeholder="contactPersonLastName" @keydown.enter.prevent/>
-        </n-form-item-gi>
-        <n-form-item-gi class="form-item--left-align" span="12" path="contactPersonEmail" label="contactPersonEmail">
-          <n-input v-model:value="formValue.contactPersonEmail" placeholder="contactPersonEmail" @keydown.enter.prevent/>
-        </n-form-item-gi>
         <n-form-item-gi class="form-item--left-align" span="12" path="international" label="international">
-          <n-input v-model:value="formValue.international" placeholder="international" @keydown.enter.prevent/>
+          <n-input v-model:value="formValue.international" placeholder="Internationaal" @keydown.enter.prevent/>
         </n-form-item-gi>
-        <n-form-item-gi class="form-item--left-align" span="12" path="dateStart" label="dateStart">
-          <n-input v-model:value="formValue.dateStart" placeholder="dateStart" @keydown.enter.prevent/>
+        <n-grid-item>
+          <h3>Contactpersoon</h3>
+        </n-grid-item>
+        <n-form-item-gi class="form-item--left-align" span="12" path="contactPersonFirstName" label="Voornaam">
+          <n-input v-model:value="formValue.contactPersonFirstName" placeholder="Jane" @keydown.enter.prevent/>
         </n-form-item-gi>
-        <n-form-item-gi class="form-item--left-align" span="12" path="hours" label="hours">
-          <n-input v-model:value="formValue.hours" placeholder="hours" @keydown.enter.prevent/>
+        <n-form-item-gi class="form-item--left-align" span="12" path="contactPersonLastName" label="Achternaam">
+          <n-input v-model:value="formValue.contactPersonLastName" placeholder="Doe" @keydown.enter.prevent/>
         </n-form-item-gi>
-        <n-form-item-gi class="form-item--left-align" span="12" path="applyBefore" label="applyBefore">
-          <n-input v-model:value="formValue.applyBefore" placeholder="applyBefore" @keydown.enter.prevent/>
+        <n-form-item-gi class="form-item--left-align" span="12" path="contactPersonEmail" label="E-mail">
+          <n-input v-model:value="formValue.contactPersonEmail" placeholder="janedoe@gmail.com" @keydown.enter.prevent/>
         </n-form-item-gi>
       </n-grid>
     </n-form>
