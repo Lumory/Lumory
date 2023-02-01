@@ -55,7 +55,7 @@ export default defineComponent({
   // intercepts axios request. Upon error, shows error message on index
   mounted: function () {
     const message = useMessage()
-    internshipService.getInternships().then(response => {
+    internshipService.getCompanyInternships(getCookieValue('company').id).then(response => {
       this.stages = response
     }).catch(error => {
       if (error.response.status === 404) {

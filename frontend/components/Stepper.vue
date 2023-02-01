@@ -172,7 +172,16 @@ export default {
             .then((formValues) => {
               this.assignFormValues(formValues)
               console.log(internshipCompanyData)
-              userService.postNewCompany(internshipCompanyData).then(() => {
+              userService.postNewCompany(internshipCompanyData).then((company) => {
+                console.log(company)
+                const companyCookie = useCookie('company', {
+                  maxAge: 30000,
+                  sameSite: 'strict'
+                })
+                companyCookie.value = {
+                  id: company.id,
+                }
+                navigateTo(`/stages`)
                 console.log('New company created')
                 this.message.success('New company created')
               })

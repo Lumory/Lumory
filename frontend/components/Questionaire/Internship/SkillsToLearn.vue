@@ -8,9 +8,9 @@
       </n-form-item>
       <div class="questionnaire-description">
         <h3 class="questionnaire-description__header">Beschrijf de vaardigheden</h3>
-        <n-form-item class="questionnaire-description__field" path="skillsToLearnDescription">
+        <n-form-item class="questionnaire-description__field" path="skillsToLearnInternDescription">
           <n-input
-              v-model:value="formValue.skillsToLearnDescription"
+              v-model:value="formValue.skillsToLearnInternDescription"
               placeholder="Geef een omschrijving."
               type="textarea"
           />
@@ -27,8 +27,8 @@ import questionnaireData from '../../../assets/json/questionaire.json'
 import QuestionnaireItemCard from "~/components/QuestionnaireItemCard.vue";
 
 interface ModelType {
-  skillsToLearn: String[]
-  skillsToLearnDescription: String
+  skillsToLearnIntern: String[]
+  skillsToLearnInternDescription: String
 }
 
 export default defineComponent({
@@ -43,15 +43,15 @@ export default defineComponent({
     const maxSelectedItems = 3
 
     let formValue = ref(<ModelType>{
-      skillsToLearn: [],
-      skillsToLearnDescription: ''
+      skillsToLearnIntern: [],
+      skillsToLearnInternDescription: ''
     });
 
     function onQuestionnaireItemCardClick(key, index) {
       if (itemRefs.value[index].selected === true) {
         selectedItems = selectedItems.filter(item => item !== key)
         itemRefs.value[index].toggleSelected()
-        formValue.value.skillsToLearn = selectedItems
+        formValue.value.skillsToLearnIntern = selectedItems
         return
       }
       if(selectedItems.length >= maxSelectedItems) {
@@ -60,11 +60,11 @@ export default defineComponent({
       }
       selectedItems.push(key)
       itemRefs.value[index].toggleSelected()
-      formValue.value.skillsToLearn = selectedItems
+      formValue.value.skillsToLearnIntern = selectedItems
     }
 
     const rules: FormRules = {
-      skillsToLearnDescription: [
+      skillsToLearnInternDescription: [
         {
           required: true,
           message: 'Beschrijving is verplicht.',
@@ -74,9 +74,9 @@ export default defineComponent({
     }
 
     function handleValidateClick() {
-      if(formValue.value.skillsToLearn.length < 1){
+      if(formValue.value.skillsToLearnIntern.length < 1){
         this.message.error('Minimaal 1 antwoord is verplicht')
-        throw new TypeError("SkillsToLearn is required")
+        throw new TypeError("SkillsToLearnIntern is required")
       }
       return formRef.value?.validate()
           .then(() => Promise.resolve(formValue.value))

@@ -83,8 +83,8 @@ const steps = [
 let questionnaireData = {
   problem: '',
   problemDescription: '',
-  skillsToLearn: '',
-  skillsToLearnDescription: '',
+  skillsToLearnIntern: '',
+  skillsToLearnInternDescription: '',
   qualitiesIntern: '',
   qualitiesInternDescription: '',
   skillsIntern: '',
@@ -151,9 +151,9 @@ export default {
       this.validateCurrentStep()
           .then((formValues) => {
             this.assignFormValues(formValues)
-            internshipService.postInternship(1, questionnaireData)
+            internshipService.postInternship(getCookieValue('company').id, questionnaireData)
                 .then(() => {
-                  this.message.success('Internship created!')
+                  navigateTo('/stages')
                 })
                 .catch(error => {
                   this.message.error(error.message)
