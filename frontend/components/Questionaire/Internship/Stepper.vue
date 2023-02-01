@@ -3,7 +3,7 @@
     <div class="wrapper">
       <ol class="c-stepper">
         <template v-for="(step, index) in this.steps">
-          <li class="c-stepper__item">
+          <li class="c-stepper__item" :class="index <= currentStep && 'complete'">
             <a @click="currentStep=index">
               <h3 class="c-stepper__title" v-if="step.title">{{ step.title }}</h3>
               <p class="c-stepper__desc" v-if="step.description">{{ step.description }}</p>
@@ -208,11 +208,14 @@ export default {
   width: var(--circle-size);
   height: var(--circle-size);
   border-radius: 50%;
-  background-color: var(--color-primary);
+  background-color: white;
   margin: 0 auto 1rem;
   counter-increment: stepper-item;
   font-weight: 700;
   content: counter(stepper-item);
+}
+.c-stepper__item.complete:before {
+  background-color: var(--color-primary);
 }
 .c-stepper__item:not(:last-child):after {
   content: "";
