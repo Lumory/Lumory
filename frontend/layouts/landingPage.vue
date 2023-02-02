@@ -12,16 +12,8 @@
   min-height: 100vh;
   flex-direction: column;
   justify-content: space-between;
-  background: url("assets/img/landing-page_background.svg") no-repeat center top;
-
-  background-image: url("assets/img/bg1.png");
-  background-image: -webkit-image-set(
-      url("assets/img/bg1.png") 1x,
-      url("assets/img/bg1.png") 2x);
-  background-image: image-set(
-      url("assets/img/bg1.png") 1x,
-      url("assets/img/bg1.png") 2x);
-
+  background: url("assets/img/bg1.png") no-repeat center top;
+  background-size: 1440px;
 }
 
 </style>
