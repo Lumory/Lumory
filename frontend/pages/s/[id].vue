@@ -2,12 +2,11 @@
   <Container>
       <n-tabs default-value="Stage details" type="line">
         <n-tab-pane name="Stage details" tab="Stage details">
-          <n-scrollbar class="scroll" style="max-height: 700px; padding-right:15px" trigger="none">
           <n-grid :x-gap="12" cols="4" item-responsive>
-            <n-grid-item span="0 400:1 600:2 800:3">
+            <n-grid-item span="3">
               <VolledigeVacature/>
             </n-grid-item>
-            <n-grid-item>
+            <n-grid-item span="1">
               <n-card title="Basis">
                 <n-space class="descriptionText" style="font-weight: bolder">
                   Naam opleiding
@@ -18,7 +17,6 @@
               </n-card>
             </n-grid-item>
           </n-grid>
-          </n-scrollbar>
         </n-tab-pane>
         <n-tab-pane name="Stagiaires" tab="Stagiaires">
           <stagesGeintereseerdeStagiaires/>
