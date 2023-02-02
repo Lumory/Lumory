@@ -14,6 +14,7 @@
   justify-content: space-between;
   background: url("assets/img/bg1.png") no-repeat center top;
   background-size: 1440px;
+  background-color: #fff;
 }
 
 </style>

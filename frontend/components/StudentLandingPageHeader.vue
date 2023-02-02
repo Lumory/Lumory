@@ -2,13 +2,13 @@
   <n-grid class="student-hero-section" cols="1 s:2" x-gap="25px" responsive="screen">
     <n-grid-item class="n-grid-item">
       <div>
-          <p class="intro-text">Vind gemakkelijk en snel de juiste stagiairen!</p>
+          <p class="intro-text">Snel een passende stage voor een vliegende start!</p>
           <n-button round secondary size="large" class="cta-button">Registreer nu!</n-button>
       </div>
     </n-grid-item>
     <n-grid-item>
         <n-image
-            src="/assets/img/landing-page_hero-image.png"
+            src="/assets/img/bg4.png"
             class="header-image"
             width="100%"
             preview-disabled

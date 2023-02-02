@@ -1,34 +1,37 @@
 <template>
-  <n-space class="services-section">
+  <n-space class="services-section" justify="center">
     <h1>Wat bieden wij?</h1>
     <n-grid cols="1 s:3" x-gap="25px" responsive="screen">
       <n-grid-item class="n-grid-item">
-          <n-icon size="48">
-            <pin-drop-outlined />
-          </n-icon>
-        <h3>Lorum Ipsum</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus velit eros, facilisis suscipit risus sed, venenatis rutrum lectus.</p>
+        <n-image
+            width="64"
+            src="/assets/img/services2.png"
+        />
+        <h3>Snelle matching</h3>
+        <p>Ons platform garandeert een snelle matching door gebruik te maken van geavanceerde matching-algoritmen en koppelingen met topbedrijven</p>
       </n-grid-item>
       <n-grid-item class="n-grid-item">
-        <n-icon size="48">
-          <pin-drop-outlined />
-        </n-icon>
-        <h3>Lorum Ipsum</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus velit eros, facilisis suscipit risus sed, venenatis rutrum lectus.</p>
+        <n-image
+            width="64"
+            src="/assets/img/services1.png"
+        />
+        <h3>Passende stage</h3>
+        <p>Wij zorgen voor een perfecte match door rekening te houden met de wensen, vaardigheden en interesses van de student en de eisen en verwachtingen van bedrijven</p>
       </n-grid-item>
       <n-grid-item class="n-grid-item">
-        <n-icon size="48">
-          <pin-drop-outlined />
-        </n-icon>
-        <h3>Lorum Ipsum</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus velit eros, facilisis suscipit risus sed, venenatis rutrum lectus.</p>
+        <n-image
+            width="64"
+            src="/assets/img/services3.png"
+        />
+        <h3>Vliegende start</h3>
+        <p>Wij bieden een vliegende start voor studenten door hen te koppelen aan relevante en uitdagende stages bij topbedrijven, waardoor ze waardevolle ervaring en vaardigheden opdoen</p>
       </n-grid-item>
     </n-grid>
   </n-space>
 </template>
 
 <script>
-import {NGrid, NGridItem, NIcon, NSpace} from "naive-ui";
+import {NGrid, NGridItem, NIcon, NSpace, NImage} from "naive-ui";
 import {PinDropOutlined} from "@vicons/material";
 
 export default {
@@ -37,7 +40,8 @@ export default {
     NGridItem,
     PinDropOutlined,
     NIcon,
-    NSpace
+    NSpace,
+    NImage
   }
 }
 </script>
