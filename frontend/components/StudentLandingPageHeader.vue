@@ -1,16 +1,14 @@
 <template>
   <n-grid class="student-hero-section" cols="1 s:2" x-gap="25px" responsive="screen">
     <n-grid-item class="n-grid-item">
-      <n-layout>
-        <n-layout-content class="CTA">
-          <p class="intro-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus velit eros, facilisis suscipit risus sed, venenatis rutrum lectus.</p>
-          <n-button round color="#FEBF00">Registreer nu!</n-button>
-        </n-layout-content>
-      </n-layout>
+      <div>
+          <p class="intro-text">Vind gemakkelijk en snel de juiste stagiairen!</p>
+          <n-button round secondary size="large" class="cta-button">Registreer nu!</n-button>
+      </div>
     </n-grid-item>
     <n-grid-item>
         <n-image
-            src="/assets/img/new2.png"
+            src="/assets/img/landing-page_hero-image.png"
             class="header-image"
             width="100%"
             preview-disabled
@@ -45,16 +43,15 @@ export default {
 .student-hero-section {
   margin-top: 150px;
 }
-.CTA {
-  text-align: center;
-  margin-bottom: 50px;
-}
 .intro-text {
-  font-family: "Arial";
-  font-weight: bold;
-  font-size: 1.5rem;
+  font-weight: bolder;
+  font-size: 3rem;
   line-height: 1.2em;
   margin-bottom: 15px;
+}
+.cta-button {
+  background-color: var(--color-primary);
+  color: #333;
 }
 .header-image, .header-image img {
   width: 100%;

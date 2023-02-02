@@ -1,12 +1,12 @@
 <template>
-	<div class="default-layout">
+	<div class="minimal-header-layout">
 		<TheMinimalHeader />
 		<slot />
 	</div>
 </template>
 
 <style>
-.default-layout {
+.minimal-header-layout {
 	display: flex;
 	flex-direction: column;
 }

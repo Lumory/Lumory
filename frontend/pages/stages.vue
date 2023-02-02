@@ -1,6 +1,4 @@
-<!-- main index for matched interns -->
 <template>
-    <!-- Titel of matched students in Lumory Container -->
   <Container>
     <n-space justify="space-between" align="end">
       <h1 class="title">Mijn stages</h1>
@@ -9,7 +7,6 @@
       </nuxt-link>
     </n-space>
     <n-divider />
-    <!-- This Lumory Container contains and shows all matched interns -->
     <n-grid class="card-container" v-if="stages.length" :cols="3" x-gap="20" y-gap="20">
       <n-grid-item v-for="(matchedintern) in stages">
         <nuxt-link :to="`/s/${matchedintern.id}`">

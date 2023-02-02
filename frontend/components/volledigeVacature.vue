@@ -1,5 +1,3 @@
-<!-- child component showing clicked intern card with more detail -->
-
 <template>
   <n-space vertical>
     <n-card>
