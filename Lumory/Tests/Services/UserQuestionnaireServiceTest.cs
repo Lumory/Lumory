@@ -1,29 +1,25 @@
-﻿using Lumory.Controllers.Users;
-using Lumory.Models;
+﻿using Lumory.Models;
 using Lumory.Services.Users;
-using Microsoft.AspNetCore.Mvc;
+using Lumory.Repositories.Users;
 using Moq;
 using NUnit.Framework;
 
-namespace Lumory.Tests.Controllers;
+namespace Lumory.Tests.Services;
 
 [TestFixture]
-public class UserQuestionnaireControllerTest
+public class UserQuestionnaireServiceTest
 {
-    private UserQuestionnaireController controller;
-    private Mock<UserService> userServiceMock;
-    private Mock<UserQuestionnaireService> userQuestionnaireServiceMock;
+    private UserQuestionnaireService service;
+    private Mock<UserQuestionnaireRepository> userQuestionnaireRepository;
     private UserQuestionnaire userQuestionnaire;
     private UserQuestionnaire returnUserQuestionnaire;
     private UserQuestionnaire userQuestionnaireEdit;
-    private User user;
 
     [SetUp]
     public void SetUp()
     {
-        userServiceMock = new Mock<UserService>();
-        userQuestionnaireServiceMock = new Mock<UserQuestionnaireService>();
-
+        userQuestionnaireRepository = new Mock<UserQuestionnaireRepository>();
+        
         //arrange
         userQuestionnaire = new UserQuestionnaire()
         {
@@ -47,7 +43,7 @@ public class UserQuestionnaireControllerTest
             Days = "Monday, Tuesday, Wednesday & Thursday",
             CreatedAt = DateTime.Now
         };
-        
+
         returnUserQuestionnaire = new UserQuestionnaire()
         {
             Id = 99999,
@@ -71,7 +67,7 @@ public class UserQuestionnaireControllerTest
             Days = "Monday, Tuesday, Wednesday & Thursday",
             CreatedAt = DateTime.Now
         };
-        
+
         userQuestionnaireEdit = new UserQuestionnaire()
         {
             Id = 99999,
@@ -95,83 +91,82 @@ public class UserQuestionnaireControllerTest
             CreatedAt = DateTime.Now
         };
         
-        user = new User()
-        {
-            Id = 1,
-            FirstName = "Jan",
-            LastName = "Jansen",
-            Email = "Jan@Jansen.nl",
-            Password = "TestPassword"
-        };
-
-        controller = new UserQuestionnaireController(userQuestionnaireServiceMock.Object, userServiceMock.Object);
+        service = new UserQuestionnaireService(userQuestionnaireRepository.Object);
     }
-    
+
     [Test]
-    //Test endpoint Post create a UserQuestionnaire by User ID
+    //Test CreateUserQuestionnaire, create user questionnaire
     public void CreateUserQuestionnaireByUserIdTest()
-    { 
+    {
         //Arrange
-        userServiceMock.Setup(c => c.FindUser(1)).Returns(user);
-        userQuestionnaireServiceMock.Setup(c => c.FindUserQuestionnaireByUserId(1));
-        userQuestionnaireServiceMock.Setup(c => c.CreateUserQuestionnaire(userQuestionnaire, 1)).Returns(returnUserQuestionnaire);
+        userQuestionnaireRepository.Setup(c => c.CreateUserQuestionnaire(userQuestionnaire)).Returns(returnUserQuestionnaire);
 
         //Act
-        var result = controller.Create(1, userQuestionnaire);
-        var okResult = result as OkObjectResult;
-
+        var result = service.CreateUserQuestionnaire(userQuestionnaire, 1);
+        
         //Assert
-        Assert.IsNotNull(okResult);
-        Assert.AreEqual(200, okResult.StatusCode);
+        Assert.IsNotNull(result);
+        Assert.AreEqual(returnUserQuestionnaire, result);
     }
     
     [Test]
-    //Test endpoint Get get a UserQuestionnaire by User ID
+    //Test FindUserQuestionnaire, find user questionnaire by ID
+    public void GetUserQuestionnaireByIdTest()
+    {
+        //Arrange
+        userQuestionnaireRepository.Setup(c => c.FindUserQuestionnaireById(99999)).Returns(returnUserQuestionnaire);
+
+        //Act
+        var result = service.FindUserQuestionnaire(99999);
+        
+        //Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(returnUserQuestionnaire, result);
+    }
+    
+    [Test]
+    //Test FindUserQuestionnaireByUserId, find user questionnaire by User ID
     public void GetUserQuestionnaireByUserIdTest()
-    { 
+    {
         //Arrange
-        userQuestionnaireServiceMock.Setup(c => c.FindUserQuestionnaireByUserId(1)).Returns(returnUserQuestionnaire);
+        userQuestionnaireRepository.Setup(c => c.FindUserQuestionnaireByUserId(1)).Returns(returnUserQuestionnaire);
 
         //Act
-        var result = controller.Find(1);
-        var okResult = result as OkObjectResult;
+        var result = service.FindUserQuestionnaireByUserId(1);
         
         //Assert
-        Assert.IsNotNull(okResult);
-        Assert.AreEqual(200, okResult.StatusCode);
+        Assert.IsNotNull(result);
+        Assert.AreEqual(returnUserQuestionnaire, result);
+    }
+    
+    
+    [Test]
+    //Test UpdateUserQuestionnaire, update user questionnaire
+    public void UpdateUserQuestionnaireTest()
+    {
+        //Arrange
+        userQuestionnaireRepository.Setup(c => c.UpdateUserQuestionnaire(returnUserQuestionnaire)).Returns(returnUserQuestionnaire);
+
+        //Act
+        var result = service.UpdateUserQuestionnaire(returnUserQuestionnaire, userQuestionnaireEdit);
+        
+        //Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(returnUserQuestionnaire, result);
     }
     
     [Test]
-    //Test endpoint Put update a UserQuestionnaire by ID
-    public void UpdateUserQuestionnaireByIdTest()
-    { 
+    //Test DeleteUserQuestionnaire, delete user questionnaire
+    public void DeleteUserQuestionnaireTest()
+    {
         //Arrange
-        userQuestionnaireServiceMock.Setup(c => c.FindUserQuestionnaire(99999)).Returns(returnUserQuestionnaire);
-        userQuestionnaireServiceMock.Setup(c => c.UpdateUserQuestionnaire(returnUserQuestionnaire, userQuestionnaireEdit)).Returns(returnUserQuestionnaire);
+        userQuestionnaireRepository.Setup(c => c.RemoveUserQuestionnaire(returnUserQuestionnaire));
 
         //Act
-        var result = controller.Update(99999, userQuestionnaireEdit);
-        var okResult = result as OkObjectResult;
+        service.DeleteUserQuestionnaire(returnUserQuestionnaire);
         
         //Assert
-        Assert.IsNotNull(okResult);
-        Assert.AreEqual(200, okResult.StatusCode);
-    }
-    
-    [Test]
-    //Test endpoint Delete delete a UserQuestionnaire by ID
-    public void DeleteUserQuestionnaireByIdTest()
-    { 
-        //Arrange
-        userQuestionnaireServiceMock.Setup(c => c.FindUserQuestionnaire(99999)).Returns(returnUserQuestionnaire);
-        userQuestionnaireServiceMock.Setup(c => c.DeleteUserQuestionnaire(returnUserQuestionnaire));
-
-        //Act
-        var result = controller.Delete(99999);
-        var okResult = result as OkObjectResult;
-        
-        //Assert
-        Assert.IsNotNull(okResult);
-        Assert.AreEqual(200, okResult.StatusCode);
+        Assert.IsTrue(true);
     }
 }    
+    

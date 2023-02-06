@@ -11,7 +11,7 @@ public class UserQuestionnaireController : ControllerBase
 {
     private UserQuestionnaireService _service;
     private UserService _service2;
-
+    
     public UserQuestionnaireController(UserQuestionnaireService service, UserService service2)
     {
         _service = service;
@@ -81,6 +81,6 @@ public class UserQuestionnaireController : ControllerBase
 
         _service.DeleteUserQuestionnaire(userQuestionnaire);
 
-        return NoContent();
+        return Ok("UserQuestionnaire Deleted");
     }
 }

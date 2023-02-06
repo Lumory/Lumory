@@ -6,6 +6,10 @@ namespace Lumory.Services.Users;
 public class UserQuestionnaireService
 {
     private UserQuestionnaireRepository _repository;
+    
+    //Just here for testing
+    public UserQuestionnaireService()
+    {}
 
 
     public UserQuestionnaireService(UserQuestionnaireRepository repository)
@@ -13,24 +17,24 @@ public class UserQuestionnaireService
         _repository = repository;
     }
 
-    public UserQuestionnaire? FindUserQuestionnaire(int id)
+    public virtual UserQuestionnaire? FindUserQuestionnaire(int id)
     {
         return _repository.FindUserQuestionnaireById(id);
     }
     
     
-    public UserQuestionnaire? FindUserQuestionnaireByUserId(int id)
+    public virtual UserQuestionnaire? FindUserQuestionnaireByUserId(int id)
     {
         return _repository.FindUserQuestionnaireByUserId(id);
     }
     
-    public UserQuestionnaire CreateUserQuestionnaire(UserQuestionnaire userQuestionnaire, int UserId)
+    public virtual UserQuestionnaire CreateUserQuestionnaire(UserQuestionnaire userQuestionnaire, int UserId)
     {
         userQuestionnaire.UserId = UserId;
         return _repository.CreateUserQuestionnaire(userQuestionnaire);
     }
     
-    public UserQuestionnaire UpdateUserQuestionnaire(UserQuestionnaire oldUserQuestionnaire, UserQuestionnaire newUserQuestionnaire)
+    public virtual UserQuestionnaire UpdateUserQuestionnaire(UserQuestionnaire oldUserQuestionnaire, UserQuestionnaire newUserQuestionnaire)
     {
         oldUserQuestionnaire.Problem = newUserQuestionnaire.Problem;
         oldUserQuestionnaire.SkillsToLearn = newUserQuestionnaire.SkillsToLearn;
@@ -53,7 +57,7 @@ public class UserQuestionnaireService
         return _repository.UpdateUserQuestionnaire(oldUserQuestionnaire);
     }
     
-    public void DeleteUserQuestionnaire(UserQuestionnaire userQuestionnaire)
+    public virtual void DeleteUserQuestionnaire(UserQuestionnaire userQuestionnaire)
     {
         _repository.RemoveUserQuestionnaire(userQuestionnaire);
     }

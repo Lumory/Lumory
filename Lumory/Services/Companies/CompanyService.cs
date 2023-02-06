@@ -8,7 +8,7 @@ public class CompanyService
 {
     private CompanyRepository _repository;
     
-    //Just here for user testing
+    //Just here for Company testing
     public CompanyService()
     {}
 

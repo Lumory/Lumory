@@ -6,22 +6,26 @@ namespace Lumory.Repositories.Users;
 public class UserQuestionnaireRepository
 {
     private ApplicationDbContext _ctx;
+    
+    //Just here for testing
+    public UserQuestionnaireRepository()
+    {}
 
     public UserQuestionnaireRepository(ApplicationDbContext ctx)
     {
         _ctx = ctx;
     }
 
-    public UserQuestionnaire? FindUserQuestionnaireById(int id)
+    public virtual UserQuestionnaire? FindUserQuestionnaireById(int id)
     {
         return _ctx.UserQuestionnaires.Where((UserQuestionnaire uq) => uq.Id == id).SingleOrDefault();
     }
     
-    public UserQuestionnaire? FindUserQuestionnaireByUserId(int id)
+    public virtual UserQuestionnaire? FindUserQuestionnaireByUserId(int id)
     {
         return _ctx.UserQuestionnaires.Where((UserQuestionnaire uq) => uq.UserId == id).SingleOrDefault();
     }
-    public UserQuestionnaire CreateUserQuestionnaire(UserQuestionnaire userQuestionnaire)
+    public virtual UserQuestionnaire CreateUserQuestionnaire(UserQuestionnaire userQuestionnaire)
     {
         _ctx.UserQuestionnaires.Add(userQuestionnaire);
 
@@ -30,7 +34,7 @@ public class UserQuestionnaireRepository
         return userQuestionnaire;
     }
     
-    public UserQuestionnaire UpdateUserQuestionnaire(UserQuestionnaire userQuestionnaire)
+    public virtual UserQuestionnaire UpdateUserQuestionnaire(UserQuestionnaire userQuestionnaire)
     {
         _ctx.UserQuestionnaires.Update(userQuestionnaire);
 
@@ -39,7 +43,7 @@ public class UserQuestionnaireRepository
         return FindUserQuestionnaireById(userQuestionnaire.Id);
     }
     
-    public void RemoveUserQuestionnaire(UserQuestionnaire userQuestionnaire)
+    public virtual void RemoveUserQuestionnaire(UserQuestionnaire userQuestionnaire)
     {
         _ctx.UserQuestionnaires.Remove(userQuestionnaire);
 
